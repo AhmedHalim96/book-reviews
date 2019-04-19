@@ -9,29 +9,40 @@ export default class CreateBook extends Component {
         name:'',
         book_author: '',
         review_text:'',
-        book_score:0
+        book_score:0,
+        featured_image: null
       }
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange(event) {
-    this.setState({
-      newBook:{...this.state.newBook,
-      [event.target.name] : event.target.value}
-    });
+    if (event.target.files) {
+      return (this.setState({
+        newBook:{...this.state.newBook,
+        [event.target.name] : event.target.files[0]}
+      }));
+    } else{
+      this.setState({
+        newBook:{...this.state.newBook,
+        [event.target.name] : event.target.value}
+      });
+    }   
+    
   }
 
   handleSubmit(event) {
-    // console.log( this.state.newBook);
-    
     event.preventDefault();
-    const {name, review_text, book_author, book_score} = this.state.newBook
+    // return console.log( this.state.newBook);
+    
+    
+    const {name, review_text, book_author, book_score, featured_image} = this.state.newBook
     Axios.post('/books',{
       name: name,
       review_text: review_text,
       book_author: book_author,
-      book_score: book_score
+      book_score: book_score,
+      featured_image: featured_image
     
     })
     .then(res=>{
@@ -58,6 +69,10 @@ export default class CreateBook extends Component {
           <div className="form-group">
             <label>Book Review*</label>
             <textarea  className='form-control' rows='10' name='review_text' onChange={this.handleChange} required ></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="image">Featured Image</label>
+            <input type="file" className="form-control-file" name="featured_image" id="image" onChange={this.handleChange}/>
           </div>
           <button type="submit" className='btn btn-dark btn-block'>Submit Review</button>
         </form>

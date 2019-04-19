@@ -74749,7 +74749,8 @@ function (_Component) {
         name: '',
         book_author: '',
         review_text: '',
-        book_score: 0
+        book_score: 0,
+        featured_image: null
       }
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
@@ -74760,27 +74761,35 @@ function (_Component) {
   _createClass(CreateBook, [{
     key: "handleChange",
     value: function handleChange(event) {
-      this.setState({
-        newBook: _objectSpread({}, this.state.newBook, _defineProperty({}, event.target.name, event.target.value))
-      });
+      if (event.target.files) {
+        return this.setState({
+          newBook: _objectSpread({}, this.state.newBook, _defineProperty({}, event.target.name, event.target.files[0]))
+        });
+      } else {
+        this.setState({
+          newBook: _objectSpread({}, this.state.newBook, _defineProperty({}, event.target.name, event.target.value))
+        });
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
       var _this2 = this;
 
-      // console.log( this.state.newBook);
-      event.preventDefault();
+      event.preventDefault(); // return console.log( this.state.newBook);
+
       var _this$state$newBook = this.state.newBook,
           name = _this$state$newBook.name,
           review_text = _this$state$newBook.review_text,
           book_author = _this$state$newBook.book_author,
-          book_score = _this$state$newBook.book_score;
+          book_score = _this$state$newBook.book_score,
+          featured_image = _this$state$newBook.featured_image;
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/books', {
         name: name,
         review_text: review_text,
         book_author: book_author,
-        book_score: book_score
+        book_score: book_score,
+        featured_image: featured_image
       }).then(function (res) {
         _this2.props.history.push('/book/' + res.data.id);
       })["catch"](function (err) {
@@ -74830,6 +74839,16 @@ function (_Component) {
         name: "review_text",
         onChange: this.handleChange,
         required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "image"
+      }, "Featured Image"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        className: "form-control-file",
+        name: "featured_image",
+        id: "image",
+        onChange: this.handleChange
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-dark btn-block"
