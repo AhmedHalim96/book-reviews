@@ -18,15 +18,7 @@ class BookController extends Controller
         return $books;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+ 
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +28,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $book = new Book;
+        $book->name = $request->name;
+        $book->book_author = $request->book_author;
+        $book->book_score = $request->book_score;
+        $book->review_text = $request->review_text;
+        $book->save();
+        return $book;
+
     }
 
     /**
@@ -51,16 +51,7 @@ class BookController extends Controller
         return $book;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  
 
     /**
      * Update the specified resource in storage.
@@ -71,7 +62,14 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        $book->name = $request->name;
+        $book->book_author = $request->book_author;
+        $book->book_score = $request->book_score;
+        $book->review_text = $request->review_text;
+        $book->save();
+        return $book;
+        
     }
 
     /**
@@ -82,6 +80,8 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book=Book::find($id);
+        $book->delete();
+        return $book;
     }
 }

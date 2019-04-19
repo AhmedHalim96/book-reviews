@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import { getBooks } from '../../actions/booksActions';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -8,8 +8,6 @@ class Sidebar extends Component {
     
   componentDidMount() {
     this.props.getBooks();
-    
-    
   }
   render() {
     const {books, isLoaded} = this.props;
@@ -23,7 +21,7 @@ class Sidebar extends Component {
       <li className="list-group-item list-group-item-action list-group-item-secondary">Recent Book Reviews</li>
       {books.map((book, id) =>{
         if(id<=2){
-          return (  <li key={book.id} className="list-group-item list-group-item-secondary"><Link to={`/book/${book.id}`}>{book.name}</Link></li>
+          return (  <li key={book.id} className="list-group-item list-group-item-secondary"><a href={`/book/${book.id}`}>{book.name}</a></li>
           )
         }
       })}        
@@ -43,4 +41,4 @@ Sidebar.protoTypes = {
   isLoaded: PropTypes.bool
 }
 
-export default connect(mapStateToProps, {getBooks}) (Sidebar)
+export default (connect(mapStateToProps, {getBooks}) (Sidebar));

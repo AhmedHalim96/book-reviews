@@ -19,3 +19,7 @@ Route::get('/', function ()
 Auth::routes();
 Route::resource('books', 'BookController');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::view('/{path?}', 'home')
+     ->where('path', '.*')
+     ->name('react');
