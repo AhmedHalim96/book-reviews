@@ -32,6 +32,7 @@ componentDidMount() {
             
               <h1>{name}<span className="badge badge-danger float-right">{book_score.slice(0,3)} / 5</span></h1>
               <h5><small>By: </small><i>{book_author}</i></h5>
+              <img src="/storage/featured_images/15557761182019-03-16-(1).png" alt={name} className="img-fluid img-thumbnail"/>
               <div dangerouslySetInnerHTML={{__html: review_text}}></div>
             </div>
             <Link to={`/book/${currentBookId}/edit`} className='btn btn-success btn-block'>Edit Review</Link>

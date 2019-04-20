@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Book;
 
 class BookController extends Controller
@@ -28,12 +29,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        $img  = $request->file('featured_image');
+        $filename = time().$img->getClientOriginalName();
+        $filename = str_replace(' ', '-', $filename);
+
+        $path = $img->storeAs('public/featured_images', $filename);
         $book = new Book;
         $book->name = $request->name;
         $book->book_author = $request->book_author;
         $book->book_score = $request->book_score;
         $book->review_text = $request->review_text;
+        $book->featured_image = $filename;
         $book->save();
         return $book;
 

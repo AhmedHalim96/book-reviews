@@ -74538,7 +74538,11 @@ function (_Component) {
           className: "card card-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "badge badge-danger float-right"
-        }, book_score.slice(0, 3), " / 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "By: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book_author)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, book_score.slice(0, 3), " / 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "By: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book_author)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: "/storage/featured_images/15557761182019-03-16-(1).png",
+          alt: name,
+          className: "img-fluid img-thumbnail"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           dangerouslySetInnerHTML: {
             __html: review_text
           }
@@ -74784,13 +74788,16 @@ function (_Component) {
           book_author = _this$state$newBook.book_author,
           book_score = _this$state$newBook.book_score,
           featured_image = _this$state$newBook.featured_image;
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/books', {
-        name: name,
-        review_text: review_text,
-        book_author: book_author,
-        book_score: book_score,
-        featured_image: featured_image
-      }).then(function (res) {
+      var fd = new FormData();
+      fd.append('name', name);
+      fd.append('review_text', review_text);
+      fd.append('book_author', book_author);
+      fd.append('book_score', book_score);
+      fd.append('featured_image', featured_image); // return console.log(fd);
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/books', fd).then(function (res) {
+        return console.log(res.data);
+
         _this2.props.history.push('/book/' + res.data.id);
       })["catch"](function (err) {
         return console.log(err);
@@ -74802,7 +74809,8 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card card-body card-dark bg-dark text-white"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
+        onSubmit: this.handleSubmit,
+        encType: "multipart/form-data"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Book Title*"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {

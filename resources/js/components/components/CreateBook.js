@@ -37,15 +37,17 @@ export default class CreateBook extends Component {
     
     
     const {name, review_text, book_author, book_score, featured_image} = this.state.newBook
-    Axios.post('/books',{
-      name: name,
-      review_text: review_text,
-      book_author: book_author,
-      book_score: book_score,
-      featured_image: featured_image
-    
-    })
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('review_text', review_text);
+    fd.append('book_author', book_author);
+    fd.append('book_score', book_score);
+    fd.append('featured_image', featured_image);
+
+    // return console.log(fd);
+    Axios.post('/books', fd)
     .then(res=>{
+      return console.log( res.data);
       this.props.history.push('/book/'+res.data.id);
     })
     .catch(err=>console.log(err));
@@ -53,7 +55,7 @@ export default class CreateBook extends Component {
   render() {
     return (
       <div className="card card-body card-dark bg-dark text-white">
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} encType='multipart/form-data'>
           <div className="form-group">
             <label>Book Title*</label>
             <input type="text" className='form-control' name='name' onChange={this.handleChange} required />
