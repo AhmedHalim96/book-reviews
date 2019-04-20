@@ -74528,7 +74528,8 @@ function (_Component) {
             name = _this$props$book.name,
             book_author = _this$props$book.book_author,
             review_text = _this$props$book.review_text,
-            book_score = _this$props$book.book_score;
+            book_score = _this$props$book.book_score,
+            featured_image = _this$props$book.featured_image;
         var currentBookId = this.props.book.id;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
@@ -74539,13 +74540,14 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "badge badge-danger float-right"
         }, book_score.slice(0, 3), " / 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "By: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, book_author)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: "/storage/featured_images/15557761182019-03-16-(1).png",
+          src: "/storage/featured_images/".concat(featured_image),
           alt: name,
-          className: "img-fluid img-thumbnail"
+          className: "card-img-top px-5 py-3 "
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           dangerouslySetInnerHTML: {
             __html: review_text
-          }
+          },
+          className: "lead"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/book/".concat(currentBookId, "/edit"),
           className: "btn btn-success btn-block"
@@ -74796,8 +74798,7 @@ function (_Component) {
       fd.append('featured_image', featured_image); // return console.log(fd);
 
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/books', fd).then(function (res) {
-        return console.log(res.data);
-
+        // return console.log( res.data);
         _this2.props.history.push('/book/' + res.data.id);
       })["catch"](function (err) {
         return console.log(err);
@@ -75020,16 +75021,7 @@ function (_Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
-  } // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if(prevState.currentBook==null){
-  //     console.log('Baaaam!!!')
-  //     return {
-  //     currentBook: nextProps.book
-  //     }
-  //   }
-  //   return null;
-  // }
-
+  }
 
   _createClass(EditBook, [{
     key: "componentDidMount",
@@ -75067,29 +75059,39 @@ function (_Component) {
   }, {
     key: "handleChange",
     value: function handleChange(event) {
-      // console.log(event);
-      this.setState({
-        currentBook: _objectSpread({}, this.state.currentBook, _defineProperty({}, event.target.name, event.target.value))
-      });
+      if (event.target.files) {
+        this.setState({
+          currentBook: _objectSpread({}, this.state.currentBook, _defineProperty({}, event.target.name, event.target.files[0]))
+        });
+      } else {
+        this.setState({
+          currentBook: _objectSpread({}, this.state.currentBook, _defineProperty({}, event.target.name, event.target.value))
+        });
+      }
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(event) {
       var _this2 = this;
 
-      // console.log( this.state.currentBook);
-      event.preventDefault();
+      event.preventDefault(); // return console.log( this.state.currentBook);
+
       var _this$state$currentBo = this.state.currentBook,
+          id = _this$state$currentBo.id,
           name = _this$state$currentBo.name,
           review_text = _this$state$currentBo.review_text,
           book_author = _this$state$currentBo.book_author,
-          book_score = _this$state$currentBo.book_score;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.patch('/books/' + this.state.currentBook.id, {
-        name: name,
-        review_text: review_text,
-        book_author: book_author,
-        book_score: book_score
-      }).then(function (res) {
+          book_score = _this$state$currentBo.book_score,
+          featured_image = _this$state$currentBo.featured_image;
+      var fd = new FormData();
+      fd.append('name', name);
+      fd.append('review_text', review_text);
+      fd.append('book_author', book_author);
+      fd.append('book_score', book_score);
+      fd.append('featured_image', featured_image);
+      fd.append('_method', 'PATCH');
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/books/' + id, fd).then(function (res) {
+        // return console.log(res.data);
         _this2.props.history.push('/book/' + res.data.id);
       })["catch"](function (err) {
         return console.log(err);
@@ -75103,11 +75105,13 @@ function (_Component) {
             name = _this$props$book.name,
             review_text = _this$props$book.review_text,
             book_author = _this$props$book.book_author,
-            book_score = _this$props$book.book_score;
+            book_score = _this$props$book.book_score,
+            featured_image = _this$props$book.featured_image;
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "card card-body card-dark bg-dark text-white"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("form", {
-          onSubmit: this.handleSubmit
+          onSubmit: this.handleSubmit,
+          encType: "multipart/form-data"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           className: "form-group"
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", null, "Book Title*"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
@@ -75148,6 +75152,21 @@ function (_Component) {
           defaultValue: review_text,
           onChange: this.handleChange,
           required: true
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+          src: "/storage/featured_images/".concat(featured_image),
+          className: "img-thumbnail img-fluid w-50 h-50 "
+        })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "form-group"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
+          htmlFor: "image"
+        }, "Change Featured Image"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+          type: "file",
+          className: "form-control-file",
+          name: "featured_image",
+          id: "image",
+          onChange: this.handleChange
         })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
           type: "submit",
           className: "btn btn-success btn-block"

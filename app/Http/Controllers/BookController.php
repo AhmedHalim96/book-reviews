@@ -15,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books =  Book::all();
+        $books =  Book::orderBy('created_at','desc')->get();
         return $books;
     }
 
@@ -32,7 +32,6 @@ class BookController extends Controller
         $img  = $request->file('featured_image');
         $filename = time().$img->getClientOriginalName();
         $filename = str_replace(' ', '-', $filename);
-
         $path = $img->storeAs('public/featured_images', $filename);
         $book = new Book;
         $book->name = $request->name;
@@ -73,6 +72,15 @@ class BookController extends Controller
         $book->book_author = $request->book_author;
         $book->book_score = $request->book_score;
         $book->review_text = $request->review_text;
+        if($request->file('featured_image')){
+           
+            $img  = $request->file('featured_image');
+            $filename = time().$img->getClientOriginalName();
+            $filename = str_replace(' ', '-', $filename);
+            $path = $img->storeAs('public/featured_images', $filename);
+            $book->featured_image = $filename;
+        }
+        
         $book->save();
         return $book;
         

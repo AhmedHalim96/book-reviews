@@ -18,6 +18,7 @@ export default class CreateBook extends Component {
   }
   handleChange(event) {
     if (event.target.files) {
+      
       return (this.setState({
         newBook:{...this.state.newBook,
         [event.target.name] : event.target.files[0]}
@@ -47,7 +48,7 @@ export default class CreateBook extends Component {
     // return console.log(fd);
     Axios.post('/books', fd)
     .then(res=>{
-      return console.log( res.data);
+      // return console.log( res.data);
       this.props.history.push('/book/'+res.data.id);
     })
     .catch(err=>console.log(err));

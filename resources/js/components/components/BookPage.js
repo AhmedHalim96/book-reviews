@@ -19,7 +19,7 @@ componentDidMount() {
   render() {
      if (this.props.isLoaded) {
       
-   const { name, book_author, review_text, book_score} = this.props.book;
+   const { name, book_author, review_text, book_score, featured_image} = this.props.book;
    const currentBookId = this.props.book.id;
 
       return (
@@ -32,8 +32,8 @@ componentDidMount() {
             
               <h1>{name}<span className="badge badge-danger float-right">{book_score.slice(0,3)} / 5</span></h1>
               <h5><small>By: </small><i>{book_author}</i></h5>
-              <img src="/storage/featured_images/15557761182019-03-16-(1).png" alt={name} className="img-fluid img-thumbnail"/>
-              <div dangerouslySetInnerHTML={{__html: review_text}}></div>
+              <img src={`/storage/featured_images/${featured_image}`} alt={name} className="card-img-top px-5 py-3 "/>
+              <div dangerouslySetInnerHTML={{__html: review_text}} className='lead'></div>
             </div>
             <Link to={`/book/${currentBookId}/edit`} className='btn btn-success btn-block'>Edit Review</Link>
             <DeleteBook id={currentBookId} history={this.props.history} />
