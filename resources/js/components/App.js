@@ -8,6 +8,7 @@ import store from './store';
 import Sidebar from './components/layout/Sidebar';
 import CreateBook from './components/CreateBook';
 import EditBook from './components/EditBook';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
   render() {
@@ -19,12 +20,11 @@ class App extends Component {
           <div className="row">
               <div className="col-md-9">
                 <Switch>
-                  
-                  <Route exact path='/' component={withRouter( Books )} />
+                  <Route  path='/dashboard' component={withRouter( Dashboard )} />
                   <Route  path='/book/:id/edit' component={withRouter( EditBook )} />
                   <Route  path='/book/create' component={withRouter( CreateBook )} />
                   <Route  path='/book/:id' component={withRouter( BookPage )} />
-                  <Route path='/' />
+                  <Route exact path='/' component={withRouter( Books )} />
                 </Switch>
               </div>
               <div className="col-md-3 d-none d-md-block">
