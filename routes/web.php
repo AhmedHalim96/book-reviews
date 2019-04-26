@@ -16,7 +16,7 @@ Route::get('/', function ()
   return view('home');
 });
 
-Auth::routes();
+// Auth::routes();
 Route::resource('books', 'BookController');
 // Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

@@ -52,12 +52,15 @@ class UserController extends Controller
         ];
                   
         $user = new \App\User($payload);
+
         if ($user->save())
         {
-            
             $token = self::getToken($request->email, $request->password); // generate user token
             
+            
             if (!is_string($token))  return response()->json(['success'=>false,'data'=>'Token generation failed'], 201);
+            
+
             
             $user = \App\User::where('email', $request->email)->get()->first();
             

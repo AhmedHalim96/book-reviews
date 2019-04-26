@@ -1,42 +1,220 @@
-import React, { Component, Fragment } from 'react';
-import Books from './components/Books';
-import BookPage from './components/BookPage';
+// Dependencies
+import React, { Component, Fragment } from "react";
+import $ from "jquery";
+import axios from "axios";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
-import {Provider} from 'react-redux';
-import store from './store';
-import Sidebar from './components/layout/Sidebar';
-import CreateBook from './components/CreateBook';
-import EditBook from './components/EditBook';
-import Dashboard from './components/Dashboard';
+// LAYOUT COMPONENTS
+import Navbar from "./components/layout/Navbar";
+import Sidebar from "./components/layout/Sidebar";
+
+// BOOK COMPONENTS
+import Books from "./components/Books";
+import BookPage from "./components/BookPage";
+import CreateBook from "./components/CreateBook";
+import EditBook from "./components/EditBook";
+
+// AUTH COMPONENTS
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 
 class App extends Component {
+  state = {
+    isLoggedIn: false,
+    user: {}
+  };
+
+  componentDidMount() {
+    let state = localStorage["appState"];
+    if (state) {
+      let AppState = JSON.parse(state);
+      // console.log(AppState);
+      this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState.user });
+    }
+    // console.log("APP ", this.props.user);
+  }
+
+  _loginUser = (email, password) => {
+    console.log("_logUser");
+    $("#login-form button")
+      .attr("disabled", "disabled")
+      .html(
+        '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
+      );
+    var formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+
+    axios
+      .post("/api/user/login", formData)
+      .then(response => {
+        console.log(response.data);
+        return response;
+      })
+      .then(json => {
+        if (json.data.success) {
+          alert("Login Successful!");
+
+          let userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+          let appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          this.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+        } else alert("Login Failed!");
+
+        $("#login-form button")
+          .removeAttr("disabled")
+          .html("Login");
+      })
+      .catch(error => {
+        alert(`An Error Occured! ${error}`);
+        $("#login-form button")
+          .removeAttr("disabled")
+          .html("Login");
+      });
+  };
+
+  _registerUser = (name, email, password) => {
+    $("#email-login-btn")
+      .attr("disabled", "disabled")
+      .html(
+        '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
+      );
+
+    var formData = new FormData();
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("name", name);
+
+    axios
+      .post("/api/user/register", formData)
+      .then(response => {
+        console.log(response);
+        return response;
+      })
+      .then(json => {
+        if (json.data.success) {
+          alert(`Registration Successful!`);
+
+          let userData = {
+            name: json.data.data.name,
+            id: json.data.data.id,
+            email: json.data.data.email,
+            auth_token: json.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+          let appState = {
+            isLoggedIn: true,
+            user: userData
+          };
+          // save app state with user date in local storage
+          localStorage["appState"] = JSON.stringify(appState);
+          this.setState({
+            isLoggedIn: appState.isLoggedIn,
+            user: appState.user
+          });
+          this.props.history.push("/");
+        } else {
+          alert(`Registration Failed!`);
+          $("#email-login-btn")
+            .removeAttr("disabled")
+            .html("Register");
+        }
+      })
+      .catch(error => {
+        alert("An Error Occured!" + error);
+        console.log(`${formData} ${error}`);
+        $("#email-login-btn")
+          .removeAttr("disabled")
+          .html("Register");
+      });
+  };
+
+  _logoutUser = () => {
+    let appState = {
+      isLoggedIn: false,
+      user: {}
+    };
+    // save app state with user date in local storage
+    localStorage["appState"] = JSON.stringify(appState);
+    this.setState(appState);
+  };
+
   render() {
     return (
-      <Provider store={store}>
-      <BrowserRouter>
-      <div className='bg-secondary'>  
-        <div className="container-fluid pt-3">  
+      <div className="bg-secondary">
+        <Navbar
+          username={this.state.user.name}
+          isLoggedIn={this.state.isLoggedIn}
+          logout={this._logoutUser}
+        />
+        <div className="container-fluid pt-3">
           <div className="row">
-              <div className="col-md-9">
+            <div className="col-md-9">
+              {this.state.isLoggedIn ? (
                 <Switch>
-                  <Route  path='/dashboard' component={withRouter( Dashboard )} />
-                  <Route  path='/book/:id/edit' component={withRouter( EditBook )} />
-                  <Route  path='/book/create' component={withRouter( CreateBook )} />
-                  <Route  path='/book/:id' component={withRouter( BookPage )} />
-                  <Route exact path='/' component={withRouter( Books )} />
+                  <Route
+                    path="/book/:id/edit"
+                    component={withRouter(EditBook)}
+                  />
+                  <Route
+                    path="/book/create"
+                    component={withRouter(CreateBook)}
+                  />
+                  <Route
+                    path="/book/:id"
+                    render={props => (
+                      <BookPage {...props} isLoggedIn={this.state.isLoggedIn} />
+                    )}
+                  />
+                  <Route exact path="/" component={withRouter(Books)} />
+                  <Redirect to="/" />
                 </Switch>
-              </div>
-              <div className="col-md-3 d-none d-md-block">
-                <Sidebar />
-              </div> 
-          </div>  
+              ) : (
+                <Switch>
+                  <Route
+                    path="/login"
+                    render={props => (
+                      <Login {...props} login={this._loginUser} />
+                    )}
+                  />
+                  <Route
+                    path="/register"
+                    render={props => (
+                      <Register {...props} register={this._registerUser} />
+                    )}
+                  />
+                  <Route
+                    path="/book/:id"
+                    render={props => (
+                      <BookPage {...props} isLoggedIn={this.state.isLoggedIn} />
+                    )}
+                  />
+                  <Route exact path="/" component={withRouter(Books)} />
+                  <Redirect to="/" />
+                </Switch>
+              )}
+            </div>
+            <div className="col-md-3 d-none d-md-block">
+              <Sidebar />
+            </div>
+          </div>
         </div>
       </div>
-      </BrowserRouter>
-      </Provider>  
     );
   }
 }
 
-export default (App) ;
+export default withRouter(App);
