@@ -8,6 +8,15 @@ import Spinner from "./layout/Spinner";
 import DeleteBook from "./DeleteBook";
 
 class BookPage extends Component {
+  state = {
+    liked: false
+  };
+
+  likeHandler = e => {
+    e.preventDefault();
+    this.setState({ liked: !this.state.liked });
+  };
+
   componentDidMount() {
     this.props.getBook(this.props.match.params.id);
 
@@ -25,6 +34,8 @@ class BookPage extends Component {
           featured_image
         } = this.props.book;
         const currentBookId = this.props.book.id;
+        const likedClass = this.state.liked ? "text-danger" : "text-secondary";
+
         return (
           <Fragment>
             <Link to="/">
@@ -39,6 +50,16 @@ class BookPage extends Component {
                 <span className="badge badge-danger ml-2">
                   {book_score.slice(0, 3)} / 5
                 </span>
+                <button
+                  className="btn float-right mx-3 btn-outline-info btn-lg"
+                  onClick={this.likeHandler}
+                  title="Add To Favourites"
+                >
+                  <i
+                    className={"fa fa-heart " + likedClass}
+                    style={{ fontSize: "3rem" }}
+                  />
+                </button>
               </h1>
 
               <h5>
