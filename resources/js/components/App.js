@@ -4,7 +4,7 @@ import $ from "jquery";
 import axios from "axios";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { getFavouriteList, appReady } from "./actions/userActions";
+import { getFavouriteList, appReady, resetUser } from "./actions/userActions";
 
 // LAYOUT COMPONENTS
 import Navbar from "./components/layout/Navbar";
@@ -79,6 +79,8 @@ class App extends Component {
             isLoggedIn: appState.isLoggedIn,
             user: appState.user
           });
+          this.props.getFavouriteList(appState.user.id);
+          this.props.history.push("/");
         } else alert("Login Failed!");
 
         $("#login-form button")
@@ -154,6 +156,7 @@ class App extends Component {
       isLoggedIn: false,
       user: {}
     };
+    this.props.resetUser();
     // save app state with user date in local storage
     localStorage["appState"] = JSON.stringify(appState);
     this.setState(appState);
@@ -257,5 +260,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFavouriteList, appReady }
+  { getFavouriteList, appReady, resetUser }
 )(App);

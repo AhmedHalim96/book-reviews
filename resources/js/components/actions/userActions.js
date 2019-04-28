@@ -52,6 +52,11 @@ export const removeFromFavourite = (book, user) => async dispatch => {
     .catch(err => console.log(err));
 };
 
+export const resetUser = () => dispatch => {
+  dispatch({
+    type: actionTypes.RESET_USER
+  });
+};
 export const appReady = () => dispatch => {
   dispatch({
     type: actionTypes.APP_READY

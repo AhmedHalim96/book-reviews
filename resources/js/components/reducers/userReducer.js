@@ -13,7 +13,12 @@ export default function(state = initialState, action) {
         ...state,
         isReady: true
       };
-      return { ...state };
+    case actionTypes.RESET_USER:
+      return {
+        ...state,
+        favouriteBooks: []
+      };
+
     case actionTypes.ADD_TO_FAVOURITES:
       return {
         ...state

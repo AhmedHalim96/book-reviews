@@ -74393,6 +74393,10 @@ function (_Component) {
             isLoggedIn: appState.isLoggedIn,
             user: appState.user
           });
+
+          _this.props.getFavouriteList(appState.user.id);
+
+          _this.props.history.push("/");
         } else alert("Login Failed!");
 
         jquery__WEBPACK_IMPORTED_MODULE_1___default()("#login-form button").removeAttr("disabled").html("Login");
@@ -74449,7 +74453,10 @@ function (_Component) {
       var appState = {
         isLoggedIn: false,
         user: {}
-      }; // save app state with user date in local storage
+      };
+
+      _this.props.resetUser(); // save app state with user date in local storage
+
 
       localStorage["appState"] = JSON.stringify(appState);
 
@@ -74564,7 +74571,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
   getFavouriteList: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["getFavouriteList"],
-  appReady: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["appReady"]
+  appReady: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["appReady"],
+  resetUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["resetUser"]
 })(App));
 
 /***/ }),
@@ -74707,7 +74715,7 @@ var getBooks = function getBooks() {
 /*!**************************************************!*\
   !*** ./resources/js/components/actions/types.js ***!
   \**************************************************/
-/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, GET_AUTHOR, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY */
+/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, GET_AUTHOR, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74720,6 +74728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TO_FAVOURITES", function() { return ADD_TO_FAVOURITES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FROM_FAVOURITES", function() { return REMOVE_FROM_FAVOURITES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_READY", function() { return APP_READY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET_USER", function() { return RESET_USER; });
 var GET_BOOKS = "GET_BOOKS";
 var GET_BOOK = "GET_BOOK";
 var CLEAR_BOOK = "CLEAR_BOOK";
@@ -74728,6 +74737,7 @@ var GET_FAVOURITE_LIST = "GET_FAVOURITE_LIST";
 var ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 var REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 var APP_READY = "APP_READY";
+var RESET_USER = "RESET_USER";
 
 /***/ }),
 
@@ -74735,7 +74745,7 @@ var APP_READY = "APP_READY";
 /*!********************************************************!*\
   !*** ./resources/js/components/actions/userActions.js ***!
   \********************************************************/
-/*! exports provided: getFavouriteList, addToFavourite, removeFromFavourite, appReady */
+/*! exports provided: getFavouriteList, addToFavourite, removeFromFavourite, resetUser, appReady */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74743,6 +74753,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFavouriteList", function() { return getFavouriteList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToFavourite", function() { return addToFavourite; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFromFavourite", function() { return removeFromFavourite; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetUser", function() { return resetUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appReady", function() { return appReady; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -74891,6 +74902,13 @@ var removeFromFavourite = function removeFromFavourite(book, user) {
       };
     }()
   );
+};
+var resetUser = function resetUser() {
+  return function (dispatch) {
+    dispatch({
+      type: _types__WEBPACK_IMPORTED_MODULE_1__["RESET_USER"]
+    });
+  };
 };
 var appReady = function appReady() {
   return function (dispatch) {
@@ -76538,7 +76556,11 @@ var initialState = {
       return _objectSpread({}, state, {
         isReady: true
       });
-      return _objectSpread({}, state);
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["RESET_USER"]:
+      return _objectSpread({}, state, {
+        favouriteBooks: []
+      });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_TO_FAVOURITES"]:
       return _objectSpread({}, state);
