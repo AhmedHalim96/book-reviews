@@ -27,11 +27,6 @@ export default function Navbar(props) {
                 Home <span className="sr-only">(current)</span>
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/book/create">
-                Create a review
-              </NavLink>
-            </li>
           </ul>
           <ul className="navbar-nav ml-auto">
             {props.isLoggedIn ? (
@@ -52,6 +47,9 @@ export default function Navbar(props) {
                   aria-labelledby="dropdown01"
                   style={{ zIndex: "1500" }}
                 >
+                  <Link className="dropdown-item" to="/dashboard">
+                    Dashboard
+                  </Link>
                   <Link className="dropdown-item" to="/book/create">
                     Create
                   </Link>

@@ -10,3 +10,9 @@ export const getBook = id => async dispatch => {
   });
   return res.data;
 };
+
+export const clearBook = () => dispatch => {
+  dispatch({
+    type: actionTypes.CLEAR_BOOK
+  });
+};

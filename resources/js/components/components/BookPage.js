@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { getBook } from "../actions/bookPageActions";
+import { withRouter } from "react-router";
+import { getBook, clearBook } from "../actions/bookPageActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBooks } from "../actions/booksActions";
+import { addToFavourite, removeFromFavourite } from "../actions/userActions";
+
 import Spinner from "./layout/Spinner";
 import DeleteBook from "./DeleteBook";
 
@@ -12,15 +15,50 @@ class BookPage extends Component {
     liked: false
   };
 
-  likeHandler = e => {
-    e.preventDefault();
-    this.setState({ liked: !this.state.liked });
+  likeHandler = async e => {
+    if (this.props.isLoggedIn) {
+      const bookId = parseInt(this.props.match.params.id);
+      const userId = this.props.user.id;
+      e.preventDefault();
+      let method = this.props.addToFavourite;
+      if (this.state.liked) {
+        method = this.props.removeFromFavourite;
+      }
+      await method(bookId, userId);
+      this.setState({ liked: !this.state.liked });
+    } else {
+      alert("Log in Please");
+    }
   };
-
+  componentWillMount() {
+    this.props.clearBook();
+  }
   componentDidMount() {
-    this.props.getBook(this.props.match.params.id);
+    const bookId = parseInt(this.props.match.params.id);
+    if (this.props.isLoggedIn) {
+      const userId = this.props.user.id;
+      if (this.props.favouriteBooks.includes(bookId)) {
+        this.setState({ liked: true });
+      }
+    }
+
+    this.props.getBook(bookId);
 
     this.props.getBooks();
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
+      const bookId = parseInt(nextProps.match.params.id);
+      if (nextProps.isLoggedIn) {
+        const userId = nextProps.user.id;
+        if (nextProps.favouriteBooks.includes(bookId)) {
+          this.setState({ liked: true });
+        }
+      }
+      nextProps.getBook(bookId);
+      nextProps.getBooks();
+    }
   }
 
   render() {
@@ -132,7 +170,9 @@ BookPage.proptypes = {
   isLoaded: PropTypes.bool.isRequired
 };
 
-export default connect(
-  mapStateToProps,
-  { getBook, getBooks }
-)(BookPage);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getBook, getBooks, addToFavourite, removeFromFavourite, clearBook }
+  )(BookPage)
+);

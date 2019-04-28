@@ -19,6 +19,10 @@ Route::get('/', function ()
 // Auth::routes();
 Route::resource('books', 'BookController');
 // Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::post('favourites/view', 'FavouriteController@index');
+Route::post('favourites/create', 'FavouriteController@create');
+Route::post('favourites/delete', 'FavouriteController@destroy');
+
 
 Route::view('/{path?}', 'home')
      ->where('path', '.*')
