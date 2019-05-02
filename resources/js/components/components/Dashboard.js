@@ -10,10 +10,8 @@ export default class Dashboard extends Component {
         <ul className="list-group">
           {this.props.favouriteBooks.map(book => {
             return (
-              <li className="list-group-item" key={book}>
-                <Link
-                  to={`book/${book}`}
-                >{`http://www.bookreviews.test/book/${book}`}</Link>
+              <li className="list-group-item" key={book.id}>
+                <Link to={`book/${book.id}`}>{book.name}</Link>
               </li>
             );
           })}

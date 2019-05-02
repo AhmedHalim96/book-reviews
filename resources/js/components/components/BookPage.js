@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
-import { getBook, clearBook } from "../actions/bookPageActions";
+import { getBook, clearBook, isLiked } from "../actions/bookPageActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBooks } from "../actions/booksActions";
@@ -11,55 +11,41 @@ import Spinner from "./layout/Spinner";
 import DeleteBook from "./DeleteBook";
 
 class BookPage extends Component {
-  state = {
-    liked: false
-  };
+  componentDidMount() {
+    this.intialize(this.props);
+  }
 
+  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
+      this.intialize(nextProps);
+    }
+  }
+
+  intialize = props => {
+    props.clearBook();
+    const bookId = parseInt(props.match.params.id);
+    if (props.isLoggedIn) {
+      const userId = props.user.id;
+      props.isLiked(bookId, userId);
+    }
+    props.getBook(bookId);
+    props.getBooks();
+  };
   likeHandler = async e => {
     if (this.props.isLoggedIn) {
       const bookId = parseInt(this.props.match.params.id);
       const userId = this.props.user.id;
       e.preventDefault();
-      let method = this.props.addToFavourite;
-      if (this.state.liked) {
-        method = this.props.removeFromFavourite;
-      }
+      let method = this.props.liked
+        ? this.props.removeFromFavourite
+        : this.props.addToFavourite;
+
       await method(bookId, userId);
-      this.setState({ liked: !this.state.liked });
+      this.props.isLiked(bookId, userId);
     } else {
       alert("Log in Please");
     }
   };
-  componentWillMount() {
-    this.props.clearBook();
-  }
-  componentDidMount() {
-    const bookId = parseInt(this.props.match.params.id);
-    if (this.props.isLoggedIn) {
-      const userId = this.props.user.id;
-      if (this.props.favouriteBooks.includes(bookId)) {
-        this.setState({ liked: true });
-      }
-    }
-
-    this.props.getBook(bookId);
-
-    this.props.getBooks();
-  }
-
-  UNSAFE_componentWillReceiveProps(nextProps, nextState) {
-    if (this.props.match.params.id !== nextProps.match.params.id) {
-      const bookId = parseInt(nextProps.match.params.id);
-      if (nextProps.isLoggedIn) {
-        const userId = nextProps.user.id;
-        if (nextProps.favouriteBooks.includes(bookId)) {
-          this.setState({ liked: true });
-        }
-      }
-      nextProps.getBook(bookId);
-      nextProps.getBooks();
-    }
-  }
 
   render() {
     if (this.props.isLoaded) {
@@ -72,7 +58,7 @@ class BookPage extends Component {
           featured_image
         } = this.props.book;
         const currentBookId = this.props.book.id;
-        const likedClass = this.state.liked ? "text-danger" : "text-secondary";
+        const likedClass = this.props.liked ? "text-danger" : "text-secondary";
 
         return (
           <Fragment>
@@ -162,7 +148,8 @@ class BookPage extends Component {
 const mapStateToProps = state => ({
   books: state.books.books,
   book: state.bookPage.book,
-  isLoaded: state.bookPage.isLoaded
+  isLoaded: state.bookPage.isLoaded,
+  liked: state.bookPage.liked
 });
 BookPage.proptypes = {
   books: PropTypes.array.isRequired,
@@ -173,6 +160,13 @@ BookPage.proptypes = {
 export default withRouter(
   connect(
     mapStateToProps,
-    { getBook, getBooks, addToFavourite, removeFromFavourite, clearBook }
+    {
+      getBook,
+      getBooks,
+      addToFavourite,
+      removeFromFavourite,
+      clearBook,
+      isLiked
+    }
   )(BookPage)
 );

@@ -57,6 +57,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-
+    public function favouriteBooks()
+    {
+        return $this->morphedByMany(Book::class, 'favouriteable')
+                    ->withPivot(['created_at'])
+                    ->orderBy('pivot_created_at', 'desc');
+    }
     
 }

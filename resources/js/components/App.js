@@ -166,7 +166,6 @@ class App extends Component {
     if (this.props.isReady) {
       const { isLoggedIn, user } = this.state;
       const { favouriteBooks } = this.props;
-      console.log(this.props);
 
       return (
         <div className="bg-secondary">

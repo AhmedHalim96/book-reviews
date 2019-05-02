@@ -9,21 +9,20 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
-Route::get('/', function ()
-{
+Route::get('/', function () {
   return view('home');
 });
 
 // Auth::routes();
 Route::resource('books', 'BookController');
 // Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::post('favourites/view', 'FavouriteController@index');
-Route::post('favourites/create', 'FavouriteController@create');
-Route::post('favourites/delete', 'FavouriteController@destroy');
-
+Route::post('books/favourites', 'FavouriteController@index');
+Route::post('books/{book}/favourites', 'FavouriteController@store');
+Route::post('books/{book}', 'FavouriteController@isFavourited');
+Route::delete('books/{book}/favourites', 'FavouriteController@destroy');
 
 Route::view('/{path?}', 'home')
-     ->where('path', '.*')
-     ->name('react');
+  ->where('path', '.*')
+  ->name('react');

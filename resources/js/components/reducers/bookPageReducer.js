@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/types";
 
 const initialState = {
   book: {},
-  isLoaded: false
+  isLoaded: false,
+  liked: false
 };
 
 export default function(state = initialState, action) {
@@ -13,6 +14,8 @@ export default function(state = initialState, action) {
         book: action.payload,
         isLoaded: true
       };
+    case actionTypes.IS_LIKED:
+      return { ...state, liked: action.payload };
     case actionTypes.CLEAR_BOOK:
       return {
         ...state,

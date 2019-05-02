@@ -74476,7 +74476,6 @@ function (_Component) {
             isLoggedIn = _this$state.isLoggedIn,
             user = _this$state.user;
         var favouriteBooks = this.props.favouriteBooks;
-        console.log(this.props);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bg-secondary"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Navbar__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -74581,12 +74580,13 @@ var mapStateToProps = function mapStateToProps(state) {
 /*!************************************************************!*\
   !*** ./resources/js/components/actions/bookPageActions.js ***!
   \************************************************************/
-/*! exports provided: getBook, clearBook */
+/*! exports provided: getBook, isLiked, clearBook */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBook", function() { return getBook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isLiked", function() { return isLiked; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearBook", function() { return clearBook; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -74614,18 +74614,19 @@ var getBook = function getBook(id) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/books/".concat(id));
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/books/".concat(id)).then(function (res) {
+                  dispatch({
+                    type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_BOOK"],
+                    payload: res.data
+                  });
+                })["catch"](function (err) {
+                  return console.log(err);
+                });
 
               case 2:
                 res = _context.sent;
-                // console.log(res);
-                dispatch({
-                  type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_BOOK"],
-                  payload: res.data
-                });
-                return _context.abrupt("return", res.data);
 
-              case 5:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -74635,6 +74636,43 @@ var getBook = function getBook(id) {
 
       return function (_x) {
         return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+var isLiked = function isLiked(book, user) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(dispatch) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/books/".concat(book), {
+                  user_id: user
+                }).then(function (res) {
+                  dispatch({
+                    type: _types__WEBPACK_IMPORTED_MODULE_1__["IS_LIKED"],
+                    payload: res.data.success
+                  });
+                })["catch"](function (err) {
+                  return console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
       };
     }()
   );
@@ -74715,7 +74753,7 @@ var getBooks = function getBooks() {
 /*!**************************************************!*\
   !*** ./resources/js/components/actions/types.js ***!
   \**************************************************/
-/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, GET_AUTHOR, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
+/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, GET_AUTHOR, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74723,6 +74761,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_BOOKS", function() { return GET_BOOKS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_BOOK", function() { return GET_BOOK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_BOOK", function() { return CLEAR_BOOK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IS_LIKED", function() { return IS_LIKED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_AUTHOR", function() { return GET_AUTHOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FAVOURITE_LIST", function() { return GET_FAVOURITE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TO_FAVOURITES", function() { return ADD_TO_FAVOURITES; });
@@ -74732,6 +74771,7 @@ __webpack_require__.r(__webpack_exports__);
 var GET_BOOKS = "GET_BOOKS";
 var GET_BOOK = "GET_BOOK";
 var CLEAR_BOOK = "CLEAR_BOOK";
+var IS_LIKED = "IS_LIKED";
 var GET_AUTHOR = "GET_AUTHOR";
 var GET_FAVOURITE_LIST = "GET_FAVOURITE_LIST";
 var ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
@@ -74758,13 +74798,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _bookPageActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bookPageActions */ "./resources/js/components/actions/bookPageActions.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 
@@ -74781,20 +74823,12 @@ var getFavouriteList = function getFavouriteList(id) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/favourites/view", {
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/books/favourites", {
                   user_id: id
                 }).then(function (res) {
-                  var payload = [];
-
-                  if (res.data) {
-                    res.data.map(function (book) {
-                      return payload.push(book.book_id);
-                    });
-                  }
-
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_FAVOURITE_LIST"],
-                    payload: payload
+                    payload: res.data
                   });
                   dispatch(appReady());
                 })["catch"](function (err) {
@@ -74831,10 +74865,11 @@ var addToFavourite = function addToFavourite(book, user) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/favourites/create", {
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/books/".concat(book, "/favourites"), {
                   user_id: user,
                   book_id: book
                 }).then(function (res) {
+                  // dispatch(isLiked(book, user));
                   dispatch(getFavouriteList(user));
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["ADD_TO_FAVOURITES"]
@@ -74873,15 +74908,15 @@ var removeFromFavourite = function removeFromFavourite(book, user) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/favourites/delete", {
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/books/".concat(book, "/favourites"), {
                   user_id: user,
-                  book_id: book
+                  book_id: book,
+                  _method: "DELETE"
                 }).then(function (res) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FROM_FAVOURITES"]
                   });
                   dispatch(getFavouriteList(user));
-                  console.log(res);
                 })["catch"](function (err) {
                   return console.log(err);
                 });
@@ -75194,8 +75229,17 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(BookPage)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      liked: false
+    _defineProperty(_assertThisInitialized(_this), "intialize", function (props) {
+      props.clearBook();
+      var bookId = parseInt(props.match.params.id);
+
+      if (props.isLoggedIn) {
+        var userId = props.user.id;
+        props.isLiked(bookId, userId);
+      }
+
+      props.getBook(bookId);
+      props.getBooks();
     });
 
     _defineProperty(_assertThisInitialized(_this), "likeHandler",
@@ -75210,34 +75254,27 @@ function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!_this.props.isLoggedIn) {
-                  _context.next = 11;
+                  _context.next = 10;
                   break;
                 }
 
                 bookId = parseInt(_this.props.match.params.id);
                 userId = _this.props.user.id;
                 e.preventDefault();
-                method = _this.props.addToFavourite;
-
-                if (_this.state.liked) {
-                  method = _this.props.removeFromFavourite;
-                }
-
-                _context.next = 8;
+                method = _this.props.liked ? _this.props.removeFromFavourite : _this.props.addToFavourite;
+                _context.next = 7;
                 return method(bookId, userId);
 
-              case 8:
-                _this.setState({
-                  liked: !_this.state.liked
-                });
+              case 7:
+                _this.props.isLiked(bookId, userId);
 
-                _context.next = 12;
+                _context.next = 11;
                 break;
 
-              case 11:
+              case 10:
                 alert("Log in Please");
 
-              case 12:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -75254,46 +75291,15 @@ function (_Component) {
   }
 
   _createClass(BookPage, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.props.clearBook();
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var bookId = parseInt(this.props.match.params.id);
-
-      if (this.props.isLoggedIn) {
-        var userId = this.props.user.id;
-
-        if (this.props.favouriteBooks.includes(bookId)) {
-          this.setState({
-            liked: true
-          });
-        }
-      }
-
-      this.props.getBook(bookId);
-      this.props.getBooks();
+      this.intialize(this.props);
     }
   }, {
     key: "UNSAFE_componentWillReceiveProps",
     value: function UNSAFE_componentWillReceiveProps(nextProps, nextState) {
       if (this.props.match.params.id !== nextProps.match.params.id) {
-        var bookId = parseInt(nextProps.match.params.id);
-
-        if (nextProps.isLoggedIn) {
-          var userId = nextProps.user.id;
-
-          if (nextProps.favouriteBooks.includes(bookId)) {
-            this.setState({
-              liked: true
-            });
-          }
-        }
-
-        nextProps.getBook(bookId);
-        nextProps.getBooks();
+        this.intialize(nextProps);
       }
     }
   }, {
@@ -75308,7 +75314,7 @@ function (_Component) {
               book_score = _this$props$book.book_score,
               featured_image = _this$props$book.featured_image;
           var currentBookId = this.props.book.id;
-          var likedClass = this.state.liked ? "text-danger" : "text-secondary";
+          var likedClass = this.props.liked ? "text-danger" : "text-secondary";
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
@@ -75377,7 +75383,8 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     books: state.books.books,
     book: state.bookPage.book,
-    isLoaded: state.bookPage.isLoaded
+    isLoaded: state.bookPage.isLoaded,
+    liked: state.bookPage.liked
   };
 };
 
@@ -75391,7 +75398,8 @@ BookPage.proptypes = {
   getBooks: _actions_booksActions__WEBPACK_IMPORTED_MODULE_7__["getBooks"],
   addToFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_8__["addToFavourite"],
   removeFromFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_8__["removeFromFavourite"],
-  clearBook: _actions_bookPageActions__WEBPACK_IMPORTED_MODULE_4__["clearBook"]
+  clearBook: _actions_bookPageActions__WEBPACK_IMPORTED_MODULE_4__["clearBook"],
+  isLiked: _actions_bookPageActions__WEBPACK_IMPORTED_MODULE_4__["isLiked"]
 })(BookPage)));
 
 /***/ }),
@@ -75733,10 +75741,10 @@ function (_Component) {
       }, this.props.favouriteBooks.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           className: "list-group-item",
-          key: book
+          key: book.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "book/".concat(book)
-        }, "http://www.bookreviews.test/book/".concat(book)));
+          to: "book/".concat(book.id)
+        }, book.name));
       })));
     }
   }]);
@@ -76434,7 +76442,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   book: {},
-  isLoaded: false
+  isLoaded: false,
+  liked: false
 };
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -76445,6 +76454,11 @@ var initialState = {
       return _objectSpread({}, state, {
         book: action.payload,
         isLoaded: true
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["IS_LIKED"]:
+      return _objectSpread({}, state, {
+        liked: action.payload
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["CLEAR_BOOK"]:
