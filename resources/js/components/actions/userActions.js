@@ -1,5 +1,5 @@
 import * as actionTypes from "./types";
-import { isLiked } from "./bookPageActions";
+import { isLiked } from "./singleBookActions";
 import axios from "axios";
 
 export const getFavouriteList = id => async dispatch => {

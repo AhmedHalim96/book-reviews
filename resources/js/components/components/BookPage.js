@@ -1,14 +1,18 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
-import { getBook, clearBook, isLiked } from "../actions/bookPageActions";
+import {
+  getBook,
+  clearBook,
+  isLiked,
+  deleteBook
+} from "../actions/singleBookActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBooks } from "../actions/booksActions";
 import { addToFavourite, removeFromFavourite } from "../actions/userActions";
 
 import Spinner from "./layout/Spinner";
-import DeleteBook from "./DeleteBook";
 
 class BookPage extends Component {
   componentDidMount() {
@@ -45,6 +49,10 @@ class BookPage extends Component {
     } else {
       alert("Log in Please");
     }
+  };
+  deleteHandler = e => {
+    e.preventDefault();
+    this.props.deleteBook(this.props.match.params.id, this.props.history);
   };
 
   render() {
@@ -114,7 +122,13 @@ class BookPage extends Component {
                 >
                   Edit Review
                 </Link>
-                <DeleteBook id={currentBookId} history={this.props.history} />
+                <button
+                  type="submit"
+                  className="btn btn-danger btn-lg float-right"
+                  onClick={this.deleteHandler}
+                >
+                  Delete Book
+                </button>
               </Fragment>
             ) : null}
 
@@ -166,7 +180,8 @@ export default withRouter(
       addToFavourite,
       removeFromFavourite,
       clearBook,
-      isLiked
+      isLiked,
+      deleteBook
     }
   )(BookPage)
 );

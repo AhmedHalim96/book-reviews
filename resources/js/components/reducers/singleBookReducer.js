@@ -22,6 +22,18 @@ export default function(state = initialState, action) {
         book: {},
         isLoaded: false
       };
+    case actionTypes.CREATE_BOOK:
+      return {
+        ...state
+      };
+    case actionTypes.UPDATE_BOOK:
+      return {
+        ...state
+      };
+    case actionTypes.DELETE_BOOK:
+      return {
+        ...state
+      };
     default:
       return state;
   }

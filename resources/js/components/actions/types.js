@@ -1,8 +1,12 @@
 export const GET_BOOKS = "GET_BOOKS";
+
 export const GET_BOOK = "GET_BOOK";
 export const CLEAR_BOOK = "CLEAR_BOOK";
 export const IS_LIKED = "IS_LIKED";
-export const GET_AUTHOR = "GET_AUTHOR";
+export const CREATE_BOOK = "CREATE_BOOK";
+export const UPDATE_BOOK = "UPDATE_BOOK";
+export const DELETE_BOOK = "DELETE_BOOK";
+
 export const GET_FAVOURITE_LIST = "GET_FAVOURITE_LIST";
 export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 export const REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";

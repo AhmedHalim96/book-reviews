@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import booksReducer from "./booksReducer";
-import bookPageReducer from "./bookPageReducer";
+import singleBookReducer from "./singleBookReducer";
 import userReducer from "./userReducer";
 
 export default combineReducers({
   books: booksReducer,
-  bookPage: bookPageReducer,
+  bookPage: singleBookReducer,
   user: userReducer
 });

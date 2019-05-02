@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import Axios from "axios";
+import { connect } from "react-redux";
+import { createBook } from "../actions/singleBookActions";
+
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-export default class CreateBook extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newBook: {
-        name: "",
-        book_author: "",
-        review_text: "",
-        book_score: 0,
-        featured_image: null
-      }
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event) {
+class CreateBook extends Component {
+  state = {
+    newBook: {
+      name: "",
+      book_author: "",
+      review_text: "",
+      book_score: 0,
+      featured_image: null
+    }
+  };
+  handleChange = event => {
     if (event.target.files) {
       return this.setState({
         newBook: {
@@ -34,34 +31,12 @@ export default class CreateBook extends Component {
         }
       });
     }
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
-    // return console.log( this.state.newBook);
-
-    const {
-      name,
-      review_text,
-      book_author,
-      book_score,
-      featured_image
-    } = this.state.newBook;
-    const fd = new FormData();
-    fd.append("name", name);
-    fd.append("review_text", review_text);
-    fd.append("book_author", book_author);
-    fd.append("book_score", book_score);
-    fd.append("featured_image", featured_image);
-
-    // return console.log(fd);
-    Axios.post("/books", fd)
-      .then(res => {
-        // return console.log( res.data);
-        this.props.history.push("/book/" + res.data.id);
-      })
-      .catch(err => console.log(err));
-  }
+    this.props.createBook(this.state.newBook, this.props.history);
+  };
   render() {
     return (
       <div className="card card-body card-dark bg-dark text-white">
@@ -129,3 +104,7 @@ export default class CreateBook extends Component {
     );
   }
 }
+export default connect(
+  null,
+  { createBook }
+)(CreateBook);
