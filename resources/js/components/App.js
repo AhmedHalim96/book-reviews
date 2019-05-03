@@ -1,10 +1,16 @@
 // Dependencies
 import React, { Component, Fragment } from "react";
-import $ from "jquery";
-import axios from "axios";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { getFavouriteList, appReady, resetUser } from "./actions/userActions";
+import {
+  getFavouriteList,
+  appReady,
+  resetUser,
+  getUser,
+  loginUser,
+  registerUser,
+  logoutUser
+} from "./actions/userActions";
 
 // LAYOUT COMPONENTS
 import Navbar from "./components/layout/Navbar";
@@ -30,149 +36,19 @@ class App extends Component {
     user: {}
   };
   componentDidMount = () => {
-    let state = localStorage["appState"];
-    let AppState;
-    if (state) {
-      AppState = JSON.parse(state);
-      this.setState({ isLoggedIn: AppState.isLoggedIn, user: AppState.user });
-      this.props.getFavouriteList(AppState.user.id);
-    } else {
-      this.props.appReady();
-    }
-  };
-
-  _loginUser = (email, password) => {
-    console.log("_logUser");
-    $("#login-form button")
-      .attr("disabled", "disabled")
-      .html(
-        '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
-      );
-    var formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
-
-    axios
-      .post("/api/user/login", formData)
-      .then(response => {
-        console.log(response.data);
-        return response;
-      })
-      .then(json => {
-        if (json.data.success) {
-          alert("Login Success!");
-
-          let userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          let appState = {
-            isLoggedIn: true,
-            user: userData
-          };
-          // save app state with user date in local storage
-          localStorage["appState"] = JSON.stringify(appState);
-          this.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-          this.props.getFavouriteList(appState.user.id);
-          this.props.history.push("/");
-        } else alert("Login Failed!");
-
-        $("#login-form button")
-          .removeAttr("disabled")
-          .html("Login");
-      })
-      .catch(error => {
-        alert(`An Error Occured! ${error}`);
-        $("#login-form button")
-          .removeAttr("disabled")
-          .html("Login");
-      });
-  };
-
-  _registerUser = (name, email, password) => {
-    $("#email-login-btn")
-      .attr("disabled", "disabled")
-      .html(
-        '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
-      );
-
-    var formData = new FormData();
-    formData.append("password", password);
-    formData.append("email", email);
-    formData.append("name", name);
-
-    axios
-      .post("/api/user/register", formData)
-      .then(response => {
-        console.log(response);
-        return response;
-      })
-      .then(json => {
-        if (json.data.success) {
-          alert(`Registration Successful!`);
-
-          let userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          let appState = {
-            isLoggedIn: true,
-            user: userData
-          };
-          // save app state with user date in local storage
-          localStorage["appState"] = JSON.stringify(appState);
-          this.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-          this.props.history.push("/");
-        } else {
-          alert(`Registration Failed!`);
-          $("#email-login-btn")
-            .removeAttr("disabled")
-            .html("Register");
-        }
-      })
-      .catch(error => {
-        alert("An Error Occured!" + error);
-        console.log(`${formData} ${error}`);
-        $("#email-login-btn")
-          .removeAttr("disabled")
-          .html("Register");
-      });
-  };
-
-  _logoutUser = () => {
-    let appState = {
-      isLoggedIn: false,
-      user: {}
-    };
-    this.props.resetUser();
-    // save app state with user date in local storage
-    localStorage["appState"] = JSON.stringify(appState);
-    this.setState(appState);
+    this.props.getUser();
   };
 
   render() {
     if (this.props.isReady) {
-      const { isLoggedIn, user } = this.state;
-      const { favouriteBooks } = this.props;
+      const { isLoggedIn, user, favouriteBooks } = this.props;
 
       return (
         <div className="bg-secondary">
           <Navbar
             username={user.name}
             isLoggedIn={isLoggedIn}
-            logout={this._logoutUser}
+            logout={this.props.logoutUser}
           />
           <div className="container-fluid pt-3">
             <div className="row">
@@ -215,13 +91,16 @@ class App extends Component {
                     <Route
                       path="/login"
                       render={props => (
-                        <Login {...props} login={this._loginUser} />
+                        <Login {...props} login={this.props.loginUser} />
                       )}
                     />
                     <Route
                       path="/register"
                       render={props => (
-                        <Register {...props} register={this._registerUser} />
+                        <Register
+                          {...props}
+                          register={this.props.registerUser}
+                        />
                       )}
                     />
 
@@ -254,10 +133,20 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   isReady: state.user.isReady,
+  user: state.user.user,
+  isLoggedIn: state.user.isLoggedIn,
   favouriteBooks: state.user.favouriteBooks
 });
 
 export default connect(
   mapStateToProps,
-  { getFavouriteList, appReady, resetUser }
+  {
+    getFavouriteList,
+    appReady,
+    resetUser,
+    getUser,
+    loginUser,
+    logoutUser,
+    registerUser
+  }
 )(App);

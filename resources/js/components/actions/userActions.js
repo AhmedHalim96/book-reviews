@@ -1,5 +1,6 @@
 import * as actionTypes from "./types";
-import { isLiked } from "./singleBookActions";
+// import { isLiked } from "./singleBookActions";
+import $ from "jquery";
 import axios from "axios";
 
 export const getFavouriteList = id => async dispatch => {
@@ -49,7 +50,141 @@ export const removeFromFavourite = (book, user) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
+export const getUser = () => dispatch => {
+  let state = localStorage["appState"];
+  let AppState = JSON.parse(state);
+  console.log(AppState);
 
+  if (AppState.isLoggedIn) {
+    dispatch({
+      type: actionTypes.GET_USER,
+      payload: AppState
+    });
+    dispatch(getFavouriteList(AppState.user.id));
+  } else {
+    dispatch(appReady());
+  }
+};
+
+export const loginUser = (email, password, history) => dispatch => {
+  $("#login-form button")
+    .attr("disabled", "disabled")
+    .html(
+      '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
+    );
+  var formData = new FormData();
+  formData.append("email", email);
+  formData.append("password", password);
+
+  axios
+    .post("/api/user/login", formData)
+    .then(response => {
+      console.log(response.data);
+      return response;
+    })
+    .then(json => {
+      if (json.data.success) {
+        alert("Login Success!");
+
+        let userData = {
+          name: json.data.data.name,
+          id: json.data.data.id,
+          email: json.data.data.email,
+          auth_token: json.data.data.auth_token,
+          timestamp: new Date().toString()
+        };
+        let appState = {
+          isLoggedIn: true,
+          user: userData
+        };
+        // save app state with user date in local storage
+        localStorage["appState"] = JSON.stringify(appState);
+        dispatch({
+          type: actionTypes.LOGIN_USER,
+          payload: appState.user
+        });
+        dispatch(getFavouriteList(appState.user.id));
+        history.push("/");
+      } else alert("Login Failed!");
+
+      $("#login-form button")
+        .removeAttr("disabled")
+        .html("Login");
+    })
+    .catch(error => {
+      alert(`An Error Occured! ${error}`);
+      $("#login-form button")
+        .removeAttr("disabled")
+        .html("Login");
+    });
+};
+export const registerUser = (name, email, password, history) => dispatch => {
+  $("#email-login-btn")
+    .attr("disabled", "disabled")
+    .html(
+      '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
+    );
+
+  var formData = new FormData();
+  formData.append("password", password);
+  formData.append("email", email);
+  formData.append("name", name);
+
+  axios
+    .post("/api/user/register", formData)
+    .then(response => {
+      console.log(response);
+      return response;
+    })
+    .then(json => {
+      if (json.data.success) {
+        alert(`Registration Successful!`);
+
+        let userData = {
+          name: json.data.data.name,
+          id: json.data.data.id,
+          email: json.data.data.email,
+          auth_token: json.data.data.auth_token,
+          timestamp: new Date().toString()
+        };
+        let appState = {
+          isLoggedIn: true,
+          user: userData
+        };
+        // save app state with user date in local storage
+        localStorage["appState"] = JSON.stringify(appState);
+        dispatch({
+          type: actionTypes.REGISTER_USER,
+          payload: appState.user
+        });
+        history.push("/");
+      } else {
+        alert(`Registration Failed!`);
+        $("#email-login-btn")
+          .removeAttr("disabled")
+          .html("Register");
+      }
+    })
+    .catch(error => {
+      alert("An Error Occured!" + error);
+      console.log(`${formData} ${error}`);
+      $("#email-login-btn")
+        .removeAttr("disabled")
+        .html("Register");
+    });
+};
+
+export const logoutUser = () => dispatch => {
+  let appState = {
+    isLoggedIn: false,
+    user: {}
+  };
+
+  // save app state with user date in local storage
+  localStorage["appState"] = JSON.stringify(appState);
+
+  dispatch(resetUser());
+};
 export const resetUser = () => dispatch => {
   dispatch({
     type: actionTypes.RESET_USER

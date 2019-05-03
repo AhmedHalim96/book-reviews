@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const Login = props => {
   let _email, _password;
   const handleLogin = e => {
     e.preventDefault();
-    props.login(_email.value, _password.value);
+    props.login(_email.value, _password.value, props.history);
   };
   return (
     <div id="main">
@@ -63,4 +63,4 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

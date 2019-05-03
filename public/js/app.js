@@ -74258,25 +74258,21 @@ if (token) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/userActions */ "./resources/js/components/actions/userActions.js");
-/* harmony import */ var _components_layout_Navbar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/layout/Navbar */ "./resources/js/components/components/layout/Navbar.js");
-/* harmony import */ var _components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/layout/Sidebar */ "./resources/js/components/components/layout/Sidebar.js");
-/* harmony import */ var _components_Books__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Books */ "./resources/js/components/components/Books.js");
-/* harmony import */ var _components_BookPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/BookPage */ "./resources/js/components/components/BookPage.js");
-/* harmony import */ var _components_CreateBook__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/CreateBook */ "./resources/js/components/components/CreateBook.js");
-/* harmony import */ var _components_EditBook__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/EditBook */ "./resources/js/components/components/EditBook.js");
-/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./auth/Login */ "./resources/js/components/auth/Login.js");
-/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./auth/Register */ "./resources/js/components/auth/Register.js");
-/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Dashboard */ "./resources/js/components/components/Dashboard.js");
-/* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/About */ "./resources/js/components/components/About.js");
-/* harmony import */ var _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/layout/PageNotFound */ "./resources/js/components/components/layout/PageNotFound.js");
-/* harmony import */ var _components_layout_Spinner__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/userActions */ "./resources/js/components/actions/userActions.js");
+/* harmony import */ var _components_layout_Navbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/layout/Navbar */ "./resources/js/components/components/layout/Navbar.js");
+/* harmony import */ var _components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/layout/Sidebar */ "./resources/js/components/components/layout/Sidebar.js");
+/* harmony import */ var _components_Books__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Books */ "./resources/js/components/components/Books.js");
+/* harmony import */ var _components_BookPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/BookPage */ "./resources/js/components/components/BookPage.js");
+/* harmony import */ var _components_CreateBook__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CreateBook */ "./resources/js/components/components/CreateBook.js");
+/* harmony import */ var _components_EditBook__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/EditBook */ "./resources/js/components/components/EditBook.js");
+/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./auth/Login */ "./resources/js/components/auth/Login.js");
+/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth/Register */ "./resources/js/components/auth/Register.js");
+/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Dashboard */ "./resources/js/components/components/Dashboard.js");
+/* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/About */ "./resources/js/components/components/About.js");
+/* harmony import */ var _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/layout/PageNotFound */ "./resources/js/components/components/layout/PageNotFound.js");
+/* harmony import */ var _components_layout_Spinner__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -74300,8 +74296,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // Dependencies
-
-
 
 
 
@@ -74346,121 +74340,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "componentDidMount", function () {
-      var state = localStorage["appState"];
-      var AppState;
-
-      if (state) {
-        AppState = JSON.parse(state);
-
-        _this.setState({
-          isLoggedIn: AppState.isLoggedIn,
-          user: AppState.user
-        });
-
-        _this.props.getFavouriteList(AppState.user.id);
-      } else {
-        _this.props.appReady();
-      }
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_loginUser", function (email, password) {
-      console.log("_logUser");
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()("#login-form button").attr("disabled", "disabled").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
-      var formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/user/login", formData).then(function (response) {
-        console.log(response.data);
-        return response;
-      }).then(function (json) {
-        if (json.data.success) {
-          alert("Login Success!");
-          var userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          var appState = {
-            isLoggedIn: true,
-            user: userData
-          }; // save app state with user date in local storage
-
-          localStorage["appState"] = JSON.stringify(appState);
-
-          _this.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-
-          _this.props.getFavouriteList(appState.user.id);
-
-          _this.props.history.push("/");
-        } else alert("Login Failed!");
-
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()("#login-form button").removeAttr("disabled").html("Login");
-      })["catch"](function (error) {
-        alert("An Error Occured! ".concat(error));
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()("#login-form button").removeAttr("disabled").html("Login");
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_registerUser", function (name, email, password) {
-      jquery__WEBPACK_IMPORTED_MODULE_1___default()("#email-login-btn").attr("disabled", "disabled").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
-      var formData = new FormData();
-      formData.append("password", password);
-      formData.append("email", email);
-      formData.append("name", name);
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/user/register", formData).then(function (response) {
-        console.log(response);
-        return response;
-      }).then(function (json) {
-        if (json.data.success) {
-          alert("Registration Successful!");
-          var userData = {
-            name: json.data.data.name,
-            id: json.data.data.id,
-            email: json.data.data.email,
-            auth_token: json.data.data.auth_token,
-            timestamp: new Date().toString()
-          };
-          var appState = {
-            isLoggedIn: true,
-            user: userData
-          }; // save app state with user date in local storage
-
-          localStorage["appState"] = JSON.stringify(appState);
-
-          _this.setState({
-            isLoggedIn: appState.isLoggedIn,
-            user: appState.user
-          });
-
-          _this.props.history.push("/");
-        } else {
-          alert("Registration Failed!");
-          jquery__WEBPACK_IMPORTED_MODULE_1___default()("#email-login-btn").removeAttr("disabled").html("Register");
-        }
-      })["catch"](function (error) {
-        alert("An Error Occured!" + error);
-        console.log("".concat(formData, " ").concat(error));
-        jquery__WEBPACK_IMPORTED_MODULE_1___default()("#email-login-btn").removeAttr("disabled").html("Register");
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_logoutUser", function () {
-      var appState = {
-        isLoggedIn: false,
-        user: {}
-      };
-
-      _this.props.resetUser(); // save app state with user date in local storage
-
-
-      localStorage["appState"] = JSON.stringify(appState);
-
-      _this.setState(appState);
+      _this.props.getUser();
     });
 
     return _this;
@@ -74472,89 +74352,89 @@ function (_Component) {
       var _this2 = this;
 
       if (this.props.isReady) {
-        var _this$state = this.state,
-            isLoggedIn = _this$state.isLoggedIn,
-            user = _this$state.user;
-        var favouriteBooks = this.props.favouriteBooks;
+        var _this$props = this.props,
+            isLoggedIn = _this$props.isLoggedIn,
+            user = _this$props.user,
+            favouriteBooks = _this$props.favouriteBooks;
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bg-secondary"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Navbar__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Navbar__WEBPACK_IMPORTED_MODULE_4__["default"], {
           username: user.name,
           isLoggedIn: isLoggedIn,
-          logout: this._logoutUser
+          logout: this.props.logoutUser
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "container-fluid pt-3"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-md-9"
-        }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/dashboard",
           render: function render(props) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Dashboard__WEBPACK_IMPORTED_MODULE_14__["default"], _extends({}, props, {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Dashboard__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
               favouriteBooks: favouriteBooks
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/:id/edit",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(_components_EditBook__WEBPACK_IMPORTED_MODULE_11__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_EditBook__WEBPACK_IMPORTED_MODULE_9__["default"])
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/create",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(_components_CreateBook__WEBPACK_IMPORTED_MODULE_10__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_CreateBook__WEBPACK_IMPORTED_MODULE_8__["default"])
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/:id",
           render: function render(props) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BookPage__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BookPage__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
               isLoggedIn: isLoggedIn,
               user: user,
               favouriteBooks: favouriteBooks
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           exact: true,
           path: "/",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(_components_Books__WEBPACK_IMPORTED_MODULE_8__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_Books__WEBPACK_IMPORTED_MODULE_6__["default"])
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/about",
-          component: _components_About__WEBPACK_IMPORTED_MODULE_15__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-          component: _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_16__["default"]
-        })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+          component: _components_About__WEBPACK_IMPORTED_MODULE_13__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          component: _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_14__["default"]
+        })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/login",
           render: function render(props) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Login__WEBPACK_IMPORTED_MODULE_12__["default"], _extends({}, props, {
-              login: _this2._loginUser
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Login__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
+              login: _this2.props.loginUser
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/register",
           render: function render(props) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Register__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, props, {
-              register: _this2._registerUser
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_auth_Register__WEBPACK_IMPORTED_MODULE_11__["default"], _extends({}, props, {
+              register: _this2.props.registerUser
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/:id",
           render: function render(props) {
-            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BookPage__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BookPage__WEBPACK_IMPORTED_MODULE_7__["default"], _extends({}, props, {
               isLoggedIn: isLoggedIn
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           exact: true,
           path: "/",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(_components_Books__WEBPACK_IMPORTED_MODULE_8__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_Books__WEBPACK_IMPORTED_MODULE_6__["default"])
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/about",
-          component: _components_About__WEBPACK_IMPORTED_MODULE_15__["default"]
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-          component: _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_16__["default"]
+          component: _components_About__WEBPACK_IMPORTED_MODULE_13__["default"]
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          component: _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_14__["default"]
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-md-3 d-none d-md-block"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_7__["default"], null)))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_5__["default"], null)))));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Spinner__WEBPACK_IMPORTED_MODULE_17__["default"], null);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Spinner__WEBPACK_IMPORTED_MODULE_15__["default"], null);
     }
   }]);
 
@@ -74564,14 +74444,20 @@ function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     isReady: state.user.isReady,
+    user: state.user.user,
+    isLoggedIn: state.user.isLoggedIn,
     favouriteBooks: state.user.favouriteBooks
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["connect"])(mapStateToProps, {
-  getFavouriteList: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["getFavouriteList"],
-  appReady: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["appReady"],
-  resetUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_5__["resetUser"]
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  getFavouriteList: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["getFavouriteList"],
+  appReady: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["appReady"],
+  resetUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["resetUser"],
+  getUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["getUser"],
+  loginUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["loginUser"],
+  logoutUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["logoutUser"],
+  registerUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["registerUser"]
 })(App));
 
 /***/ }),
@@ -74876,7 +74762,7 @@ var clearBook = function clearBook() {
 /*!**************************************************!*\
   !*** ./resources/js/components/actions/types.js ***!
   \**************************************************/
-/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
+/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK, GET_USER, LOGIN_USER, REGISTER_USER, LOGOUT_USER, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74888,6 +74774,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATE_BOOK", function() { return CREATE_BOOK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_BOOK", function() { return UPDATE_BOOK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_BOOK", function() { return DELETE_BOOK; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USER", function() { return GET_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN_USER", function() { return LOGIN_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REGISTER_USER", function() { return REGISTER_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_USER", function() { return LOGOUT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_FAVOURITE_LIST", function() { return GET_FAVOURITE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TO_FAVOURITES", function() { return ADD_TO_FAVOURITES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FROM_FAVOURITES", function() { return REMOVE_FROM_FAVOURITES; });
@@ -74900,6 +74790,10 @@ var IS_LIKED = "IS_LIKED";
 var CREATE_BOOK = "CREATE_BOOK";
 var UPDATE_BOOK = "UPDATE_BOOK";
 var DELETE_BOOK = "DELETE_BOOK";
+var GET_USER = "GET_USER";
+var LOGIN_USER = "LOGIN_USER";
+var REGISTER_USER = "REGISTER_USER";
+var LOGOUT_USER = "LOGOUT_USER";
 var GET_FAVOURITE_LIST = "GET_FAVOURITE_LIST";
 var ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 var REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
@@ -74912,7 +74806,7 @@ var RESET_USER = "RESET_USER";
 /*!********************************************************!*\
   !*** ./resources/js/components/actions/userActions.js ***!
   \********************************************************/
-/*! exports provided: getFavouriteList, addToFavourite, removeFromFavourite, resetUser, appReady */
+/*! exports provided: getFavouriteList, addToFavourite, removeFromFavourite, getUser, loginUser, registerUser, logoutUser, resetUser, appReady */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74920,12 +74814,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFavouriteList", function() { return getFavouriteList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToFavourite", function() { return addToFavourite; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFromFavourite", function() { return removeFromFavourite; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUser", function() { return getUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginUser", function() { return loginUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registerUser", function() { return registerUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutUser", function() { return logoutUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetUser", function() { return resetUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appReady", function() { return appReady; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
-/* harmony import */ var _singleBookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./singleBookActions */ "./resources/js/components/actions/singleBookActions.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 
@@ -74934,6 +74833,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+ // import { isLiked } from "./singleBookActions";
 
 
 
@@ -75065,6 +74965,116 @@ var removeFromFavourite = function removeFromFavourite(book, user) {
     }()
   );
 };
+var getUser = function getUser() {
+  return function (dispatch) {
+    var state = localStorage["appState"];
+    var AppState = JSON.parse(state);
+    console.log(AppState);
+
+    if (AppState.isLoggedIn) {
+      dispatch({
+        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USER"],
+        payload: AppState
+      });
+      dispatch(getFavouriteList(AppState.user.id));
+    } else {
+      dispatch(appReady());
+    }
+  };
+};
+var loginUser = function loginUser(email, password, history) {
+  return function (dispatch) {
+    jquery__WEBPACK_IMPORTED_MODULE_2___default()("#login-form button").attr("disabled", "disabled").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
+    var formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/login", formData).then(function (response) {
+      console.log(response.data);
+      return response;
+    }).then(function (json) {
+      if (json.data.success) {
+        alert("Login Success!");
+        var userData = {
+          name: json.data.data.name,
+          id: json.data.data.id,
+          email: json.data.data.email,
+          auth_token: json.data.data.auth_token,
+          timestamp: new Date().toString()
+        };
+        var appState = {
+          isLoggedIn: true,
+          user: userData
+        }; // save app state with user date in local storage
+
+        localStorage["appState"] = JSON.stringify(appState);
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_1__["LOGIN_USER"],
+          payload: appState.user
+        });
+        dispatch(getFavouriteList(appState.user.id));
+        history.push("/");
+      } else alert("Login Failed!");
+
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()("#login-form button").removeAttr("disabled").html("Login");
+    })["catch"](function (error) {
+      alert("An Error Occured! ".concat(error));
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()("#login-form button").removeAttr("disabled").html("Login");
+    });
+  };
+};
+var registerUser = function registerUser(name, email, password, history) {
+  return function (dispatch) {
+    jquery__WEBPACK_IMPORTED_MODULE_2___default()("#email-login-btn").attr("disabled", "disabled").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
+    var formData = new FormData();
+    formData.append("password", password);
+    formData.append("email", email);
+    formData.append("name", name);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/register", formData).then(function (response) {
+      console.log(response);
+      return response;
+    }).then(function (json) {
+      if (json.data.success) {
+        alert("Registration Successful!");
+        var userData = {
+          name: json.data.data.name,
+          id: json.data.data.id,
+          email: json.data.data.email,
+          auth_token: json.data.data.auth_token,
+          timestamp: new Date().toString()
+        };
+        var appState = {
+          isLoggedIn: true,
+          user: userData
+        }; // save app state with user date in local storage
+
+        localStorage["appState"] = JSON.stringify(appState);
+        dispatch({
+          type: _types__WEBPACK_IMPORTED_MODULE_1__["REGISTER_USER"],
+          payload: appState.user
+        });
+        history.push("/");
+      } else {
+        alert("Registration Failed!");
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()("#email-login-btn").removeAttr("disabled").html("Register");
+      }
+    })["catch"](function (error) {
+      alert("An Error Occured!" + error);
+      console.log("".concat(formData, " ").concat(error));
+      jquery__WEBPACK_IMPORTED_MODULE_2___default()("#email-login-btn").removeAttr("disabled").html("Register");
+    });
+  };
+};
+var logoutUser = function logoutUser() {
+  return function (dispatch) {
+    var appState = {
+      isLoggedIn: false,
+      user: {}
+    }; // save app state with user date in local storage
+
+    localStorage["appState"] = JSON.stringify(appState);
+    dispatch(resetUser());
+  };
+};
 var resetUser = function resetUser() {
   return function (dispatch) {
     dispatch({
@@ -75102,7 +75112,7 @@ var Login = function Login(props) {
 
   var handleLogin = function handleLogin(e) {
     e.preventDefault();
-    props.login(_email.value, _password.value);
+    props.login(_email.value, _password.value, props.history);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75159,7 +75169,7 @@ var Login = function Login(props) {
   }, " Register"))))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Login);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Login));
 
 /***/ }),
 
@@ -75183,7 +75193,7 @@ var Register = function Register(props) {
 
   var handleLogin = function handleLogin(e) {
     e.preventDefault();
-    props.register(_name.value, _email.value, _password.value);
+    props.register(_name.value, _email.value, _password.value, props.history);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75253,7 +75263,7 @@ var Register = function Register(props) {
   }, " Login"))))))));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Register);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Register));
 
 /***/ }),
 
@@ -76608,6 +76618,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
+  user: {},
+  isLoggedIn: false,
   favouriteBooks: [],
   isReady: false
 };
@@ -76627,9 +76639,29 @@ var initialState = {
         isReady: true
       });
 
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_USER"]:
+      return _objectSpread({}, state, {
+        user: action.payload.user,
+        isLoggedIn: true
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LOGIN_USER"]:
+      return _objectSpread({}, state, {
+        user: action.payload,
+        isLoggedIn: true
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LOGOUT_USER"]:
+      return _objectSpread({}, state, {
+        user: action.payload,
+        isLoggedIn: false
+      });
+
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["RESET_USER"]:
       return _objectSpread({}, state, {
-        favouriteBooks: []
+        favouriteBooks: [],
+        user: {},
+        isLoggedIn: false
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ADD_TO_FAVOURITES"]:

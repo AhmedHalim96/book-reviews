@@ -1,13 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const Register = props => {
   let _email, _password, _name;
 
   const handleLogin = e => {
     e.preventDefault();
-
-    props.register(_name.value, _email.value, _password.value);
+    props.register(_name.value, _email.value, _password.value, props.history);
   };
 
   return (
@@ -77,4 +76,4 @@ const Register = props => {
   );
 };
 
-export default Register;
+export default withRouter(Register);

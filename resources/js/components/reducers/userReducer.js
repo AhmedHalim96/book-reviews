@@ -1,5 +1,7 @@
 import * as actionTypes from "../actions/types";
 const initialState = {
+  user: {},
+  isLoggedIn: false,
   favouriteBooks: [],
   isReady: false
 };
@@ -13,10 +15,30 @@ export default function(state = initialState, action) {
         ...state,
         isReady: true
       };
+    case actionTypes.GET_USER:
+      return {
+        ...state,
+        user: action.payload.user,
+        isLoggedIn: true
+      };
+    case actionTypes.LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: true
+      };
+    case actionTypes.LOGOUT_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: false
+      };
     case actionTypes.RESET_USER:
       return {
         ...state,
-        favouriteBooks: []
+        favouriteBooks: [],
+        user: {},
+        isLoggedIn: false
       };
 
     case actionTypes.ADD_TO_FAVOURITES:
