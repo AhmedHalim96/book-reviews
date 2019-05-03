@@ -33,7 +33,6 @@ class BookPage extends Component {
       props.isLiked(bookId, userId);
     }
     props.getBook(bookId);
-    props.getBooks();
   };
   likeHandler = async e => {
     if (this.props.isLoggedIn) {
@@ -167,7 +166,6 @@ const mapStateToProps = state => ({
 });
 BookPage.proptypes = {
   books: PropTypes.array.isRequired,
-  book: PropTypes.array.isRequired,
   isLoaded: PropTypes.bool.isRequired
 };
 
@@ -176,7 +174,6 @@ export default withRouter(
     mapStateToProps,
     {
       getBook,
-      getBooks,
       addToFavourite,
       removeFromFavourite,
       clearBook,

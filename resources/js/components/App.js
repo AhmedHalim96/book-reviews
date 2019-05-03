@@ -11,6 +11,7 @@ import {
   registerUser,
   logoutUser
 } from "./actions/userActions";
+import { getBooks } from "./actions/booksActions";
 
 // LAYOUT COMPONENTS
 import Navbar from "./components/layout/Navbar";
@@ -31,17 +32,13 @@ import PageNotFound from "./components/layout/PageNotFound";
 import Spinner from "./components/layout/Spinner";
 
 class App extends Component {
-  state = {
-    isLoggedIn: false,
-    user: {}
-  };
   componentDidMount = () => {
-    this.props.getUser();
+    this.props.getBooks().then(() => this.props.getUser());
   };
 
   render() {
     if (this.props.isReady) {
-      const { isLoggedIn, user, favouriteBooks } = this.props;
+      const { isLoggedIn, user, favouriteBooks, books } = this.props;
 
       return (
         <div className="bg-secondary">
@@ -77,11 +74,16 @@ class App extends Component {
                           isLoggedIn={isLoggedIn}
                           user={user}
                           favouriteBooks={favouriteBooks}
+                          books={books}
                         />
                       )}
                     />
 
-                    <Route exact path="/" component={withRouter(Books)} />
+                    <Route
+                      exact
+                      path="/"
+                      render={props => <Books {...props} books={books} />}
+                    />
                     <Route path="/about" component={About} />
 
                     <Route component={PageNotFound} />
@@ -111,7 +113,11 @@ class App extends Component {
                       )}
                     />
 
-                    <Route exact path="/" component={withRouter(Books)} />
+                    <Route
+                      exact
+                      path="/"
+                      render={props => <Books {...props} books={books} />}
+                    />
 
                     <Route path="/about" component={About} />
 
@@ -120,7 +126,7 @@ class App extends Component {
                 )}
               </div>
               <div className="col-md-3 d-none d-md-block">
-                <Sidebar />
+                <Sidebar books={books} />
               </div>
             </div>
           </div>
@@ -135,7 +141,8 @@ const mapStateToProps = state => ({
   isReady: state.user.isReady,
   user: state.user.user,
   isLoggedIn: state.user.isLoggedIn,
-  favouriteBooks: state.user.favouriteBooks
+  favouriteBooks: state.user.favouriteBooks,
+  books: state.books.books
 });
 
 export default connect(
@@ -147,6 +154,7 @@ export default connect(
     getUser,
     loginUser,
     logoutUser,
-    registerUser
+    registerUser,
+    getBooks
   }
 )(App);
