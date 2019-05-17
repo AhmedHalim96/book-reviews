@@ -18,10 +18,16 @@ export default function(state = initialState, action) {
     case actionTypes.GET_USER:
       return {
         ...state,
-        user: action.payload.user,
+        user: action.payload,
         isLoggedIn: true
       };
     case actionTypes.LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload,
+        isLoggedIn: true
+      };
+    case actionTypes.REGISTER_USER:
       return {
         ...state,
         user: action.payload,

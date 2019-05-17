@@ -51,16 +51,27 @@ export const removeFromFavourite = (book, user) => async dispatch => {
     .catch(err => console.log(err));
 };
 export const getUser = () => dispatch => {
-  let state = localStorage["appState"];
-  let AppState = JSON.parse(state);
-  console.log(AppState);
+  if (localStorage["appState"]) {
+    let state = localStorage["appState"];
+    let AppState = JSON.parse(state);
+    console.log(AppState);
 
-  if (AppState.isLoggedIn) {
-    dispatch({
-      type: actionTypes.GET_USER,
-      payload: AppState
-    });
-    dispatch(getFavouriteList(AppState.user.id));
+    if (AppState.isLoggedIn) {
+      axios
+        .post("/api/user/get", {
+          user_id: AppState.user.id
+        })
+        .then(res => {
+          console.log(res);
+          dispatch({
+            type: actionTypes.GET_USER,
+            payload: res.data.data
+          });
+          dispatch(getFavouriteList(AppState.user.id));
+        });
+    } else {
+      dispatch(appReady());
+    }
   } else {
     dispatch(appReady());
   }
@@ -91,7 +102,8 @@ export const loginUser = (email, password, history) => dispatch => {
           id: json.data.data.id,
           email: json.data.data.email,
           auth_token: json.data.data.auth_token,
-          timestamp: new Date().toString()
+          timestamp: new Date().toString(),
+          role: json.data.data.role
         };
         let appState = {
           isLoggedIn: true,

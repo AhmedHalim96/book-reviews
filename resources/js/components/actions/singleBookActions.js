@@ -1,16 +1,22 @@
 import * as actionTypes from "./types";
 import axios from "axios";
+import { getBooks } from "./booksActions";
+import { Redirect } from "react-router-dom";
 
 export const getBook = id => async dispatch => {
   const res = await axios
     .get(`/books/${id}`)
     .then(res => {
+      console.log(res.data);
       dispatch({
         type: actionTypes.GET_BOOK,
-        payload: res.data
+        payload: res.data.book
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      return <Redirect to="/" />;
+    });
 };
 export const isLiked = (book, user) => async dispatch => {
   await axios
@@ -25,7 +31,7 @@ export const isLiked = (book, user) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const createBook = (newBook, history) => async dispatch => {
+export const createBook = (newBook, userId, history) => async dispatch => {
   const {
     name,
     review_text,
@@ -39,6 +45,7 @@ export const createBook = (newBook, history) => async dispatch => {
   fd.append("book_author", book_author);
   fd.append("book_score", book_score);
   fd.append("featured_image", featured_image);
+  fd.append("user_id", userId);
 
   await axios
     .post("/books", fd)
@@ -47,6 +54,7 @@ export const createBook = (newBook, history) => async dispatch => {
         type: actionTypes.CREATE_BOOK
       });
       history.push("/book/" + res.data.id);
+      dispatch(getBooks());
     })
     .catch(err => console.log(err));
 };
@@ -73,6 +81,8 @@ export const updateBook = updatedBook => async dispatch => {
       dispatch({
         type: actionTypes.UPDATE_BOOK
       });
+      dispatch(getBooks());
+      dispatch(getBook(id));
     })
     .catch(err => console.log(err));
 };

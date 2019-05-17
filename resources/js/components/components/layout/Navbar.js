@@ -40,7 +40,7 @@ export default function Navbar(props) {
                   aria-expanded="false"
                 >
                   <i className="fa fa-circle-user" />
-                  {props.username}
+                  {props.user.name}
                 </Link>
                 <div
                   className="dropdown-menu"
@@ -50,9 +50,11 @@ export default function Navbar(props) {
                   <Link className="dropdown-item" to="/dashboard">
                     Dashboard
                   </Link>
-                  <Link className="dropdown-item" to="/book/create">
-                    Create
-                  </Link>
+                  {props.user.role !== "Subscriber" ? (
+                    <Link className="dropdown-item" to="/book/create">
+                      Create a Review
+                    </Link>
+                  ) : null}
 
                   <Link className="dropdown-item" to="/" onClick={props.logout}>
                     Logout

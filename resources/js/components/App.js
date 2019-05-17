@@ -39,11 +39,12 @@ class App extends Component {
   render() {
     if (this.props.isReady) {
       const { isLoggedIn, user, favouriteBooks, books } = this.props;
+      console.log(user);
 
       return (
         <div className="bg-secondary">
           <Navbar
-            username={user.name}
+            user={user}
             isLoggedIn={isLoggedIn}
             logout={this.props.logoutUser}
           />
@@ -58,14 +59,26 @@ class App extends Component {
                         <Dashboard {...props} favouriteBooks={favouriteBooks} />
                       )}
                     />
-                    <Route
-                      path="/book/:id/edit"
-                      component={withRouter(EditBook)}
-                    />
-                    <Route
-                      path="/book/create"
-                      component={withRouter(CreateBook)}
-                    />
+                    {user.role == "Admin" || user.role == "Editor" ? (
+                      <Route
+                        path="/book/:id/edit"
+                        render={props => (
+                          <EditBook
+                            {...props}
+                            userId={user.id}
+                            userRole={user.role}
+                          />
+                        )}
+                      />
+                    ) : null}
+                    {user.role == "Admin" || user.role == "Editor" ? (
+                      <Route
+                        path="/book/create"
+                        render={props => (
+                          <CreateBook {...props} userId={user.id} />
+                        )}
+                      />
+                    ) : null}
                     <Route
                       path="/book/:id"
                       render={props => (

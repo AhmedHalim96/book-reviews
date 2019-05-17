@@ -64136,7 +64136,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74356,10 +74356,11 @@ function (_Component) {
             user = _this$props.user,
             favouriteBooks = _this$props.favouriteBooks,
             books = _this$props.books;
+        console.log(user);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bg-secondary"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          username: user.name,
+          user: user,
           isLoggedIn: isLoggedIn,
           logout: this.props.logoutUser
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -74375,13 +74376,22 @@ function (_Component) {
               favouriteBooks: favouriteBooks
             }));
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        }), user.role == "Admin" || user.role == "Editor" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/:id/edit",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_EditBook__WEBPACK_IMPORTED_MODULE_10__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          render: function render(props) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_EditBook__WEBPACK_IMPORTED_MODULE_10__["default"], _extends({}, props, {
+              userId: user.id,
+              userRole: user.role
+            }));
+          }
+        }) : null, user.role == "Admin" || user.role == "Editor" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/create",
-          component: Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(_components_CreateBook__WEBPACK_IMPORTED_MODULE_9__["default"])
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          render: function render(props) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_CreateBook__WEBPACK_IMPORTED_MODULE_9__["default"], _extends({}, props, {
+              userId: user.id
+            }));
+          }
+        }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/book/:id",
           render: function render(props) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BookPage__WEBPACK_IMPORTED_MODULE_8__["default"], _extends({}, props, {
@@ -74557,11 +74567,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _booksActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./booksActions */ "./resources/js/components/actions/booksActions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 
@@ -74579,12 +74593,16 @@ var getBook = function getBook(id) {
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/books/".concat(id)).then(function (res) {
+                  console.log(res.data);
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_BOOK"],
-                    payload: res.data
+                    payload: res.data.book
                   });
                 })["catch"](function (err) {
-                  return console.log(err);
+                  console.log(err);
+                  return React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Redirect"], {
+                    to: "/"
+                  });
                 });
 
               case 2:
@@ -74641,7 +74659,7 @@ var isLiked = function isLiked(book, user) {
     }()
   );
 };
-var createBook = function createBook(newBook, history) {
+var createBook = function createBook(newBook, userId, history) {
   return (
     /*#__PURE__*/
     function () {
@@ -74660,17 +74678,19 @@ var createBook = function createBook(newBook, history) {
                 fd.append("book_author", book_author);
                 fd.append("book_score", book_score);
                 fd.append("featured_image", featured_image);
-                _context3.next = 9;
+                fd.append("user_id", userId);
+                _context3.next = 10;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/books", fd).then(function (res) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["CREATE_BOOK"]
                   });
                   history.push("/book/" + res.data.id);
+                  dispatch(Object(_booksActions__WEBPACK_IMPORTED_MODULE_3__["getBooks"])());
                 })["catch"](function (err) {
                   return console.log(err);
                 });
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -74708,6 +74728,8 @@ var updateBook = function updateBook(updatedBook) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE_BOOK"]
                   });
+                  dispatch(Object(_booksActions__WEBPACK_IMPORTED_MODULE_3__["getBooks"])());
+                  dispatch(getBook(id));
                 })["catch"](function (err) {
                   return console.log(err);
                 });
@@ -74980,16 +75002,25 @@ var removeFromFavourite = function removeFromFavourite(book, user) {
 };
 var getUser = function getUser() {
   return function (dispatch) {
-    var state = localStorage["appState"];
-    var AppState = JSON.parse(state);
-    console.log(AppState);
+    if (localStorage["appState"]) {
+      var state = localStorage["appState"];
+      var AppState = JSON.parse(state);
+      console.log(AppState);
 
-    if (AppState.isLoggedIn) {
-      dispatch({
-        type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USER"],
-        payload: AppState
-      });
-      dispatch(getFavouriteList(AppState.user.id));
+      if (AppState.isLoggedIn) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/get", {
+          user_id: AppState.user.id
+        }).then(function (res) {
+          console.log(res);
+          dispatch({
+            type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USER"],
+            payload: res.data.data
+          });
+          dispatch(getFavouriteList(AppState.user.id));
+        });
+      } else {
+        dispatch(appReady());
+      }
     } else {
       dispatch(appReady());
     }
@@ -75012,7 +75043,8 @@ var loginUser = function loginUser(email, password, history) {
           id: json.data.data.id,
           email: json.data.data.email,
           auth_token: json.data.data.auth_token,
-          timestamp: new Date().toString()
+          timestamp: new Date().toString(),
+          role: json.data.data.role
         };
         var appState = {
           isLoggedIn: true,
@@ -75320,9 +75352,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_booksActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/booksActions */ "./resources/js/components/actions/booksActions.js");
-/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../actions/userActions */ "./resources/js/components/actions/userActions.js");
-/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/userActions */ "./resources/js/components/actions/userActions.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -75348,7 +75379,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -75462,10 +75492,12 @@ function (_Component) {
         if (this.props.book) {
           var _this$props$book = this.props.book,
               name = _this$props$book.name,
+              review_author = _this$props$book.review_author,
               book_author = _this$props$book.book_author,
               review_text = _this$props$book.review_text,
               book_score = _this$props$book.book_score,
-              featured_image = _this$props$book.featured_image;
+              featured_image = _this$props$book.featured_image,
+              user_id = _this$props$book.user_id;
           var currentBookId = this.props.book.id;
           var likedClass = this.props.liked ? "text-danger" : "text-secondary";
           return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -75473,39 +75505,50 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
             className: "fa fa-arrow-circle-left"
           }), " Return to Home"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "card card-body"
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, name, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-            className: "badge badge-danger ml-2"
-          }, book_score.slice(0, 3), " / 5"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-            className: "btn float-right mx-3 btn-outline-info btn-lg",
+            className: "card"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+            className: "card-header"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "ml-3"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "By"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+            className: "text-primary"
+          }, book_author, " ")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+            className: "btn float-right",
             onClick: this.likeHandler,
             title: "Add To Favourites"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
-            className: "fa fa-heart " + likedClass,
-            style: {
-              fontSize: "3rem"
-            }
-          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "By: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", null, book_author)), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "row mb-3"
+            className: "fa fa-heart fa-2x " + likedClass
+          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "row"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "col-md-6 "
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
             src: "/storage/featured_images/".concat(featured_image),
             alt: name,
             className: "card-img-top img-thumbnail"
-          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "card-body px-2 pb-2"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", {
+            className: "text-danger"
+          }, "Reviewed by: ")), review_author, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "ml-3"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+            className: "text-dark"
+          }, "Reviewer Rating: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+            className: "badge badge-danger"
+          }, book_score % 1 == 0 ? book_score.slice(0, 1) : book_score.slice(0, 3), " ", "/ 5")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             dangerouslySetInnerHTML: {
               __html: review_text
             },
             className: "lead"
-          })), this.props.isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+          })), this.props.isLoggedIn && (this.props.user.role == "Admin" || this.props.user.role == "Editor" && this.props.user.id == user_id) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/book/".concat(currentBookId, "/edit"),
             className: "btn btn-success btn-lg"
           }, "Edit Review"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
             type: "submit",
             className: "btn btn-danger btn-lg float-right",
             onClick: this.deleteHandler
-          }, "Delete Book")) : null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, "Delete Book")) : null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "list-group"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
             className: "list-group-item list-group-item-action list-group-item-secondary"
@@ -75518,7 +75561,7 @@ function (_Component) {
                 to: "/book/".concat(item.id)
               }, item.name));
             }
-          })));
+          }))));
         }
 
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
@@ -75526,7 +75569,7 @@ function (_Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Spinner__WEBPACK_IMPORTED_MODULE_9__["default"], null);
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Spinner__WEBPACK_IMPORTED_MODULE_8__["default"], null);
     }
   }]);
 
@@ -75548,8 +75591,8 @@ BookPage.proptypes = {
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(mapStateToProps, {
   getBook: _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__["getBook"],
-  addToFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_8__["addToFavourite"],
-  removeFromFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_8__["removeFromFavourite"],
+  addToFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_7__["addToFavourite"],
+  removeFromFavourite: _actions_userActions__WEBPACK_IMPORTED_MODULE_7__["removeFromFavourite"],
   clearBook: _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__["clearBook"],
   isLiked: _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__["isLiked"],
   deleteBook: _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__["deleteBook"]
@@ -75666,7 +75709,8 @@ function (_Component) {
         book_author: "",
         review_text: "",
         book_score: 0,
-        featured_image: null
+        featured_image: null,
+        userId: null
       }
     });
 
@@ -75683,9 +75727,9 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // return console.log(this.state.newBook);
 
-      _this.props.createBook(_this.state.newBook, _this.props.history);
+      _this.props.createBook(_this.state.newBook, _this.props.userId, _this.props.history);
     });
 
     return _this;
@@ -75953,41 +75997,23 @@ function (_Component) {
 
   _createClass(EditBook, [{
     key: "componentDidMount",
-    value: function () {
-      var _componentDidMount = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                console.log(this.props);
-                _context2.next = 3;
-                return this.props.getBook(this.props.match.params.id);
+    value: function componentDidMount() {
+      var _this2 = this;
 
-              case 3:
-                this.setState({
-                  currentBook: this.props.book
-                });
-
-              case 4:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function componentDidMount() {
-        return _componentDidMount.apply(this, arguments);
-      }
-
-      return componentDidMount;
-    }()
+      this.props.getBook(this.props.match.params.id).then(function () {
+        if (_this2.props.userId == _this2.props.book.user_id || _this2.props.userRole == "Admin") {
+          _this2.setState({
+            currentBook: _this2.props.book
+          });
+        } else {
+          _this2.props.history.push("/");
+        }
+      });
+    }
   }, {
     key: "render",
     value: function render() {
-      if (this.props.isLoaded) {
+      if (this.props.isLoaded && this.props.userId == this.props.book.user_id || this.props.userRole == "Admin") {
         var _this$props$book = this.props.book,
             name = _this$props$book.name,
             review_text = _this$props$book.review_text,
@@ -76186,7 +76212,7 @@ function Navbar(props) {
     "aria-expanded": "false"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
     className: "fa fa-circle-user"
-  }), props.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }), props.user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-menu",
     "aria-labelledby": "dropdown01",
     style: {
@@ -76195,10 +76221,10 @@ function Navbar(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/dashboard"
-  }, "Dashboard"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Dashboard"), props.user.role !== "Subscriber" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/book/create"
-  }, "Create"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Create a Review") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/",
     onClick: props.logout
@@ -76524,11 +76550,17 @@ var initialState = {
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_USER"]:
       return _objectSpread({}, state, {
-        user: action.payload.user,
+        user: action.payload,
         isLoggedIn: true
       });
 
     case _actions_types__WEBPACK_IMPORTED_MODULE_0__["LOGIN_USER"]:
+      return _objectSpread({}, state, {
+        user: action.payload,
+        isLoggedIn: true
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["REGISTER_USER"]:
       return _objectSpread({}, state, {
         user: action.payload,
         isLoggedIn: true

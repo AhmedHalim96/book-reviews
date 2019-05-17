@@ -9,7 +9,6 @@ import {
 } from "../actions/singleBookActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getBooks } from "../actions/booksActions";
 import { addToFavourite, removeFromFavourite } from "../actions/userActions";
 
 import Spinner from "./layout/Spinner";
@@ -59,10 +58,12 @@ class BookPage extends Component {
       if (this.props.book) {
         const {
           name,
+          review_author,
           book_author,
           review_text,
           book_score,
-          featured_image
+          featured_image,
+          user_id
         } = this.props.book;
         const currentBookId = this.props.book.id;
         const likedClass = this.props.liked ? "text-danger" : "text-secondary";
@@ -75,29 +76,22 @@ class BookPage extends Component {
 
             <hr />
 
-            <div className="card card-body">
-              <h1>
-                {name}
-                <span className="badge badge-danger ml-2">
-                  {book_score.slice(0, 3)} / 5
+            <div className="card">
+              <h1 className="card-header">
+                <strong>{name}</strong>
+                <span className="ml-3">
+                  <small>By</small>
+                  <i className="text-primary">{book_author} </i>
                 </span>
                 <button
-                  className="btn float-right mx-3 btn-outline-info btn-lg"
+                  className="btn float-right"
                   onClick={this.likeHandler}
                   title="Add To Favourites"
                 >
-                  <i
-                    className={"fa fa-heart " + likedClass}
-                    style={{ fontSize: "3rem" }}
-                  />
+                  <i className={"fa fa-heart fa-2x " + likedClass} />
                 </button>
               </h1>
-
-              <h5>
-                <small>By: </small>
-                <i>{book_author}</i>
-              </h5>
-              <div className="row mb-3">
+              <div className="row">
                 <div className="col-md-6 ">
                   <img
                     src={`/storage/featured_images/${featured_image}`}
@@ -106,49 +100,70 @@ class BookPage extends Component {
                   />
                 </div>
               </div>
+              <div>
+                <div className="card-body px-2 pb-2">
+                  <i>
+                    <strong className="text-danger">Reviewed by: </strong>
+                  </i>
+                  {review_author}
+                  <br />
+                  <span className="ml-3">
+                    <i className="text-dark">Reviewer Rating: </i>
+                    <span className="badge badge-danger">
+                      {book_score % 1 == 0
+                        ? book_score.slice(0, 1)
+                        : book_score.slice(0, 3)}{" "}
+                      / 5
+                    </span>
+                  </span>
+                  <hr />
+                  <div
+                    dangerouslySetInnerHTML={{ __html: review_text }}
+                    className="lead"
+                  />
+                </div>
 
-              <div
-                dangerouslySetInnerHTML={{ __html: review_text }}
-                className="lead"
-              />
-            </div>
-
-            {this.props.isLoggedIn ? (
-              <Fragment>
-                <Link
-                  to={`/book/${currentBookId}/edit`}
-                  className="btn btn-success btn-lg"
-                >
-                  Edit Review
-                </Link>
-                <button
-                  type="submit"
-                  className="btn btn-danger btn-lg float-right"
-                  onClick={this.deleteHandler}
-                >
-                  Delete Book
-                </button>
-              </Fragment>
-            ) : null}
-
-            <hr />
-
-            <div className="list-group">
-              <li className="list-group-item list-group-item-action list-group-item-secondary">
-                Other Book Reviews
-              </li>
-              {this.props.books.map((item, id) => {
-                if (item.id != currentBookId) {
-                  return (
-                    <li
-                      key={id}
-                      className="list-group-item list-group-item-secondary"
+                {this.props.isLoggedIn &&
+                (this.props.user.role == "Admin" ||
+                  (this.props.user.role == "Editor" &&
+                    this.props.user.id == user_id)) ? (
+                  <Fragment>
+                    <Link
+                      to={`/book/${currentBookId}/edit`}
+                      className="btn btn-success btn-lg"
                     >
-                      <Link to={`/book/${item.id}`}>{item.name}</Link>
-                    </li>
-                  );
-                }
-              })}
+                      Edit Review
+                    </Link>
+                    <button
+                      type="submit"
+                      className="btn btn-danger btn-lg float-right"
+                      onClick={this.deleteHandler}
+                    >
+                      Delete Book
+                    </button>
+                  </Fragment>
+                ) : null}
+              </div>
+
+              <hr />
+
+              <div className="list-group">
+                <li className="list-group-item list-group-item-action list-group-item-secondary">
+                  Other Book Reviews
+                </li>
+                {this.props.books.map((item, id) => {
+                  if (item.id != currentBookId) {
+                    return (
+                      <li
+                        key={id}
+                        className="list-group-item list-group-item-secondary"
+                      >
+                        <Link to={`/book/${item.id}`}>{item.name}</Link>
+                      </li>
+                    );
+                  }
+                })}
+              </div>
             </div>
           </Fragment>
         );

@@ -9,11 +9,18 @@ class EditBook extends Component {
     currentBook: null
   };
 
-  async componentDidMount() {
-    console.log(this.props);
-    await this.props.getBook(this.props.match.params.id);
-    this.setState({
-      currentBook: this.props.book
+  componentDidMount() {
+    this.props.getBook(this.props.match.params.id).then(() => {
+      if (
+        this.props.userId == this.props.book.user_id ||
+        this.props.userRole == "Admin"
+      ) {
+        this.setState({
+          currentBook: this.props.book
+        });
+      } else {
+        this.props.history.push("/");
+      }
     });
   }
 
@@ -41,7 +48,10 @@ class EditBook extends Component {
     this.props.history.push("/book/" + this.state.currentBook.id);
   };
   render() {
-    if (this.props.isLoaded) {
+    if (
+      (this.props.isLoaded && this.props.userId == this.props.book.user_id) ||
+      this.props.userRole == "Admin"
+    ) {
       const {
         name,
         review_text,

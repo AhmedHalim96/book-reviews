@@ -12,9 +12,11 @@ class CreateBook extends Component {
       book_author: "",
       review_text: "",
       book_score: 0,
-      featured_image: null
+      featured_image: null,
+      userId: null
     }
   };
+
   handleChange = event => {
     if (event.target.files) {
       return this.setState({
@@ -35,7 +37,13 @@ class CreateBook extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createBook(this.state.newBook, this.props.history);
+
+    // return console.log(this.state.newBook);
+    this.props.createBook(
+      this.state.newBook,
+      this.props.userId,
+      this.props.history
+    );
   };
   render() {
     return (

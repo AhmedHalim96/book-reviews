@@ -15,4 +15,8 @@ public function favouritedBy(User $user)
 {
 	return $this->favourites->contains($user);
 }
+public function user()
+{
+    return $this->belongsTo('App\User');
+}
 }

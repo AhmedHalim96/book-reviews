@@ -34,6 +34,7 @@ class BookController extends Controller {
     $book->book_score = $request->book_score;
     $book->review_text = $request->review_text;
     $book->featured_image = $filename;
+    $book->user_id = $request->user_id;
     $book->save();
     return $book;
 
@@ -46,8 +47,17 @@ class BookController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function show($id) {
-    $book = Book::find($id);
-    return $book;
+    if($book = Book::find($id)){
+      $review_author = $book->user()->first()->name;
+      $book->review_author= $review_author;
+
+      // REMOVING USER_ID FROM BOOK FOR SECURITY REASONS
+      // unset($book->user_id);
+
+      return ['status' => 'found', 'book' => $book];
+    };
+    return ['status' => 404, "msg"=> "Book Not Found" ];
+   
   }
 
   /**
