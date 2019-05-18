@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['middleware' => ['jwt.auth','api-header']], function () {
+Route::group(['middleware' => ['jwt-auth','api-header']], function () {
   
     // all routes to protected resources are registered here  
     Route::get('users/list', function(){
-        $users = App\User::all();
-        
-        $response = ['success'=>true, 'data'=>$users];
+        $users = App\User::all()->toArray();
+        $users =  array_map(function($user){
+           $role=User::find($user['id'])->roles->first()->name;
+            return ['id'=>$user['id'], 'name' =>$user['name'], 'email' =>$user['email'],"role" =>$role];
+        }, $users);
+        $response = ['success'=>true, 'users'=>$users];
         return response()->json($response, 201);
     });
+    Route::post('user/role','UserController@adminAssignRoles');
 });
 Route::group(['middleware' => 'api-header'], function () {
   

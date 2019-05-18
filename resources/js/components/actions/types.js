@@ -16,3 +16,6 @@ export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 export const REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 export const APP_READY = "APP_READY";
 export const RESET_USER = "RESET_USER";
+
+export const GET_USERS = "GET_USERS";
+export const ASSIGN_USER_ROLE = "ASSIGN_USER_ROLE";

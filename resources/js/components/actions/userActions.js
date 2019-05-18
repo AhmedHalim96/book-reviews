@@ -101,7 +101,7 @@ export const loginUser = (email, password, history) => dispatch => {
           name: json.data.data.name,
           id: json.data.data.id,
           email: json.data.data.email,
-          auth_token: json.data.data.auth_token,
+          token: json.data.data.token,
           timestamp: new Date().toString(),
           role: json.data.data.role
         };

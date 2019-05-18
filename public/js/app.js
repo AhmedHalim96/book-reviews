@@ -64136,7 +64136,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74274,6 +74274,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/About */ "./resources/js/components/components/About.js");
 /* harmony import */ var _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/layout/PageNotFound */ "./resources/js/components/components/layout/PageNotFound.js");
 /* harmony import */ var _components_layout_Spinner__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _components_AdminPanel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/AdminPanel */ "./resources/js/components/components/AdminPanel.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -74310,6 +74311,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
  // AUTH COMPONENTS
+
 
 
 
@@ -74369,7 +74371,14 @@ function (_Component) {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-md-9"
-        }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, user.role == "Admin" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+          path: "/admin-panel",
+          render: function render(props) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_AdminPanel__WEBPACK_IMPORTED_MODULE_17__["default"], _extends({}, props, {
+              user: user
+            }));
+          }
+        }) : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/dashboard",
           render: function render(props) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Dashboard__WEBPACK_IMPORTED_MODULE_13__["default"], _extends({}, props, {
@@ -74482,6 +74491,108 @@ var mapStateToProps = function mapStateToProps(state) {
   registerUser: _actions_userActions__WEBPACK_IMPORTED_MODULE_3__["registerUser"],
   getBooks: _actions_booksActions__WEBPACK_IMPORTED_MODULE_4__["getBooks"]
 })(App));
+
+/***/ }),
+
+/***/ "./resources/js/components/actions/adminPanelActions.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/actions/adminPanelActions.js ***!
+  \**************************************************************/
+/*! exports provided: getUsers, assignUserRole */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUsers", function() { return getUsers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assignUserRole", function() { return assignUserRole; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var getUsers = function getUsers(token) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(dispatch) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/list?token=" + token).then(function (res) {
+                  console.log(res.data);
+                  dispatch({
+                    type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USERS"],
+                    payload: res.data.users
+                  });
+                })["catch"](function (err) {
+                  return console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }()
+  );
+};
+var assignUserRole = function assignUserRole(token, id, role) {
+  return (
+    /*#__PURE__*/
+    function () {
+      var _ref2 = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(dispatch) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/user/role?token=" + token, {
+                  user_id: id,
+                  role: role
+                }).then(function (res) {
+                  console.log(res.data);
+                  dispatch({
+                    type: _types__WEBPACK_IMPORTED_MODULE_1__["ASSIGN_USER_ROLE"]
+                  });
+                  dispatch(getUsers(token));
+                })["catch"](function (err) {
+                  return console.log(err);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function (_x2) {
+        return _ref2.apply(this, arguments);
+      };
+    }()
+  );
+};
 
 /***/ }),
 
@@ -74797,7 +74908,7 @@ var clearBook = function clearBook() {
 /*!**************************************************!*\
   !*** ./resources/js/components/actions/types.js ***!
   \**************************************************/
-/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK, GET_USER, LOGIN_USER, REGISTER_USER, LOGOUT_USER, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER */
+/*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK, GET_USER, LOGIN_USER, REGISTER_USER, LOGOUT_USER, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER, GET_USERS, ASSIGN_USER_ROLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74818,6 +74929,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FROM_FAVOURITES", function() { return REMOVE_FROM_FAVOURITES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_READY", function() { return APP_READY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET_USER", function() { return RESET_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_USERS", function() { return GET_USERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ASSIGN_USER_ROLE", function() { return ASSIGN_USER_ROLE; });
 var GET_BOOKS = "GET_BOOKS";
 var GET_BOOK = "GET_BOOK";
 var CLEAR_BOOK = "CLEAR_BOOK";
@@ -74834,6 +74947,8 @@ var ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";
 var REMOVE_FROM_FAVOURITES = "REMOVE_FROM_FAVOURITES";
 var APP_READY = "APP_READY";
 var RESET_USER = "RESET_USER";
+var GET_USERS = "GET_USERS";
+var ASSIGN_USER_ROLE = "ASSIGN_USER_ROLE";
 
 /***/ }),
 
@@ -75042,7 +75157,7 @@ var loginUser = function loginUser(email, password, history) {
           name: json.data.data.name,
           id: json.data.data.id,
           email: json.data.data.email,
-          auth_token: json.data.data.auth_token,
+          token: json.data.data.token,
           timestamp: new Date().toString(),
           role: json.data.data.role
         };
@@ -75330,6 +75445,216 @@ function About() {
     className: "card card-body"
   }, "This is The about Page!");
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/components/AdminPanel.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/components/AdminPanel.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/adminPanelActions */ "./resources/js/components/actions/adminPanelActions.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var AdminPanel =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(AdminPanel, _Component);
+
+  function AdminPanel() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, AdminPanel);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AdminPanel)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      rolesArr: ["Admin", "Editor", "Subscriber"]
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onChangeHandler", function (e, id) {
+      _this.setState(_defineProperty({}, id, e.target.id));
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (id) {
+      var role = _this.state.rolesArr[parseInt(_this.state[id]) - 1];
+
+      _this.props.assignUserRole(_this.props.user.token, id, role);
+    });
+
+    return _this;
+  }
+
+  _createClass(AdminPanel, [{
+    key: "componentDidMount",
+    value: function () {
+      var _componentDidMount = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.props.getUsers(this.props.user.token);
+
+              case 2:
+                this.props.users.map(function (user) {
+                  if (user.id != _this2.props.user.id) {
+                    var checked = _this2.state.rolesArr.indexOf(user.role) + 1;
+                    return _this2.setState(_defineProperty({}, user.id, checked));
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function componentDidMount() {
+        return _componentDidMount.apply(this, arguments);
+      }
+
+      return componentDidMount;
+    }()
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      console.log(this.states);
+
+      if (this.props.isLoaded) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          className: "card card-body"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+          className: "text-primary text-center w-100"
+        }, "Admin Panel"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
+          className: "table"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", {
+          className: "thead-dark"
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "id"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Name"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Email"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Admin"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Editor"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Subscriber"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+          scope: "col"
+        }, "Assign"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.props.users.map(function (user) {
+          if (user.id != _this3.props.user.id) {
+            return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
+              key: user.id
+            }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", {
+              scope: "row"
+            }, user.id), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, user.email), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+              checked: _this3.state[user.id] == 1 ? true : false,
+              onChange: function onChange(e) {
+                return _this3.onChangeHandler(e, user.id);
+              },
+              id: 1,
+              type: "checkbox",
+              className: "form-control text-left"
+            })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+              checked: _this3.state[user.id] == 2 ? true : false,
+              onChange: function onChange(e) {
+                return _this3.onChangeHandler(e, user.id);
+              },
+              id: 2,
+              type: "checkbox",
+              className: "form-control text-left"
+            })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+              checked: _this3.state[user.id] == 3 ? true : false,
+              onChange: function onChange(e) {
+                return _this3.onChangeHandler(e, user.id);
+              },
+              id: 3,
+              type: "checkbox",
+              className: "form-control text-left"
+            })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+              onClick: function onClick() {
+                return _this3.submitHandler(user.id);
+              },
+              className: "btn btn-dark"
+            }, "Assign")));
+          }
+        }))));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Spinner__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+    }
+  }]);
+
+  return AdminPanel;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    users: state.adminPanel.users,
+    isLoaded: state.adminPanel.isLoaded
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, {
+  getUsers: _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__["getUsers"],
+  assignUserRole: _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__["assignUserRole"]
+})(AdminPanel));
 
 /***/ }),
 
@@ -76218,10 +76543,13 @@ function Navbar(props) {
     style: {
       zIndex: "1500"
     }
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, props.user.role == "Admin" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "dropdown-item",
+    to: "/admin-panel"
+  }, "Admin Panel") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/dashboard"
-  }, "Dashboard"), props.user.role !== "Subscriber" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Dashboard"), props.user.role != "Subscriber" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/book/create"
   }, "Create a Review") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -76391,6 +76719,46 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/components/reducers/adminPanelReducer.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/reducers/adminPanelReducer.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/components/actions/types.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initialState = {
+  users: [],
+  isLoaded: false
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["GET_USERS"]:
+      return _objectSpread({}, state, {
+        users: action.payload,
+        isLoaded: true
+      });
+
+    case _actions_types__WEBPACK_IMPORTED_MODULE_0__["ASSIGN_USER_ROLE"]:
+      return _objectSpread({}, state);
+
+    default:
+      return state;
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/components/reducers/booksReducer.js":
 /*!**********************************************************!*\
   !*** ./resources/js/components/reducers/booksReducer.js ***!
@@ -76441,6 +76809,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _booksReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./booksReducer */ "./resources/js/components/reducers/booksReducer.js");
 /* harmony import */ var _singleBookReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./singleBookReducer */ "./resources/js/components/reducers/singleBookReducer.js");
 /* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userReducer */ "./resources/js/components/reducers/userReducer.js");
+/* harmony import */ var _adminPanelReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./adminPanelReducer */ "./resources/js/components/reducers/adminPanelReducer.js");
+
 
 
 
@@ -76448,7 +76818,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   books: _booksReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   bookPage: _singleBookReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  user: _userReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  user: _userReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  adminPanel: _adminPanelReducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 }));
 
 /***/ }),

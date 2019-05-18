@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
+
 Route::resource('books', 'BookController');
 // Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::post('books/favourites', 'FavouriteController@index');

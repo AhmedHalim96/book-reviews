@@ -47,10 +47,15 @@ export default function Navbar(props) {
                   aria-labelledby="dropdown01"
                   style={{ zIndex: "1500" }}
                 >
+                  {props.user.role == "Admin" ? (
+                    <Link className="dropdown-item" to="/admin-panel">
+                      Admin Panel
+                    </Link>
+                  ) : null}
                   <Link className="dropdown-item" to="/dashboard">
                     Dashboard
                   </Link>
-                  {props.user.role !== "Subscriber" ? (
+                  {props.user.role != "Subscriber" ? (
                     <Link className="dropdown-item" to="/book/create">
                       Create a Review
                     </Link>

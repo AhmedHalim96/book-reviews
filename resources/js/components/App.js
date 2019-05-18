@@ -30,6 +30,7 @@ import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import PageNotFound from "./components/layout/PageNotFound";
 import Spinner from "./components/layout/Spinner";
+import AdminPanel from "./components/AdminPanel";
 
 class App extends Component {
   componentDidMount = () => {
@@ -53,6 +54,12 @@ class App extends Component {
               <div className="col-md-9">
                 {isLoggedIn ? (
                   <Switch>
+                    {user.role == "Admin" ? (
+                      <Route
+                        path="/admin-panel"
+                        render={props => <AdminPanel {...props} user={user} />}
+                      />
+                    ) : null}
                     <Route
                       path="/dashboard"
                       render={props => (

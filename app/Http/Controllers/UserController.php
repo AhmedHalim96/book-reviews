@@ -33,13 +33,14 @@ class UserController extends Controller {
       $token = self::getToken($request->email, $request->password);
       $user->auth_token = $token;
       $user->save();
-    $response = ['success' => true, 'data' => ['id' => $user->id, 'auth_token' => $user->auth_token, 'name' => $user->name, 'email' => $user->email, "role" =>$user->roles->first()->name]];
+    $response = ['success' => true, 'data' => ['id' => $user->id, 'token' => $user->auth_token, 'name' => $user->name, 'email' => $user->email, "role" =>$user->roles->first()->name]];
     } else {
       $response = ['success' => false, 'data' => 'Record doesnt exists'];
     }
 
     return response()->json($response, 201);
   }
+
   public function register(Request $request) {    
     $user = new User();
     $user->name = $request->name;
@@ -68,10 +69,19 @@ class UserController extends Controller {
 
     return response()->json($response, 201);
   }
+
   public function getUserInfo(Request $request)
   {
     $user = User::find($request->user_id);
-    $response = ['success' => true, 'data' => ['name' => $user->name, 'id' => $user->id, 'email' => $user->email, 'auth_token' => $user->token , "role" =>$user->roles->first()->name]];
+    $response = ['success' => true, 'data' => ['name' => $user->name, 'id' => $user->id, 'email' => $user->email, 'token' => $user->auth_token , "role" =>$user->roles->first()->name]];
     return $response;
   }
+  public function adminAssignRoles(Request $request)
+  {
+    $user = User::find($request->user_id);
+    $user->roles()->detach();
+    $user->roles()->attach(Role::where('name', $request->role)->first()); 
+    return ["success"=> true];  
+  }
+ 
 }
