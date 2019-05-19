@@ -75830,7 +75830,36 @@ function (_Component) {
             className: "ml-3"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "By"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
             className: "text-primary"
-          }, book_author, " ")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+          }, book_author, " ")), this.props.isLoggedIn && (this.props.user.role == "Admin" || this.props.user.role == "Editor" && this.props.user.id == user_id) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "dropdown d-inline"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            to: "",
+            className: "fa fa-pencil text-primary",
+            style: {
+              fontSize: "2rem"
+            },
+            "aria-hidden": "true",
+            id: "dropdownMenuButton",
+            "data-toggle": "dropdown",
+            "aria-haspopup": "true",
+            "aria-expanded": "false"
+          }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "dropdown-menu",
+            "aria-labelledby": "dropdownMenuButton"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            to: "/book/".concat(currentBookId, "/edit"),
+            className: " dropdown-item"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+            className: "fa fa-pencil  text-primary",
+            "aria-hidden": "true"
+          }), " ", "Edit Review"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            to: "/",
+            className: " dropdown-item",
+            onClick: this.deleteHandler
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
+            className: "fa fa-trash text-danger",
+            "aria-hidden": "true"
+          }), " ", "Delete Book"))) : null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
             className: "btn float-right",
             onClick: this.likeHandler,
             title: "Add To Favourites"
@@ -75859,14 +75888,7 @@ function (_Component) {
               __html: review_text
             },
             className: "lead"
-          })), this.props.isLoggedIn && (this.props.user.role == "Admin" || this.props.user.role == "Editor" && this.props.user.id == user_id) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-            to: "/book/".concat(currentBookId, "/edit"),
-            className: "btn btn-success btn-lg"
-          }, "Edit Review"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
-            type: "submit",
-            className: "btn btn-danger btn-lg float-right",
-            onClick: this.deleteHandler
-          }, "Delete Book")) : null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          })))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "list-group"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
             className: "list-group-item list-group-item-action list-group-item-secondary"
@@ -75879,7 +75901,7 @@ function (_Component) {
                 to: "/book/".concat(item.id)
               }, item.name));
             }
-          }))));
+          })));
         }
 
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {

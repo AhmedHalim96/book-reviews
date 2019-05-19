@@ -83,6 +83,49 @@ class BookPage extends Component {
                   <small>By</small>
                   <i className="text-primary">{book_author} </i>
                 </span>
+                {this.props.isLoggedIn &&
+                (this.props.user.role == "Admin" ||
+                  (this.props.user.role == "Editor" &&
+                    this.props.user.id == user_id)) ? (
+                  <div className="dropdown d-inline">
+                    <Link
+                      to=""
+                      className="fa fa-pencil text-primary"
+                      style={{ fontSize: "2rem" }}
+                      aria-hidden="true"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    />
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <Link
+                        to={`/book/${currentBookId}/edit`}
+                        className=" dropdown-item"
+                      >
+                        <i
+                          className="fa fa-pencil  text-primary"
+                          aria-hidden="true"
+                        />{" "}
+                        Edit Review
+                      </Link>
+                      <Link
+                        to="/"
+                        className=" dropdown-item"
+                        onClick={this.deleteHandler}
+                      >
+                        <i
+                          className="fa fa-trash text-danger"
+                          aria-hidden="true"
+                        />{" "}
+                        Delete Book
+                      </Link>
+                    </div>
+                  </div>
+                ) : null}
                 <button
                   className="btn float-right"
                   onClick={this.likeHandler}
@@ -122,48 +165,25 @@ class BookPage extends Component {
                     className="lead"
                   />
                 </div>
-
-                {this.props.isLoggedIn &&
-                (this.props.user.role == "Admin" ||
-                  (this.props.user.role == "Editor" &&
-                    this.props.user.id == user_id)) ? (
-                  <Fragment>
-                    <Link
-                      to={`/book/${currentBookId}/edit`}
-                      className="btn btn-success btn-lg"
-                    >
-                      Edit Review
-                    </Link>
-                    <button
-                      type="submit"
-                      className="btn btn-danger btn-lg float-right"
-                      onClick={this.deleteHandler}
-                    >
-                      Delete Book
-                    </button>
-                  </Fragment>
-                ) : null}
               </div>
-
-              <hr />
-
-              <div className="list-group">
-                <li className="list-group-item list-group-item-action list-group-item-secondary">
-                  Other Book Reviews
-                </li>
-                {this.props.books.map((item, id) => {
-                  if (item.id != currentBookId) {
-                    return (
-                      <li
-                        key={id}
-                        className="list-group-item list-group-item-secondary"
-                      >
-                        <Link to={`/book/${item.id}`}>{item.name}</Link>
-                      </li>
-                    );
-                  }
-                })}
-              </div>
+            </div>
+            <hr />
+            <div className="list-group">
+              <li className="list-group-item list-group-item-action list-group-item-secondary">
+                Other Book Reviews
+              </li>
+              {this.props.books.map((item, id) => {
+                if (item.id != currentBookId) {
+                  return (
+                    <li
+                      key={id}
+                      className="list-group-item list-group-item-secondary"
+                    >
+                      <Link to={`/book/${item.id}`}>{item.name}</Link>
+                    </li>
+                  );
+                }
+              })}
             </div>
           </Fragment>
         );
