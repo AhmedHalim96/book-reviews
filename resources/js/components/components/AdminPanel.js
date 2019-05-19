@@ -27,7 +27,6 @@ class AdminPanel extends Component {
   };
 
   render() {
-    console.log(this.states);
     if (this.props.isLoaded) {
       return (
         <div className="card card-body">

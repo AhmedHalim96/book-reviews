@@ -74358,7 +74358,6 @@ function (_Component) {
             user = _this$props.user,
             favouriteBooks = _this$props.favouriteBooks,
             books = _this$props.books;
-        console.log(user);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bg-secondary"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Navbar__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -74531,7 +74530,6 @@ var getUsers = function getUsers(token) {
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/list?token=" + token).then(function (res) {
-                  console.log(res.data);
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USERS"],
                     payload: res.data.users
@@ -74570,7 +74568,6 @@ var assignUserRole = function assignUserRole(token, id, role) {
                   user_id: id,
                   role: role
                 }).then(function (res) {
-                  console.log(res.data);
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["ASSIGN_USER_ROLE"]
                   });
@@ -74704,7 +74701,6 @@ var getBook = function getBook(id) {
               case 0:
                 _context.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/books/".concat(id)).then(function (res) {
-                  console.log(res.data);
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_BOOK"],
                     payload: res.data.book
@@ -75190,7 +75186,6 @@ var registerUser = function registerUser(name, email, password, history) {
     formData.append("email", email);
     formData.append("name", name);
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/register", formData).then(function (response) {
-      console.log(response);
       return response;
     }).then(function (json) {
       if (json.data.success) {
@@ -75571,8 +75566,6 @@ function (_Component) {
     key: "render",
     value: function render() {
       var _this3 = this;
-
-      console.log(this.states);
 
       if (this.props.isLoaded) {
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -76052,7 +76045,7 @@ function (_Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
-      event.preventDefault(); // return console.log(this.state.newBook);
+      event.preventDefault();
 
       _this.props.createBook(_this.state.newBook, _this.props.userId, _this.props.history);
     });
@@ -76178,7 +76171,6 @@ function (_Component) {
   _createClass(Dashboard, [{
     key: "render",
     value: function render() {
-      console.log("Dashvoard", this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Favourite Books"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {

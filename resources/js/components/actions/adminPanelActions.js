@@ -5,7 +5,6 @@ export const getUsers = token => async dispatch => {
   await axios
     .get("/api/users/list?token=" + token)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: actionTypes.GET_USERS,
         payload: res.data.users
@@ -20,7 +19,6 @@ export const assignUserRole = (token, id, role) => async dispatch => {
       role: role
     })
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: actionTypes.ASSIGN_USER_ROLE
       });

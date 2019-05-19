@@ -145,7 +145,6 @@ export const registerUser = (name, email, password, history) => dispatch => {
   axios
     .post("/api/user/register", formData)
     .then(response => {
-      console.log(response);
       return response;
     })
     .then(json => {

@@ -40,8 +40,6 @@ class App extends Component {
   render() {
     if (this.props.isReady) {
       const { isLoggedIn, user, favouriteBooks, books } = this.props;
-      console.log(user);
-
       return (
         <div className="bg-secondary">
           <Navbar

@@ -7,7 +7,6 @@ export const getBook = id => async dispatch => {
   const res = await axios
     .get(`/books/${id}`)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: actionTypes.GET_BOOK,
         payload: res.data.book

@@ -37,8 +37,6 @@ class CreateBook extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
-    // return console.log(this.state.newBook);
     this.props.createBook(
       this.state.newBook,
       this.props.userId,
