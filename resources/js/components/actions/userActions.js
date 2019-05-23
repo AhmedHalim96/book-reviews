@@ -77,7 +77,7 @@ export const getUser = () => dispatch => {
   }
 };
 
-export const loginUser = (email, password, history) => dispatch => {
+export const loginUser = (email, password, rememberMe, history) => dispatch => {
   $("#login-form button")
     .attr("disabled", "disabled")
     .html(
@@ -86,6 +86,7 @@ export const loginUser = (email, password, history) => dispatch => {
   var formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
+  formData.append("rememberMe", rememberMe);
 
   axios
     .post("/api/user/login", formData)

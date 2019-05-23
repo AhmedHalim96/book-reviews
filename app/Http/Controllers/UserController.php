@@ -5,19 +5,23 @@ use App\Role;
 use Illuminate\Http\Request;
 use JWTAuth;
 use JWTAuthException;
-
+use Carbon\Carbon;
 class UserController extends Controller {
-  private function getToken($email, $password) {
+  private function getToken($email, $password, $rememberMe=false) {
     $token = null;
     //$credentials = $request->only('email', 'password');
     try {
-      if (!$token = JWTAuth::attempt(['email' => $email, 'password' => $password])) {
-        return response()->json([
-          'response' => 'error',
-          'message' => 'Password or email is invalid',
-          'token' => $token,
-        ]);
+      if ($rememberMe) {
+      $token = JWTAuth::attempt(['email' => $email, 'password' => $password],['exp' => Carbon::now()->addDays(7)->timestamp]);
+     
+      } else {
+      $token = JWTAuth::attempt(['email' => $email, 'password' => $password]);   
+      die("Dead");
+
       }
+      
+      
+      
     } catch (JWTAuthException $e) {
       return response()->json([
         'response' => 'error',
@@ -30,7 +34,7 @@ class UserController extends Controller {
     $user = \App\User::where('email', $request->email)->get()->first();
     if ($user && \Hash::check($request->password, $user->password)) // The passwords match...
     {
-      $token = self::getToken($request->email, $request->password);
+      $token = self::getToken($request->email, $request->password, $request->rememberMe);
       $user->auth_token = $token;
       $user->save();
     $response = ['success' => true, 'data' => ['id' => $user->id, 'token' => $user->auth_token, 'name' => $user->name, 'email' => $user->email, "role" =>$user->roles->first()->name]];

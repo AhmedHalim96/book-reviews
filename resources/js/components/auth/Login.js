@@ -2,10 +2,10 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
 const Login = props => {
-  let _email, _password;
+  let _email, _password, _rememberMe;
   const handleLogin = e => {
     e.preventDefault();
-    props.login(_email.value, _password.value, props.history);
+    props.login(_email.value, _password.value, _rememberMe, props.history);
   };
   return (
     <div id="main">
@@ -41,6 +41,14 @@ const Login = props => {
                     className="form-control"
                     placeholder="password"
                   />
+                </div>
+                <div className="form-check mb-2">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    ref={input => (_rememberMe = input)}
+                  />
+                  <label className="form-check-label">Remember Me</label>
                 </div>
 
                 <button

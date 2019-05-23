@@ -75137,12 +75137,13 @@ var getUser = function getUser() {
     }
   };
 };
-var loginUser = function loginUser(email, password, history) {
+var loginUser = function loginUser(email, password, rememberMe, history) {
   return function (dispatch) {
     jquery__WEBPACK_IMPORTED_MODULE_2___default()("#login-form button").attr("disabled", "disabled").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>');
     var formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
+    formData.append("rememberMe", rememberMe);
     axios__WEBPACK_IMPORTED_MODULE_3___default.a.post("/api/user/login", formData).then(function (response) {
       console.log(response.data);
       return response;
@@ -75263,11 +75264,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Login = function Login(props) {
-  var _email, _password;
+  var _email, _password, _rememberMe;
 
   var handleLogin = function handleLogin(e) {
     e.preventDefault();
-    props.login(_email.value, _password.value, props.history);
+    props.login(_email.value, _password.value, _rememberMe, props.history);
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -75313,7 +75314,17 @@ var Login = function Login(props) {
     type: "password",
     className: "form-control",
     placeholder: "password"
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-check mb-2"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    className: "form-check-input",
+    type: "checkbox",
+    ref: function ref(input) {
+      return _rememberMe = input;
+    }
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "form-check-label"
+  }, "Remember Me")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-lg btn-success",
     id: "email-login-btn"
