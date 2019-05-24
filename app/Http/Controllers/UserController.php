@@ -4,19 +4,23 @@ use App\User;
 use App\Role;
 use Illuminate\Http\Request;
 use JWTAuth;
+use JWTFactory;
 use JWTAuthException;
 use Carbon\Carbon;
 class UserController extends Controller {
   private function getToken($email, $password, $rememberMe=false) {
     $token = null;
     //$credentials = $request->only('email', 'password');
+    
     try {
       if ($rememberMe) {
-      $token = JWTAuth::attempt(['email' => $email, 'password' => $password],['exp' => Carbon::now()->addDays(7)->timestamp]);
+      JWTFactory::setTTL(10080);
+      $token = JWTAuth::attempt(['email' => $email, 'password' => $password]);
+        
      
       } else {
       $token = JWTAuth::attempt(['email' => $email, 'password' => $password]);   
-      die("Dead");
+
 
       }
       

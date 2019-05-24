@@ -1,8 +1,9 @@
 import * as actionTypes from "./types";
-// import { isLiked } from "./singleBookActions";
 import $ from "jquery";
+import ExpiredStorage from "expired-storage";
 import axios from "axios";
 
+const expiredStorage = new ExpiredStorage();
 export const getFavouriteList = id => async dispatch => {
   const res = await axios
     .post(`/books/favourites`, {
@@ -51,6 +52,8 @@ export const removeFromFavourite = (book, user) => async dispatch => {
     .catch(err => console.log(err));
 };
 export const getUser = () => dispatch => {
+  const expiredStorage = new ExpiredStorage();
+  expiredStorage.clearExpired();
   if (localStorage["appState"]) {
     let state = localStorage["appState"];
     let AppState = JSON.parse(state);
@@ -111,7 +114,12 @@ export const loginUser = (email, password, rememberMe, history) => dispatch => {
           user: userData
         };
         // save app state with user date in local storage
-        localStorage["appState"] = JSON.stringify(appState);
+        if (rememberMe) {
+          expiredStorage.setItem("appState", JSON.stringify(appState), 604800);
+        } else {
+          expiredStorage.setItem("appState", JSON.stringify(appState), 3600);
+        }
+
         dispatch({
           type: actionTypes.LOGIN_USER,
           payload: appState.user
@@ -164,7 +172,8 @@ export const registerUser = (name, email, password, history) => dispatch => {
           user: userData
         };
         // save app state with user date in local storage
-        localStorage["appState"] = JSON.stringify(appState);
+        expiredStorage.setItem("appState", JSON.stringify(appState), 3600);
+
         dispatch({
           type: actionTypes.REGISTER_USER,
           payload: appState.user
@@ -193,7 +202,7 @@ export const logoutUser = () => dispatch => {
   };
 
   // save app state with user date in local storage
-  localStorage["appState"] = JSON.stringify(appState);
+  expiredStorage.setItem("appState", JSON.stringify(appState));
 
   dispatch(resetUser());
 };
