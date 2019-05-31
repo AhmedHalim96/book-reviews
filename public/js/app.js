@@ -64485,7 +64485,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74534,7 +74534,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/ */ "./resources/js/components/index.js");
+__webpack_require__(/*! ./src/ */ "./resources/js/src/index.js");
 
 /***/ }),
 
@@ -74596,10 +74596,10 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/App.js":
-/*!****************************************!*\
-  !*** ./resources/js/components/App.js ***!
-  \****************************************/
+/***/ "./resources/js/src/App.js":
+/*!*********************************!*\
+  !*** ./resources/js/src/App.js ***!
+  \*********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74609,21 +74609,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/userActions */ "./resources/js/components/actions/userActions.js");
-/* harmony import */ var _actions_booksActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/booksActions */ "./resources/js/components/actions/booksActions.js");
-/* harmony import */ var _components_layout_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/layout/Navbar */ "./resources/js/components/components/layout/Navbar.js");
-/* harmony import */ var _components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/layout/Sidebar */ "./resources/js/components/components/layout/Sidebar.js");
-/* harmony import */ var _components_Books__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Books */ "./resources/js/components/components/Books.js");
-/* harmony import */ var _components_BookPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/BookPage */ "./resources/js/components/components/BookPage.js");
-/* harmony import */ var _components_CreateBook__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CreateBook */ "./resources/js/components/components/CreateBook.js");
-/* harmony import */ var _components_EditBook__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/EditBook */ "./resources/js/components/components/EditBook.js");
-/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth/Login */ "./resources/js/components/auth/Login.js");
-/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./auth/Register */ "./resources/js/components/auth/Register.js");
-/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Dashboard */ "./resources/js/components/components/Dashboard.js");
-/* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/About */ "./resources/js/components/components/About.js");
-/* harmony import */ var _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/layout/PageNotFound */ "./resources/js/components/components/layout/PageNotFound.js");
-/* harmony import */ var _components_layout_Spinner__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
-/* harmony import */ var _components_AdminPanel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/AdminPanel */ "./resources/js/components/components/AdminPanel.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./actions/userActions */ "./resources/js/src/actions/userActions.js");
+/* harmony import */ var _actions_booksActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/booksActions */ "./resources/js/src/actions/booksActions.js");
+/* harmony import */ var _components_layout_Navbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/layout/Navbar */ "./resources/js/src/components/layout/Navbar.js");
+/* harmony import */ var _components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/layout/Sidebar */ "./resources/js/src/components/layout/Sidebar.js");
+/* harmony import */ var _components_Books__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Books */ "./resources/js/src/components/Books.js");
+/* harmony import */ var _components_BookPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/BookPage */ "./resources/js/src/components/BookPage.js");
+/* harmony import */ var _components_CreateBook__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CreateBook */ "./resources/js/src/components/CreateBook.js");
+/* harmony import */ var _components_EditBook__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/EditBook */ "./resources/js/src/components/EditBook.js");
+/* harmony import */ var _auth_Login__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./auth/Login */ "./resources/js/src/auth/Login.js");
+/* harmony import */ var _auth_Register__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./auth/Register */ "./resources/js/src/auth/Register.js");
+/* harmony import */ var _components_Dashboard__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Dashboard */ "./resources/js/src/components/Dashboard.js");
+/* harmony import */ var _components_About__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/About */ "./resources/js/src/components/About.js");
+/* harmony import */ var _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/layout/PageNotFound */ "./resources/js/src/components/layout/PageNotFound.js");
+/* harmony import */ var _components_layout_Spinner__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
+/* harmony import */ var _components_AdminPanel__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/AdminPanel */ "./resources/js/src/components/AdminPanel.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -74842,10 +74842,10 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./resources/js/components/actions/adminPanelActions.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/actions/adminPanelActions.js ***!
-  \**************************************************************/
+/***/ "./resources/js/src/actions/adminPanelActions.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/actions/adminPanelActions.js ***!
+  \*******************************************************/
 /*! exports provided: getUsers, assignUserRole */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74855,7 +74855,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "assignUserRole", function() { return assignUserRole; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/src/actions/types.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
@@ -74942,10 +74942,10 @@ var assignUserRole = function assignUserRole(token, id, role) {
 
 /***/ }),
 
-/***/ "./resources/js/components/actions/booksActions.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/actions/booksActions.js ***!
-  \*********************************************************/
+/***/ "./resources/js/src/actions/booksActions.js":
+/*!**************************************************!*\
+  !*** ./resources/js/src/actions/booksActions.js ***!
+  \**************************************************/
 /*! exports provided: getBooks */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74954,7 +74954,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBooks", function() { return getBooks; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/src/actions/types.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 
@@ -75004,10 +75004,10 @@ var getBooks = function getBooks() {
 
 /***/ }),
 
-/***/ "./resources/js/components/actions/singleBookActions.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/actions/singleBookActions.js ***!
-  \**************************************************************/
+/***/ "./resources/js/src/actions/singleBookActions.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/actions/singleBookActions.js ***!
+  \*******************************************************/
 /*! exports provided: getBook, isLiked, createBook, updateBook, deleteBook, clearBook */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75021,10 +75021,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearBook", function() { return clearBook; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/src/actions/types.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _booksActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./booksActions */ "./resources/js/components/actions/booksActions.js");
+/* harmony import */ var _booksActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./booksActions */ "./resources/js/src/actions/booksActions.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -75250,10 +75250,10 @@ var clearBook = function clearBook() {
 
 /***/ }),
 
-/***/ "./resources/js/components/actions/types.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/actions/types.js ***!
-  \**************************************************/
+/***/ "./resources/js/src/actions/types.js":
+/*!*******************************************!*\
+  !*** ./resources/js/src/actions/types.js ***!
+  \*******************************************/
 /*! exports provided: GET_BOOKS, GET_BOOK, CLEAR_BOOK, IS_LIKED, CREATE_BOOK, UPDATE_BOOK, DELETE_BOOK, GET_USER, LOGIN_USER, REGISTER_USER, LOGOUT_USER, GET_FAVOURITE_LIST, ADD_TO_FAVOURITES, REMOVE_FROM_FAVOURITES, APP_READY, RESET_USER, GET_USERS, ASSIGN_USER_ROLE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75298,10 +75298,10 @@ var ASSIGN_USER_ROLE = "ASSIGN_USER_ROLE";
 
 /***/ }),
 
-/***/ "./resources/js/components/actions/userActions.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/actions/userActions.js ***!
-  \********************************************************/
+/***/ "./resources/js/src/actions/userActions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/src/actions/userActions.js ***!
+  \*************************************************/
 /*! exports provided: getFavouriteList, addToFavourite, removeFromFavourite, getUser, loginUser, registerUser, logoutUser, resetUser, appReady */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75318,7 +75318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "appReady", function() { return appReady; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./resources/js/src/actions/types.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var expired_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! expired-storage */ "./node_modules/expired-storage/dist/expired_storage.js");
@@ -75609,10 +75609,10 @@ var appReady = function appReady() {
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/Login.js":
-/*!***********************************************!*\
-  !*** ./resources/js/components/auth/Login.js ***!
-  \***********************************************/
+/***/ "./resources/js/src/auth/Login.js":
+/*!****************************************!*\
+  !*** ./resources/js/src/auth/Login.js ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75700,10 +75700,10 @@ var Login = function Login(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/auth/Register.js":
-/*!**************************************************!*\
-  !*** ./resources/js/components/auth/Register.js ***!
-  \**************************************************/
+/***/ "./resources/js/src/auth/Register.js":
+/*!*******************************************!*\
+  !*** ./resources/js/src/auth/Register.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75794,10 +75794,10 @@ var Register = function Register(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/About.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/components/About.js ***!
-  \*****************************************************/
+/***/ "./resources/js/src/components/About.js":
+/*!**********************************************!*\
+  !*** ./resources/js/src/components/About.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75815,10 +75815,10 @@ function About() {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/AdminPanel.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/components/AdminPanel.js ***!
-  \**********************************************************/
+/***/ "./resources/js/src/components/AdminPanel.js":
+/*!***************************************************!*\
+  !*** ./resources/js/src/components/AdminPanel.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -75829,8 +75829,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/adminPanelActions */ "./resources/js/components/actions/adminPanelActions.js");
-/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/adminPanelActions */ "./resources/js/src/actions/adminPanelActions.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -76023,10 +76023,10 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/BookPage.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/components/BookPage.js ***!
-  \********************************************************/
+/***/ "./resources/js/src/components/BookPage.js":
+/*!*************************************************!*\
+  !*** ./resources/js/src/components/BookPage.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76038,12 +76038,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/components/actions/singleBookActions.js");
+/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/src/actions/singleBookActions.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/userActions */ "./resources/js/components/actions/userActions.js");
-/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/userActions */ "./resources/js/src/actions/userActions.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -76312,10 +76312,10 @@ BookPage.proptypes = {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/Books.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/components/Books.js ***!
-  \*****************************************************/
+/***/ "./resources/js/src/components/Books.js":
+/*!**********************************************!*\
+  !*** ./resources/js/src/components/Books.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76323,10 +76323,10 @@ BookPage.proptypes = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _bookItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bookItem */ "./resources/js/components/components/bookItem.js");
+/* harmony import */ var _bookItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bookItem */ "./resources/js/src/components/bookItem.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
  // import axios from 'axios';
 
 
@@ -76352,10 +76352,10 @@ Books.protoTypes = {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/CreateBook.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/components/CreateBook.js ***!
-  \**********************************************************/
+/***/ "./resources/js/src/components/CreateBook.js":
+/*!***************************************************!*\
+  !*** ./resources/js/src/components/CreateBook.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76364,7 +76364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/components/actions/singleBookActions.js");
+/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/src/actions/singleBookActions.js");
 /* harmony import */ var _ckeditor_ckeditor5_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ckeditor/ckeditor5-react */ "./node_modules/@ckeditor/ckeditor5-react/dist/ckeditor.js");
 /* harmony import */ var _ckeditor_ckeditor5_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
@@ -76523,10 +76523,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/Dashboard.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/components/Dashboard.js ***!
-  \*********************************************************/
+/***/ "./resources/js/src/components/Dashboard.js":
+/*!**************************************************!*\
+  !*** ./resources/js/src/components/Dashboard.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76593,10 +76593,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/EditBook.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/components/EditBook.js ***!
-  \********************************************************/
+/***/ "./resources/js/src/components/EditBook.js":
+/*!*************************************************!*\
+  !*** ./resources/js/src/components/EditBook.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76609,8 +76609,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/components/actions/singleBookActions.js");
-/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/components/components/layout/Spinner.js");
+/* harmony import */ var _actions_singleBookActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/singleBookActions */ "./resources/js/src/actions/singleBookActions.js");
+/* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -76824,10 +76824,10 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/bookItem.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/components/bookItem.js ***!
-  \********************************************************/
+/***/ "./resources/js/src/components/bookItem.js":
+/*!*************************************************!*\
+  !*** ./resources/js/src/components/bookItem.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76871,10 +76871,10 @@ function bookItem(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/layout/Navbar.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/components/layout/Navbar.js ***!
-  \*************************************************************/
+/***/ "./resources/js/src/components/layout/Navbar.js":
+/*!******************************************************!*\
+  !*** ./resources/js/src/components/layout/Navbar.js ***!
+  \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76968,10 +76968,10 @@ function Navbar(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/layout/PageNotFound.js":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/components/layout/PageNotFound.js ***!
-  \*******************************************************************/
+/***/ "./resources/js/src/components/layout/PageNotFound.js":
+/*!************************************************************!*\
+  !*** ./resources/js/src/components/layout/PageNotFound.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -76991,10 +76991,10 @@ function PageNotFound() {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/layout/Sidebar.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/components/layout/Sidebar.js ***!
-  \**************************************************************/
+/***/ "./resources/js/src/components/layout/Sidebar.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/components/layout/Sidebar.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77036,10 +77036,10 @@ Sidebar.protoTypes = {
 
 /***/ }),
 
-/***/ "./resources/js/components/components/layout/Spinner.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/components/layout/Spinner.js ***!
-  \**************************************************************/
+/***/ "./resources/js/src/components/layout/Spinner.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/components/layout/Spinner.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77079,10 +77079,10 @@ function Spinner() {
 
 /***/ }),
 
-/***/ "./resources/js/components/index.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/index.js ***!
-  \******************************************/
+/***/ "./resources/js/src/index.js":
+/*!***********************************!*\
+  !*** ./resources/js/src/index.js ***!
+  \***********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77092,10 +77092,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./resources/js/components/App.js");
+/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./resources/js/src/App.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/components/store.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/src/store.js");
 
 
 
@@ -77111,16 +77111,16 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ "./resources/js/components/reducers/adminPanelReducer.js":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/reducers/adminPanelReducer.js ***!
-  \***************************************************************/
+/***/ "./resources/js/src/reducers/adminPanelReducer.js":
+/*!********************************************************!*\
+  !*** ./resources/js/src/reducers/adminPanelReducer.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/src/actions/types.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -77151,16 +77151,16 @@ var initialState = {
 
 /***/ }),
 
-/***/ "./resources/js/components/reducers/booksReducer.js":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/reducers/booksReducer.js ***!
-  \**********************************************************/
+/***/ "./resources/js/src/reducers/booksReducer.js":
+/*!***************************************************!*\
+  !*** ./resources/js/src/reducers/booksReducer.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/src/actions/types.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -77188,20 +77188,20 @@ var initialState = {
 
 /***/ }),
 
-/***/ "./resources/js/components/reducers/index.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/reducers/index.js ***!
-  \***************************************************/
+/***/ "./resources/js/src/reducers/index.js":
+/*!********************************************!*\
+  !*** ./resources/js/src/reducers/index.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _booksReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./booksReducer */ "./resources/js/components/reducers/booksReducer.js");
-/* harmony import */ var _singleBookReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./singleBookReducer */ "./resources/js/components/reducers/singleBookReducer.js");
-/* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userReducer */ "./resources/js/components/reducers/userReducer.js");
-/* harmony import */ var _adminPanelReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./adminPanelReducer */ "./resources/js/components/reducers/adminPanelReducer.js");
+/* harmony import */ var _booksReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./booksReducer */ "./resources/js/src/reducers/booksReducer.js");
+/* harmony import */ var _singleBookReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./singleBookReducer */ "./resources/js/src/reducers/singleBookReducer.js");
+/* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userReducer */ "./resources/js/src/reducers/userReducer.js");
+/* harmony import */ var _adminPanelReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./adminPanelReducer */ "./resources/js/src/reducers/adminPanelReducer.js");
 
 
 
@@ -77216,16 +77216,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/reducers/singleBookReducer.js":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/reducers/singleBookReducer.js ***!
-  \***************************************************************/
+/***/ "./resources/js/src/reducers/singleBookReducer.js":
+/*!********************************************************!*\
+  !*** ./resources/js/src/reducers/singleBookReducer.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/src/actions/types.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -77274,16 +77274,16 @@ var initialState = {
 
 /***/ }),
 
-/***/ "./resources/js/components/reducers/userReducer.js":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/reducers/userReducer.js ***!
-  \*********************************************************/
+/***/ "./resources/js/src/reducers/userReducer.js":
+/*!**************************************************!*\
+  !*** ./resources/js/src/reducers/userReducer.js ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/components/actions/types.js");
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./resources/js/src/actions/types.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -77355,10 +77355,10 @@ var initialState = {
 
 /***/ }),
 
-/***/ "./resources/js/components/store.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/store.js ***!
-  \******************************************/
+/***/ "./resources/js/src/store.js":
+/*!***********************************!*\
+  !*** ./resources/js/src/store.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -77366,7 +77366,7 @@ var initialState = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers */ "./resources/js/components/reducers/index.js");
+/* harmony import */ var _reducers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers */ "./resources/js/src/reducers/index.js");
 
 
 
