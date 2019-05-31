@@ -37,11 +37,16 @@ class CreateBook extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createBook(
-      this.state.newBook,
-      this.props.userId,
-      this.props.history
-    );
+    const fileSize = this.state.newBook.featured_image.size;
+    if (!(fileSize > 2086666)) {
+      this.props.createBook(
+        this.state.newBook,
+        this.props.userId,
+        this.props.history
+      );
+    } else {
+      alert("File Too Big");
+    }
   };
   render() {
     return (
@@ -94,12 +99,14 @@ class CreateBook extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="image">Featured Image</label>
+            {/* <input type="hidden" name="MAX_FILE_SIZE" value="2097152" /> */}
             <input
               type="file"
               className="form-control-file"
               name="featured_image"
               id="image"
               onChange={this.handleChange}
+              required
             />
           </div>
           <button type="submit" className="btn btn-dark btn-block">

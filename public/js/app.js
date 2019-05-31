@@ -75220,6 +75220,7 @@ var deleteBook = function deleteBook(id, history) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["DELETE_BOOK"]
                   });
+                  dispatch(Object(_booksActions__WEBPACK_IMPORTED_MODULE_3__["getBooks"])());
                   history.push("/");
                 })["catch"](function (err) {
                   return console.log(err);
@@ -76439,8 +76440,13 @@ function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
       event.preventDefault();
+      var fileSize = _this.state.newBook.featured_image.size;
 
-      _this.props.createBook(_this.state.newBook, _this.props.userId, _this.props.history);
+      if (!(fileSize > 2086666)) {
+        _this.props.createBook(_this.state.newBook, _this.props.userId, _this.props.history);
+      } else {
+        alert("File Too Big");
+      }
     });
 
     return _this;
@@ -76499,7 +76505,8 @@ function (_Component) {
         className: "form-control-file",
         name: "featured_image",
         id: "image",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-dark btn-block"

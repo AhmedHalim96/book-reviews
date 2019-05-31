@@ -92,6 +92,7 @@ export const deleteBook = (id, history) => async dispatch => {
       dispatch({
         type: actionTypes.DELETE_BOOK
       });
+      dispatch(getBooks());
       history.push("/");
     })
     .catch(err => console.log(err));

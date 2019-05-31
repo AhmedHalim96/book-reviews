@@ -95,6 +95,8 @@ class BookController extends Controller {
    */
   public function destroy($id) {
     $book = Book::find($id);
+    // return unlink(storage_path("public/featured_images/".$book->featured_image));
+    Storage::delete("public/featured_images/".$book->featured_image);
     $book->delete();
     return $book;
   }
