@@ -55,7 +55,7 @@ export default function Navbar(props) {
                   <Link className="dropdown-item" to="/dashboard">
                     Dashboard
                   </Link>
-                  {props.user.role != "Subscriber" ? (
+                  {props.user.role == "Admin" || props.user.role == "Editor" ? (
                     <Link className="dropdown-item" to="/book/create">
                       Create a Review
                     </Link>

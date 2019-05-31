@@ -3,7 +3,6 @@ import React, { Component, Fragment } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  getFavouriteList,
   appReady,
   resetUser,
   getUser,
@@ -39,7 +38,7 @@ class App extends Component {
 
   render() {
     if (this.props.isReady) {
-      const { isLoggedIn, user, favouriteBooks, books } = this.props;
+      const { isLoggedIn, user, books } = this.props;
       return (
         <div className="bg-secondary">
           <Navbar
@@ -61,9 +60,10 @@ class App extends Component {
                     <Route
                       path="/dashboard"
                       render={props => (
-                        <Dashboard {...props} favouriteBooks={favouriteBooks} />
+                        <Dashboard {...props} userId={user.id} />
                       )}
                     />
+
                     {user.role == "Admin" || user.role == "Editor" ? (
                       <Route
                         path="/book/:id/edit"
@@ -91,7 +91,6 @@ class App extends Component {
                           {...props}
                           isLoggedIn={isLoggedIn}
                           user={user}
-                          favouriteBooks={favouriteBooks}
                           books={books}
                         />
                       )}
@@ -151,7 +150,11 @@ class App extends Component {
         </div>
       );
     }
-    return <Spinner />;
+    return (
+      <div className="my-auto">
+        <Spinner color={"#343a40"} />
+      </div>
+    );
   }
 }
 
@@ -159,14 +162,12 @@ const mapStateToProps = state => ({
   isReady: state.user.isReady,
   user: state.user.user,
   isLoggedIn: state.user.isLoggedIn,
-  favouriteBooks: state.user.favouriteBooks,
   books: state.books.books
 });
 
 export default connect(
   mapStateToProps,
   {
-    getFavouriteList,
     appReady,
     resetUser,
     getUser,

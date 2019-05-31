@@ -2,8 +2,13 @@ import * as actionTypes from "./types";
 import $ from "jquery";
 import ExpiredStorage from "expired-storage";
 import axios from "axios";
+import SimpleCrypto from "simple-crypto-js";
 
 const expiredStorage = new ExpiredStorage();
+const simpleCrypto = new SimpleCrypto(
+  "c9a1375fc3e8f227b3efda9947502153b73d37696bd1a90ed1c2cd79caaeb14b"
+);
+
 export const getFavouriteList = id => async dispatch => {
   const res = await axios
     .post(`/books/favourites`, {
@@ -51,33 +56,25 @@ export const removeFromFavourite = (book, user) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const getUser = () => dispatch => {
-  const expiredStorage = new ExpiredStorage();
-  expiredStorage.clearExpired();
-  if (localStorage["appState"]) {
-    let state = localStorage["appState"];
-    let AppState = JSON.parse(state);
-    console.log(AppState);
 
-    if (AppState.isLoggedIn) {
-      axios
-        .post("/api/user/get", {
-          user_id: AppState.user.id
-        })
-        .then(res => {
-          console.log(res);
-          dispatch({
-            type: actionTypes.GET_USER,
-            payload: res.data.data
-          });
-          dispatch(getFavouriteList(AppState.user.id));
+export const getUser = () => dispatch => {
+  expiredStorage.clearExpired();
+  let AppState = null;
+  if (localStorage["appState"]) {
+    try {
+      AppState = simpleCrypto.decrypt(localStorage["appState"], true);
+      if (AppState.isLoggedIn) {
+        dispatch({
+          type: actionTypes.GET_USER,
+          payload: AppState.user
         });
-    } else {
-      dispatch(appReady());
+      }
+    } catch (error) {
+      dispatch(logoutUser());
     }
-  } else {
-    dispatch(appReady());
   }
+
+  dispatch(appReady());
 };
 
 export const loginUser = (email, password, rememberMe, history) => dispatch => {
@@ -113,11 +110,15 @@ export const loginUser = (email, password, rememberMe, history) => dispatch => {
           isLoggedIn: true,
           user: userData
         };
+
+        // Encrypt appState for localStorage
+        const encryptedAppState = simpleCrypto.encrypt(appState);
+
         // save app state with user date in local storage
         if (rememberMe) {
-          expiredStorage.setItem("appState", JSON.stringify(appState), 604800);
+          expiredStorage.setItem("appState", encryptedAppState, 604800);
         } else {
-          expiredStorage.setItem("appState", JSON.stringify(appState), 3600);
+          expiredStorage.setItem("appState", encryptedAppState, 3600);
         }
 
         dispatch({
@@ -171,8 +172,12 @@ export const registerUser = (name, email, password, history) => dispatch => {
           isLoggedIn: true,
           user: userData
         };
+
+        // Encrypt appState for localStorage
+        const encryptedAppState = simpleCrypto.encrypt(appState);
+
         // save app state with user date in local storage
-        expiredStorage.setItem("appState", JSON.stringify(appState), 3600);
+        expiredStorage.setItem("appState", encryptedAppState, 3600);
 
         dispatch({
           type: actionTypes.REGISTER_USER,
@@ -201,8 +206,11 @@ export const logoutUser = () => dispatch => {
     user: {}
   };
 
+  // Encrypt appState for localStorage
+  const encryptedAppState = simpleCrypto.encrypt(appState);
+
   // save app state with user date in local storage
-  expiredStorage.setItem("appState", JSON.stringify(appState));
+  expiredStorage.setItem("appState", encryptedAppState);
 
   dispatch(resetUser());
 };

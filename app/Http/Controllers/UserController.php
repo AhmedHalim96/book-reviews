@@ -78,12 +78,6 @@ class UserController extends Controller {
     return response()->json($response, 201);
   }
 
-  public function getUserInfo(Request $request)
-  {
-    $user = User::find($request->user_id);
-    $response = ['success' => true, 'data' => ['name' => $user->name, 'id' => $user->id, 'email' => $user->email, 'token' => $user->auth_token , "role" =>$user->roles->first()->name]];
-    return $response;
-  }
   public function adminAssignRoles(Request $request)
   {
     $user = User::find($request->user_id);
