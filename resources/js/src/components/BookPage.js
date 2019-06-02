@@ -77,10 +77,10 @@ class BookPage extends Component {
             <hr />
 
             <div className="card">
-              <h1 className="card-header">
+              <h2 className="card-header">
                 <strong>{name}</strong>
                 <span className="ml-3">
-                  <small>By</small>
+                  <small>By </small>
                   <i className="text-primary">{book_author} </i>
                 </span>
                 {this.props.isLoggedIn &&
@@ -133,38 +133,37 @@ class BookPage extends Component {
                 >
                   <i className={"fa fa-heart fa-2x " + likedClass} />
                 </button>
-              </h1>
+              </h2>
               <div className="row">
-                <div className="col-md-6 ">
+                <div className="col-md-4 ml-3 mt-2">
                   <img
                     src={`/storage/featured_images/${featured_image}`}
                     alt={name}
-                    className="card-img-top img-thumbnail"
+                    className="card-img-top"
                   />
                 </div>
               </div>
-              <div>
-                <div className="card-body px-2 pb-2">
-                  <i>
-                    <strong className="text-danger">Reviewed by: </strong>
-                  </i>
-                  {review_author}
-                  <br />
-                  <span className="ml-3">
-                    <i className="text-dark">Reviewer Rating: </i>
-                    <span className="badge badge-danger">
-                      {book_score % 1 == 0
-                        ? book_score.slice(0, 1)
-                        : book_score.slice(0, 3)}{" "}
-                      / 5
-                    </span>
+
+              <div className="card-body">
+                <i>
+                  <strong className="text-danger">Reviewed by: </strong>
+                </i>
+                {review_author}
+                <br />
+                <span className="ml-3">
+                  <i className="text-dark">Reviewer Rating: </i>
+                  <span className="badge badge-danger">
+                    {book_score % 1 == 0
+                      ? book_score.slice(0, 1)
+                      : book_score.slice(0, 3)}{" "}
+                    / 5
                   </span>
-                  <hr />
-                  <div
-                    dangerouslySetInnerHTML={{ __html: review_text }}
-                    className="lead"
-                  />
-                </div>
+                </span>
+                <hr />
+                <div
+                  dangerouslySetInnerHTML={{ __html: review_text }}
+                  className="lead card-text"
+                />
               </div>
             </div>
             <hr />
