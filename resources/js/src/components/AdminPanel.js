@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUsers, assignUserRole } from "../actions/adminPanelActions";
 import Spinner from "./layout/Spinner";
+import Modal from "./layout/Modal/Modal";
 
 class AdminPanel extends Component {
   state = {
+    showModal: false,
     rolesArr: ["Admin", "Editor", "Subscriber"]
   };
   async componentDidMount() {
@@ -27,7 +29,9 @@ class AdminPanel extends Component {
   submitHandler = targetedUserId => {
     const role = this.state.rolesArr[parseInt(this.state[targetedUserId]) - 1];
     const { token, id } = this.props.user;
-    this.props.assignUserRole(token, id, targetedUserId, role);
+    this.props.assignUserRole(token, id, targetedUserId, role).then(() => {
+      this.setState({ showModal: true });
+    });
   };
 
   render() {
@@ -97,6 +101,12 @@ class AdminPanel extends Component {
               })}
             </tbody>
           </table>
+          <Modal
+            show={this.state.showModal}
+            close={() => this.setState({ showModal: false })}
+          >
+            <p className="lead">Operation Succesful</p>
+          </Modal>
         </div>
       );
     }

@@ -15217,6 +15217,44 @@ module.exports = exports['default'];
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/layout/Backdrop/Backdrop.css":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/components/layout/Backdrop/Backdrop.css ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".Backdrop{\r\n    width: 100%;\r\n    height: 100%;\r\n    position: fixed;\r\n    z-index:100 ;\r\n    left: 0;\r\n    top: 0;\r\n    background: rgba(0, 0, 0, 0.5);\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/layout/Modal/Modal.css":
+/*!********************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/components/layout/Modal/Modal.css ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".Modal {\r\n    position: fixed;\r\n    z-index: 500;\r\n    background-color: white;\r\n    width: 70%;\r\n    border: 1px solid #ccc;\r\n    box-shadow: 1px 1px 1px black;\r\n    padding: 16px;\r\n    left: 15%;\r\n    top: 30%;\r\n    box-sizing: border-box;\r\n    transition: all 0.3s ease-out;\r\n}\r\n\r\n@media (min-width: 600px) {\r\n    .Modal {\r\n        width: 500px;\r\n        left: calc(50% - 250px);\r\n    }\r\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/style.css":
 /*!*******************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/postcss-loader/src??ref--6-2!./resources/js/src/components/style.css ***!
@@ -71271,7 +71309,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
+/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83222,6 +83260,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/adminPanelActions */ "./resources/js/src/actions/adminPanelActions.js");
 /* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
+/* harmony import */ var _layout_Modal_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layout/Modal/Modal */ "./resources/js/src/components/layout/Modal/Modal.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -83253,6 +83292,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var AdminPanel =
 /*#__PURE__*/
 function (_Component) {
@@ -83272,6 +83312,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AdminPanel)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
+      showModal: false,
       rolesArr: ["Admin", "Editor", "Subscriber"]
     });
 
@@ -83286,7 +83327,11 @@ function (_Component) {
           token = _this$props$user.token,
           id = _this$props$user.id;
 
-      _this.props.assignUserRole(token, id, targetedUserId, role);
+      _this.props.assignUserRole(token, id, targetedUserId, role).then(function () {
+        _this.setState({
+          showModal: true
+        });
+      });
     });
 
     return _this;
@@ -83397,7 +83442,16 @@ function (_Component) {
               className: "btn btn-dark"
             }, "Assign")));
           }
-        }))));
+        }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Modal_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          show: this.state.showModal,
+          close: function close() {
+            return _this3.setState({
+              showModal: false
+            });
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+          className: "lead"
+        }, "Operation Succesful")));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Spinner__WEBPACK_IMPORTED_MODULE_4__["default"], null);
@@ -83442,6 +83496,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_userActions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../actions/userActions */ "./resources/js/src/actions/userActions.js");
 /* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
+/* harmony import */ var _layout_Modal_Modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./layout/Modal/Modal */ "./resources/js/src/components/layout/Modal/Modal.js");
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -83477,6 +83532,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var BookPage =
 /*#__PURE__*/
 function (_Component) {
@@ -83494,6 +83550,10 @@ function (_Component) {
     }
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(BookPage)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      showModal: false
+    });
 
     _defineProperty(_assertThisInitialized(_this), "intialize", function (props) {
       props.clearBook();
@@ -83556,6 +83616,20 @@ function (_Component) {
       e.preventDefault();
 
       _this.props.deleteBook(_this.props.match.params.id, _this.props.user.id, _this.props.history);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "closeModalHandler", function () {
+      return _this.setState({
+        showModal: false
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "showModalHandler", function (e) {
+      e.preventDefault();
+
+      _this.setState({
+        showModal: true
+      });
     });
 
     return _this;
@@ -83625,7 +83699,7 @@ function (_Component) {
           }), " ", "Edit Review"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
             to: "/",
             className: " dropdown-item",
-            onClick: this.deleteHandler
+            onClick: this.showModalHandler
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
             className: "fa fa-trash text-danger",
             "aria-hidden": "true"
@@ -83671,7 +83745,16 @@ function (_Component) {
                 to: "/book/".concat(item.id)
               }, item.name));
             }
-          })));
+          })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Modal_Modal__WEBPACK_IMPORTED_MODULE_9__["default"], {
+            show: this.state.showModal,
+            close: this.closeModalHandler
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Do You wanna delete this book?"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+            className: "btn btn-danger mr-3",
+            onClick: this.deleteHandler
+          }, "yes"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+            className: "btn btn-secondary",
+            onClick: this.closeModalHandler
+          }, "No")));
         }
 
         return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Redirect"], {
@@ -84422,6 +84505,185 @@ function bookItem(props) {
 
 /***/ }),
 
+/***/ "./resources/js/src/components/layout/Backdrop/Backdrop.css":
+/*!******************************************************************!*\
+  !*** ./resources/js/src/components/layout/Backdrop/Backdrop.css ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/postcss-loader/src??ref--6-2!./Backdrop.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/layout/Backdrop/Backdrop.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/src/components/layout/Backdrop/Backdrop.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/src/components/layout/Backdrop/Backdrop.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Backdrop_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Backdrop.css */ "./resources/js/src/components/layout/Backdrop/Backdrop.css");
+/* harmony import */ var _Backdrop_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Backdrop_css__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var backdrop = function backdrop(props) {
+  return props.show ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "Backdrop",
+    onClick: props.onClick
+  }) : null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (backdrop);
+
+/***/ }),
+
+/***/ "./resources/js/src/components/layout/Modal/Modal.css":
+/*!************************************************************!*\
+  !*** ./resources/js/src/components/layout/Modal/Modal.css ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/postcss-loader/src??ref--6-2!./Modal.css */ "./node_modules/css-loader/index.js?!./node_modules/postcss-loader/src/index.js?!./resources/js/src/components/layout/Modal/Modal.css");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./resources/js/src/components/layout/Modal/Modal.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/src/components/layout/Modal/Modal.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Modal_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal.css */ "./resources/js/src/components/layout/Modal/Modal.css");
+/* harmony import */ var _Modal_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Modal_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Backdrop_Backdrop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Backdrop/Backdrop */ "./resources/js/src/components/layout/Backdrop/Backdrop.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Modal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Modal, _Component);
+
+  function Modal() {
+    _classCallCheck(this, Modal);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Modal).apply(this, arguments));
+  }
+
+  _createClass(Modal, [{
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Backdrop_Backdrop__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        show: this.props.show,
+        onClick: this.props.close
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Modal",
+        style: {
+          transform: this.props.show ? "translateY(0)" : "translateY(-1000vh)",
+          opacity: this.props.show ? "1" : "0"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog my-0 ",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close",
+        onClick: this.props.close
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "text-center"
+      }, this.props.children))))));
+    }
+  }]);
+
+  return Modal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Modal);
+
+/***/ }),
+
 /***/ "./resources/js/src/components/layout/Navbar.js":
 /*!******************************************************!*\
   !*** ./resources/js/src/components/layout/Navbar.js ***!
@@ -84479,8 +84741,8 @@ function Navbar(props) {
     "aria-haspopup": "true",
     "aria-expanded": "false"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-    className: "fa fa-circle-user"
-  }), props.user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "fa fa-user-circle fa-lg"
+  }), " ", props.user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown-menu",
     "aria-labelledby": "dropdown01",
     style: {

@@ -12,8 +12,12 @@ import { connect } from "react-redux";
 import { addToFavourite, removeFromFavourite } from "../actions/userActions";
 
 import Spinner from "./layout/Spinner";
+import Modal from "./layout/Modal/Modal";
 
 class BookPage extends Component {
+  state = {
+    showModal: false
+  };
   componentDidMount() {
     this.intialize(this.props);
   }
@@ -57,6 +61,11 @@ class BookPage extends Component {
     );
   };
 
+  closeModalHandler = () => this.setState({ showModal: false });
+  showModalHandler = e => {
+    e.preventDefault();
+    this.setState({ showModal: true });
+  };
   render() {
     if (this.props.isLoaded) {
       if (this.props.book) {
@@ -119,7 +128,7 @@ class BookPage extends Component {
                       <Link
                         to="/"
                         className=" dropdown-item"
-                        onClick={this.deleteHandler}
+                        onClick={this.showModalHandler}
                       >
                         <i
                           className="fa fa-trash text-danger"
@@ -188,6 +197,21 @@ class BookPage extends Component {
                 }
               })}
             </div>
+            <Modal show={this.state.showModal} close={this.closeModalHandler}>
+              <p>Do You wanna delete this book?</p>
+              <button
+                className="btn btn-danger mr-3"
+                onClick={this.deleteHandler}
+              >
+                yes
+              </button>
+              <button
+                className="btn btn-secondary"
+                onClick={this.closeModalHandler}
+              >
+                No
+              </button>
+            </Modal>
           </Fragment>
         );
       }

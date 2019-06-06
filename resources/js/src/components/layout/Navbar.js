@@ -39,8 +39,7 @@ export default function Navbar(props) {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i className="fa fa-circle-user" />
-                  {props.user.name}
+                  <i className="fa fa-user-circle fa-lg" /> {props.user.name}
                 </Link>
                 <div
                   className="dropdown-menu"
