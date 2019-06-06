@@ -80,7 +80,7 @@ class UserController extends Controller {
 
   public function adminAssignRoles(Request $request)
   {
-    $user = User::find($request->user_id);
+    $user = User::find($request->targeted_user);
     $user->roles()->detach();
     $user->roles()->attach(Role::where('name', $request->role)->first()); 
     return ["success"=> true];  

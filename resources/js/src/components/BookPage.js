@@ -50,7 +50,11 @@ class BookPage extends Component {
   };
   deleteHandler = e => {
     e.preventDefault();
-    this.props.deleteBook(this.props.match.params.id, this.props.history);
+    this.props.deleteBook(
+      this.props.match.params.id,
+      this.props.user.id,
+      this.props.history
+    );
   };
 
   render() {

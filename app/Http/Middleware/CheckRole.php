@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Middleware;
 use Closure;
+use App\User;
+
 
 class CheckRole {
   /**
@@ -11,12 +13,13 @@ class CheckRole {
    * @return mixed
    */
   public function handle($request, Closure $next) {
-    if ($request->user() === null) {
+    $user = User::find($request->user_id);
+    if ($user === null) {
       return response("Insufficient permissions", 401);
     }
     $actions = $request->route()->getAction();
     $roles = isset($actions['roles']) ? $actions['roles'] : null;
-    if ($request->user()->hasAnyRole($roles) || !$roles) {
+    if ($user->hasAnyRole($roles) || !$roles) {
       return $next($request);
     }
     return response("Insufficient permissions", 401);

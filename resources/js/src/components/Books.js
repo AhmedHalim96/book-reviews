@@ -6,9 +6,7 @@ import "./style.css";
 class Books extends Component {
   state = {
     selectedView:
-      (localStorage["selectedView"] &&
-        localStorage["selectedView"] == "grid") ||
-      "list"
+      localStorage["selectedView"] == "grid" || "list"
         ? localStorage["selectedView"]
         : "grid"
   };

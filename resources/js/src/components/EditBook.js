@@ -44,7 +44,7 @@ class EditBook extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-    await this.props.updateBook(this.state.currentBook);
+    await this.props.updateBook(this.state.currentBook, this.props.userId);
     this.props.history.push("/book/" + this.state.currentBook.id);
   };
   render() {

@@ -26,7 +26,7 @@ export const getFavouriteList = id => async dispatch => {
 
 export const addToFavourite = (book, user) => async dispatch => {
   const res = await axios
-    .post(`/books/${book}/favourites`, {
+    .post(`/books/favourites/add`, {
       user_id: user,
       book_id: book
     })
@@ -43,7 +43,7 @@ export const addToFavourite = (book, user) => async dispatch => {
 
 export const removeFromFavourite = (book, user) => async dispatch => {
   const res = await axios
-    .post(`/books/${book}/favourites`, {
+    .post(`/books/favourites/remove`, {
       user_id: user,
       book_id: book,
       _method: "DELETE"

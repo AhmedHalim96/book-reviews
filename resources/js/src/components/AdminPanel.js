@@ -8,9 +8,10 @@ class AdminPanel extends Component {
     rolesArr: ["Admin", "Editor", "Subscriber"]
   };
   async componentDidMount() {
-    await this.props.getUsers(this.props.user.token);
+    const { token, id } = this.props.user;
+    await this.props.getUsers(token, id);
     this.props.users.map(user => {
-      if (user.id != this.props.user.id) {
+      if (user.id != id) {
         const checked = this.state.rolesArr.indexOf(user.role) + 1;
         return this.setState({
           [user.id]: checked
@@ -18,12 +19,15 @@ class AdminPanel extends Component {
       }
     });
   }
+
   onChangeHandler = (e, id) => {
     this.setState({ [id]: e.target.id });
   };
-  submitHandler = id => {
-    const role = this.state.rolesArr[parseInt(this.state[id]) - 1];
-    this.props.assignUserRole(this.props.user.token, id, role);
+
+  submitHandler = targetedUserId => {
+    const role = this.state.rolesArr[parseInt(this.state[targetedUserId]) - 1];
+    const { token, id } = this.props.user;
+    this.props.assignUserRole(token, id, targetedUserId, role);
   };
 
   render() {

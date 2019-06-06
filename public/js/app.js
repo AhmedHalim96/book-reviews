@@ -71271,7 +71271,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82244,7 +82244,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var getUsers = function getUsers(token) {
+var getUsers = function getUsers(token, userId) {
   return (
     /*#__PURE__*/
     function () {
@@ -82256,7 +82256,10 @@ var getUsers = function getUsers(token) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/api/users/list?token=" + token).then(function (res) {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/users/list?token=" + token, {
+                  _method: "GET",
+                  user_id: userId
+                }).then(function (res) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["GET_USERS"],
                     payload: res.data.users
@@ -82279,7 +82282,7 @@ var getUsers = function getUsers(token) {
     }()
   );
 };
-var assignUserRole = function assignUserRole(token, id, role) {
+var assignUserRole = function assignUserRole(token, adminId, targetedUserId, role) {
   return (
     /*#__PURE__*/
     function () {
@@ -82292,13 +82295,15 @@ var assignUserRole = function assignUserRole(token, id, role) {
               case 0:
                 _context2.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/api/user/role?token=" + token, {
-                  user_id: id,
+                  token: token,
+                  user_id: adminId,
+                  targeted_user: targetedUserId,
                   role: role
                 }).then(function (res) {
-                  dispatch({
-                    type: _types__WEBPACK_IMPORTED_MODULE_1__["ASSIGN_USER_ROLE"]
-                  });
-                  dispatch(getUsers(token));
+                  console.log(res.data); // dispatch({
+                  //   type: actionTypes.ASSIGN_USER_ROLE
+                  // });
+                  // dispatch(getUsers(token));
                 })["catch"](function (err) {
                   return console.log(err);
                 });
@@ -82538,7 +82543,7 @@ var createBook = function createBook(newBook, userId, history) {
     }()
   );
 };
-var updateBook = function updateBook(updatedBook) {
+var updateBook = function updateBook(updatedBook, userId) {
   return (
     /*#__PURE__*/
     function () {
@@ -82557,6 +82562,7 @@ var updateBook = function updateBook(updatedBook) {
                 fd.append("book_author", book_author);
                 fd.append("book_score", book_score);
                 fd.append("featured_image", featured_image);
+                fd.append("user_id", userId);
                 fd.append("_method", "PATCH");
                 axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/books/".concat(id), fd).then(function (res) {
                   dispatch({
@@ -82568,7 +82574,7 @@ var updateBook = function updateBook(updatedBook) {
                   return console.log(err);
                 });
 
-              case 9:
+              case 10:
               case "end":
                 return _context4.stop();
             }
@@ -82582,7 +82588,7 @@ var updateBook = function updateBook(updatedBook) {
     }()
   );
 };
-var deleteBook = function deleteBook(id, history) {
+var deleteBook = function deleteBook(id, userId, history) {
   return (
     /*#__PURE__*/
     function () {
@@ -82594,7 +82600,10 @@ var deleteBook = function deleteBook(id, history) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a["delete"]("/books/".concat(id)).then(function (res) {
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/books/".concat(id), {
+                  _method: "DELETE",
+                  user_id: userId
+                }).then(function (res) {
                   dispatch({
                     type: _types__WEBPACK_IMPORTED_MODULE_1__["DELETE_BOOK"]
                   });
@@ -82773,7 +82782,7 @@ var addToFavourite = function addToFavourite(book, user) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/books/".concat(book, "/favourites"), {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/books/favourites/add", {
                   user_id: user,
                   book_id: book
                 }).then(function (res) {
@@ -82816,7 +82825,7 @@ var removeFromFavourite = function removeFromFavourite(book, user) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/books/".concat(book, "/favourites"), {
+                return axios__WEBPACK_IMPORTED_MODULE_4___default.a.post("/books/favourites/remove", {
                   user_id: user,
                   book_id: book,
                   _method: "DELETE"
@@ -83270,10 +83279,14 @@ function (_Component) {
       _this.setState(_defineProperty({}, id, e.target.id));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (id) {
-      var role = _this.state.rolesArr[parseInt(_this.state[id]) - 1];
+    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (targetedUserId) {
+      var role = _this.state.rolesArr[parseInt(_this.state[targetedUserId]) - 1];
 
-      _this.props.assignUserRole(_this.props.user.token, id, role);
+      var _this$props$user = _this.props.user,
+          token = _this$props$user.token,
+          id = _this$props$user.id;
+
+      _this.props.assignUserRole(token, id, targetedUserId, role);
     });
 
     return _this;
@@ -83287,22 +83300,25 @@ function (_Component) {
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _this2 = this;
 
+        var _this$props$user2, token, id;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return this.props.getUsers(this.props.user.token);
+                _this$props$user2 = this.props.user, token = _this$props$user2.token, id = _this$props$user2.id;
+                _context.next = 3;
+                return this.props.getUsers(token, id);
 
-              case 2:
+              case 3:
                 this.props.users.map(function (user) {
-                  if (user.id != _this2.props.user.id) {
+                  if (user.id != id) {
                     var checked = _this2.state.rolesArr.indexOf(user.role) + 1;
                     return _this2.setState(_defineProperty({}, user.id, checked));
                   }
                 });
 
-              case 3:
+              case 4:
               case "end":
                 return _context.stop();
             }
@@ -83539,7 +83555,7 @@ function (_Component) {
     _defineProperty(_assertThisInitialized(_this), "deleteHandler", function (e) {
       e.preventDefault();
 
-      _this.props.deleteBook(_this.props.match.params.id, _this.props.history);
+      _this.props.deleteBook(_this.props.match.params.id, _this.props.user.id, _this.props.history);
     });
 
     return _this;
@@ -83754,7 +83770,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Books)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
-      selectedView: localStorage["selectedView"] && localStorage["selectedView"] == "grid" || "list" ? localStorage["selectedView"] : "grid"
+      selectedView: localStorage["selectedView"] == "grid" || "list" ? localStorage["selectedView"] : "grid"
     });
 
     _defineProperty(_assertThisInitialized(_this), "changeViewHandler", function (e, view) {
@@ -84198,7 +84214,7 @@ function (_Component) {
               case 0:
                 event.preventDefault();
                 _context.next = 3;
-                return _this.props.updateBook(_this.state.currentBook);
+                return _this.props.updateBook(_this.state.currentBook, _this.props.userId);
 
               case 3:
                 _this.props.history.push("/book/" + _this.state.currentBook.id);

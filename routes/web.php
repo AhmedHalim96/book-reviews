@@ -15,14 +15,23 @@ Route::get('/', function () {
   return view('home');
 });
 
-// Auth::routes();
 
-Route::resource('books', 'BookController');
-// Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::post('books/favourites', 'FavouriteController@index');
-Route::post('books/{book}/favourites', 'FavouriteController@store');
-Route::post('books/{book}', 'FavouriteController@isFavourited');
-Route::delete('books/{book}/favourites', 'FavouriteController@destroy');
+Route::get('books', 'BookController@index');
+Route::get('books/{id}', 'BookController@show');
+
+Route::group(['middleware'=> 'roles', 'roles'=>['Admin', 'Editor']], function () {
+  Route::post('books', 'BookController@store');
+  Route::delete('books/{id}', 'BookController@destroy');
+  Route::patch('books/{id}', 'BookController@update');
+});
+
+  Route::group(['middleware'=> 'roles', 'roles'=>['Admin', 'Editor', 'Subscriber']], function () {
+    Route::post('books/favourites', 'FavouriteController@index');
+    Route::post('books/favourites/add', 'FavouriteController@store');
+    Route::post('books/{book}', 'FavouriteController@isFavourited');
+    Route::delete('books/favourites/remove', 'FavouriteController@destroy');
+  });
+
 
 Route::view('/{path?}', 'home')
   ->where('path', '.*')

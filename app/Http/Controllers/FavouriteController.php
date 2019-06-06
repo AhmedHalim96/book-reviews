@@ -13,17 +13,17 @@ class FavouriteController extends Controller {
     $favourite_books = $user->favouriteBooks()->get();
     return $favourite_books;
   }
-  public function store(Request $request, Book $book) {
+  public function store(Request $request) {
 
     $user = User::find($request->user_id);
-    $user->favouriteBooks()->syncWithoutDetaching([$book->id]);
+    $user->favouriteBooks()->syncWithoutDetaching([$request->book_id]);
 
     return response()->json([
       'success' => true,
     ]);
   }
-  public function destroy(Request $request, Book $book) {
-    User::find($request->user_id)->favouriteBooks()->detach($book);
+  public function destroy(Request $request) {
+    User::find($request->user_id)->favouriteBooks()->detach(Book::find($request->book_id));
     return response()->json([
       'success' => true,
     ]);

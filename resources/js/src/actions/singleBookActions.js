@@ -57,7 +57,7 @@ export const createBook = (newBook, userId, history) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const updateBook = updatedBook => async dispatch => {
+export const updateBook = (updatedBook, userId) => async dispatch => {
   const {
     id,
     name,
@@ -73,6 +73,7 @@ export const updateBook = updatedBook => async dispatch => {
   fd.append("book_author", book_author);
   fd.append("book_score", book_score);
   fd.append("featured_image", featured_image);
+  fd.append("user_id", userId);
   fd.append("_method", "PATCH");
   axios
     .post(`/books/${id}`, fd)
@@ -85,9 +86,12 @@ export const updateBook = updatedBook => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const deleteBook = (id, history) => async dispatch => {
+export const deleteBook = (id, userId, history) => async dispatch => {
   await axios
-    .delete(`/books/${id}`)
+    .post(`/books/${id}`, {
+      _method: "DELETE",
+      user_id: userId
+    })
     .then(res => {
       dispatch({
         type: actionTypes.DELETE_BOOK
