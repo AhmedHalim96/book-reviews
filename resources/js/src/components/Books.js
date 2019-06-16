@@ -5,10 +5,17 @@ import "./style.css";
 
 class Books extends Component {
   state = {
+    filterTerm: null,
     selectedView:
       localStorage["selectedView"] == "grid" || "list"
         ? localStorage["selectedView"]
         : "grid"
+  };
+
+  onChangeHandler = e => {
+    this.setState({
+      filterTerm: e.target.value
+    });
   };
 
   changeViewHandler = (e, view) => {
@@ -20,8 +27,12 @@ class Books extends Component {
   };
 
   render() {
-    const { books } = this.props;
-
+    let { books } = this.props;
+    if (this.state.filterTerm) {
+      books = books.filter(book => {
+        return book.name.toLowerCase().indexOf(this.state.filterTerm) !== -1;
+      });
+    }
     return (
       <div className="row">
         <div className="col-md-10 mx-auto mb-1 ">
@@ -29,8 +40,8 @@ class Books extends Component {
             href=""
             className={
               this.state.selectedView == "list"
-                ? "float-right text-dark __view"
-                : "float-right text-white __view"
+                ? "mr-2 text-dark __view"
+                : "mr-2 text-white __view"
             }
             onClick={e => this.changeViewHandler(e, "list")}
           >
@@ -40,13 +51,20 @@ class Books extends Component {
             href=""
             className={
               this.state.selectedView == "grid"
-                ? "mr-2 float-right  __view text-dark"
-                : "mr-2 float-right text-white __view"
+                ? " __view text-dark"
+                : "text-white __view"
             }
             onClick={e => this.changeViewHandler(e, "grid")}
           >
             <i className="fa fa-th-large fa-2x " />
           </a>
+
+          <input
+            onChange={this.onChangeHandler}
+            type="text"
+            className="float-right filter-input px-2"
+            placeholder="Filter by Name......"
+          />
         </div>
         <div
           className={`row ${this.state.selectedView == "grid" ? "ml-5" : null}`}

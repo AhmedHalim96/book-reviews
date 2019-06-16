@@ -2,8 +2,7 @@
 .__active {
   color: rgba(48, 61, 73, 0.5) !important;
 }
-.checkbox-2x
-{
+.checkbox-2x {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
   -moz-transform: scale(2); /* FF */
@@ -11,4 +10,8 @@
   -o-transform: scale(2); /* Opera */
   transform: scale(2);
   padding: 10px;
+}
+
+.filter-input {
+  border-radius: 0.25rem;
 }
