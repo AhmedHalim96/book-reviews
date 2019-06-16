@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { getUsers, assignUserRole } from "../actions/adminPanelActions";
 import Spinner from "./layout/Spinner";
 import Modal from "./layout/Modal/Modal";
+import "./style.css";
 
 class AdminPanel extends Component {
   state = {
+    modalMessage: null,
     showModal: false,
     rolesArr: ["Admin", "Editor", "Subscriber"]
   };
@@ -26,11 +28,16 @@ class AdminPanel extends Component {
     this.setState({ [id]: e.target.id });
   };
 
-  submitHandler = targetedUserId => {
-    const role = this.state.rolesArr[parseInt(this.state[targetedUserId]) - 1];
+  submitHandler = targetedUser => {
+    const role = this.state.rolesArr[parseInt(this.state[targetedUser.id]) - 1];
     const { token, id } = this.props.user;
-    this.props.assignUserRole(token, id, targetedUserId, role).then(() => {
-      this.setState({ showModal: true });
+    this.props.assignUserRole(token, id, targetedUser.id, role).then(() => {
+      this.setState({
+        showModal: true,
+        modalMessage: `${targetedUser.name} is now ${
+          role == "Subscriber" ? "a" : "an"
+        } ${role.toLowerCase()}`
+      });
     });
   };
 
@@ -66,7 +73,7 @@ class AdminPanel extends Component {
                           onChange={e => this.onChangeHandler(e, user.id)}
                           id={1}
                           type="checkbox"
-                          className="form-control text-left"
+                          className="checkbox-2x"
                         />
                       </td>
                       <td>
@@ -75,7 +82,7 @@ class AdminPanel extends Component {
                           onChange={e => this.onChangeHandler(e, user.id)}
                           id={2}
                           type="checkbox"
-                          className="form-control text-left"
+                          className="checkbox-2x"
                         />
                       </td>
                       <td>
@@ -84,12 +91,12 @@ class AdminPanel extends Component {
                           onChange={e => this.onChangeHandler(e, user.id)}
                           id={3}
                           type="checkbox"
-                          className="form-control text-left"
+                          className="checkbox-2x"
                         />
                       </td>
                       <td>
                         <button
-                          onClick={() => this.submitHandler(user.id)}
+                          onClick={() => this.submitHandler(user)}
                           className="btn btn-dark"
                         >
                           Assign
@@ -105,7 +112,7 @@ class AdminPanel extends Component {
             show={this.state.showModal}
             close={() => this.setState({ showModal: false })}
           >
-            <p className="lead">Operation Succesful</p>
+            <p className="lead">{this.state.modalMessage}</p>
           </Modal>
         </div>
       );

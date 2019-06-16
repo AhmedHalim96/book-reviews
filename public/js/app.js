@@ -15267,7 +15267,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".__view:hover,\r\n.__active {\r\n  color: rgba(48, 61, 73, 0.5) !important;\r\n}\r\n", ""]);
+exports.push([module.i, ".__view:hover,\r\n.__active {\r\n  color: rgba(48, 61, 73, 0.5) !important;\r\n}\r\n.checkbox-2x\r\n{\r\n  /* Double-sized Checkboxes */ /* IE */ /* FF */\r\n  -webkit-transform: scale(2); /* Safari and Chrome */ /* Opera */\r\n  transform: scale(2);\r\n  padding: 10px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -71309,7 +71309,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -83261,6 +83261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_adminPanelActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/adminPanelActions */ "./resources/js/src/actions/adminPanelActions.js");
 /* harmony import */ var _layout_Spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layout/Spinner */ "./resources/js/src/components/layout/Spinner.js");
 /* harmony import */ var _layout_Modal_Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./layout/Modal/Modal */ "./resources/js/src/components/layout/Modal/Modal.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style.css */ "./resources/js/src/components/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_6__);
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -83293,6 +83295,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var AdminPanel =
 /*#__PURE__*/
 function (_Component) {
@@ -83312,6 +83315,7 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(AdminPanel)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
+      modalMessage: null,
       showModal: false,
       rolesArr: ["Admin", "Editor", "Subscriber"]
     });
@@ -83320,16 +83324,17 @@ function (_Component) {
       _this.setState(_defineProperty({}, id, e.target.id));
     });
 
-    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (targetedUserId) {
-      var role = _this.state.rolesArr[parseInt(_this.state[targetedUserId]) - 1];
+    _defineProperty(_assertThisInitialized(_this), "submitHandler", function (targetedUser) {
+      var role = _this.state.rolesArr[parseInt(_this.state[targetedUser.id]) - 1];
 
       var _this$props$user = _this.props.user,
           token = _this$props$user.token,
           id = _this$props$user.id;
 
-      _this.props.assignUserRole(token, id, targetedUserId, role).then(function () {
+      _this.props.assignUserRole(token, id, targetedUser.id, role).then(function () {
         _this.setState({
-          showModal: true
+          showModal: true,
+          modalMessage: "".concat(targetedUser.name, " is now ").concat(role == "Subscriber" ? "a" : "an", " ").concat(role.toLowerCase())
         });
       });
     });
@@ -83418,7 +83423,7 @@ function (_Component) {
               },
               id: 1,
               type: "checkbox",
-              className: "form-control text-left"
+              className: "checkbox-2x"
             })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
               checked: _this3.state[user.id] == 2 ? true : false,
               onChange: function onChange(e) {
@@ -83426,7 +83431,7 @@ function (_Component) {
               },
               id: 2,
               type: "checkbox",
-              className: "form-control text-left"
+              className: "checkbox-2x"
             })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
               checked: _this3.state[user.id] == 3 ? true : false,
               onChange: function onChange(e) {
@@ -83434,10 +83439,10 @@ function (_Component) {
               },
               id: 3,
               type: "checkbox",
-              className: "form-control text-left"
+              className: "checkbox-2x"
             })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
               onClick: function onClick() {
-                return _this3.submitHandler(user.id);
+                return _this3.submitHandler(user);
               },
               className: "btn btn-dark"
             }, "Assign")));
@@ -83451,7 +83456,7 @@ function (_Component) {
           }
         }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
           className: "lead"
-        }, "Operation Succesful")));
+        }, this.state.modalMessage)));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_layout_Spinner__WEBPACK_IMPORTED_MODULE_4__["default"], null);
