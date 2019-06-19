@@ -48,20 +48,20 @@ export default function Navbar(props) {
                 >
                   {props.user.role == "Admin" ? (
                     <Link className="dropdown-item" to="/admin-panel">
-                      Admin Panel
+                      <i class="fas fa-users-cog" /> Admin Panel
                     </Link>
                   ) : null}
                   <Link className="dropdown-item" to="/dashboard">
-                    Dashboard
+                    <i class="fa fa-columns" /> Dashboard
                   </Link>
                   {props.user.role == "Admin" || props.user.role == "Editor" ? (
                     <Link className="dropdown-item" to="/book/create">
-                      Create a Review
+                      <i class="fa fa-plus" /> Create a Review
                     </Link>
                   ) : null}
 
                   <Link className="dropdown-item" to="/" onClick={props.logout}>
-                    Logout
+                    <i class="fas fa-sign-out-alt" /> Logout
                   </Link>
                 </div>
               </li>

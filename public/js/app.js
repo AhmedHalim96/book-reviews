@@ -15267,7 +15267,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".__view:hover,\r\n.__active {\r\n  color: rgba(48, 61, 73, 0.5) !important;\r\n}\r\n.checkbox-2x {\r\n  /* Double-sized Checkboxes */ /* IE */ /* FF */\r\n  -webkit-transform: scale(2); /* Safari and Chrome */ /* Opera */\r\n  transform: scale(2);\r\n  padding: 10px;\r\n}\r\n\r\n.filter-input {\r\n  border-radius: 0.25rem;\r\n}\r\n", ""]);
+exports.push([module.i, ".__view:hover,\r\n.__active {\r\n  color: rgba(48, 61, 73, 0.5) !important;\r\n}\r\n.checkbox-2x {\r\n  /* Double-sized Checkboxes */ /* IE */ /* FF */\r\n  -webkit-transform: scale(2); /* Safari and Chrome */ /* Opera */\r\n  transform: scale(2);\r\n  padding: 10px;\r\n}\r\n\r\n.filter-input,\r\n.filter-select {\r\n  border-radius: 0.25rem;\r\n}\r\n", ""]);
 
 // exports
 
@@ -83858,13 +83858,20 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Books)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     _defineProperty(_assertThisInitialized(_this), "state", {
+      filterBy: "Title",
       filterTerm: null,
-      selectedView: localStorage["selectedView"] == "grid" || "list" ? localStorage["selectedView"] : "grid"
+      selectedView: localStorage["selectedView"] == "grid" || localStorage["selectedView"] == "list" ? localStorage["selectedView"] : "grid"
     });
 
-    _defineProperty(_assertThisInitialized(_this), "onChangeHandler", function (e) {
+    _defineProperty(_assertThisInitialized(_this), "changeFilterTermHandler", function (e) {
       _this.setState({
-        filterTerm: e.target.value
+        filterTerm: e.target.value.toLowerCase()
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "changeFilteByHandler", function (e) {
+      _this.setState({
+        filterBy: e.target.value
       });
     });
 
@@ -83888,8 +83895,27 @@ function (_Component) {
       var books = this.props.books;
 
       if (this.state.filterTerm) {
+        var filterBy;
+
+        switch (this.state.filterBy) {
+          case "Title":
+            filterBy = "name";
+            break;
+
+          case "Author":
+            filterBy = "book_author";
+            break;
+
+          case "Reviewer":
+            filterBy = "review_author";
+            break;
+
+          default:
+            break;
+        }
+
         books = books.filter(function (book) {
-          return book.name.toLowerCase().indexOf(_this2.state.filterTerm) !== -1;
+          return book[filterBy].toLowerCase().indexOf(_this2.state.filterTerm) !== -1;
         });
       }
 
@@ -83913,13 +83939,22 @@ function (_Component) {
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fa fa-th-large fa-2x "
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        onChange: this.onChangeHandler,
-        type: "text",
-        className: "float-right filter-input px-2",
-        placeholder: "Filter by Name......"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row ".concat(this.state.selectedView == "grid" ? "ml-5" : null)
+        className: "d-inline float-right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "filterBy",
+        className: "text-white"
+      }, "Filter By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "filter-select mx-2",
+        onChange: this.changeFilteByHandler,
+        id: "filterBy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Title"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Author"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Reviewer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.changeFilterTermHandler,
+        type: "text",
+        className: "filter-input px-2",
+        placeholder: "Filter by ".concat(this.state.filterBy.charAt(0).toUpperCase() + this.state.filterBy.slice(1), "......")
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row col-md-12 ".concat(this.state.selectedView == "grid" ? "ml-5" : null)
       }, books.map(function (book) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_bookItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
           book: book,
@@ -84479,7 +84514,8 @@ function bookItem(props) {
       book_author = _props$book.book_author,
       review_text = _props$book.review_text,
       book_score = _props$book.book_score,
-      featured_image = _props$book.featured_image;
+      featured_image = _props$book.featured_image,
+      review_author = _props$book.review_author;
   var mini_review_text = review_text.slice(0, 40) + '...."';
 
   if (props.viewType == "list") {
@@ -84487,9 +84523,15 @@ function bookItem(props) {
       className: "card col-md-10 mx-auto card-dark bg-dark text-white pt-3 mb-2"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "card-body"
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, name, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Written by"), " ", book_author, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      className: "card-title"
+    }, name, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", null, "Written by"), " ", book_author, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "float-right"
-    }, book_score.slice(0, 3), " / 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, book_score.slice(0, 3), " / 5")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: {
+        textDecoration: "underline #fff"
+      }
+    }, "Reviewed By: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " ", review_author)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       dangerouslySetInnerHTML: {
         __html: mini_review_text
       },
@@ -84515,7 +84557,11 @@ function bookItem(props) {
       className: "card-body"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
       className: "card-title"
-    }, name, " by ", book_author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, name, " by ", book_author), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      style: {
+        textDecoration: "underline #fff"
+      }
+    }, "Reviewed By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, " ", review_author)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       dangerouslySetInnerHTML: {
         __html: mini_review_text
       },
@@ -84775,17 +84821,25 @@ function Navbar(props) {
   }, props.user.role == "Admin" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/admin-panel"
-  }, "Admin Panel") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fas fa-users-cog"
+  }), " Admin Panel") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/dashboard"
-  }, "Dashboard"), props.user.role == "Admin" || props.user.role == "Editor" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fa fa-columns"
+  }), " Dashboard"), props.user.role == "Admin" || props.user.role == "Editor" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/book/create"
-  }, "Create a Review") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fa fa-plus"
+  }), " Create a Review") : null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "dropdown-item",
     to: "/",
     onClick: props.logout
-  }, "Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    "class": "fas fa-sign-out-alt"
+  }), " Logout"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "nav-item"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["NavLink"], {
     className: "nav-link",
@@ -84817,13 +84871,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PageNotFound; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-function PageNotFound() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card card-body bg-light"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "lead text-danger p-5 m-auto display-2"
-  }, "404 Error", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " Page Not Found!"));
+
+function PageNotFound(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+    to: "/"
+  });
 }
 
 /***/ }),

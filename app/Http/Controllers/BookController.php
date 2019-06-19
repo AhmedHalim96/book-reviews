@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,14 @@ class BookController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function index() {
-    $books = Book::orderBy('created_at', 'desc')->get();
+    $books = Book::orderBy('created_at', 'desc')->get()->toArray();
+
+    $books = array_map(function ($book) {
+      $review_author = Book::find($book['id'])->user()->first()->name;
+      $book['review_author'] = $review_author;
+      return $book;
+    }, $books);
+
     return $books;
   }
 
@@ -47,17 +55,17 @@ class BookController extends Controller {
    * @return \Illuminate\Http\Response
    */
   public function show($id) {
-    if($book = Book::find($id)){
+    if ($book = Book::find($id)) {
       $review_author = $book->user()->first()->name;
-      $book->review_author= $review_author;
+      $book->review_author = $review_author;
 
       // REMOVING USER_ID FROM BOOK FOR SECURITY REASONS
       // unset($book->user_id);
 
       return ['status' => 'found', 'book' => $book];
     };
-    return ['status' => 404, "msg"=> "Book Not Found" ];
-   
+    return ['status' => 404, "msg" => "Book Not Found"];
+
   }
 
   /**
@@ -96,7 +104,7 @@ class BookController extends Controller {
   public function destroy($id) {
     $book = Book::find($id);
     // return unlink(storage_path("public/featured_images/".$book->featured_image));
-    Storage::delete("public/featured_images/".$book->featured_image);
+    Storage::delete("public/featured_images/" . $book->featured_image);
     $book->delete();
     return $book;
   }

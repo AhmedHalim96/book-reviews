@@ -9,17 +9,22 @@ export default function bookItem(props) {
     book_author,
     review_text,
     book_score,
-    featured_image
+    featured_image,
+    review_author
   } = props.book;
   const mini_review_text = review_text.slice(0, 40) + '...."';
   if (props.viewType == "list") {
     return (
       <div className="card col-md-10 mx-auto card-dark bg-dark text-white pt-3 mb-2">
         <div className="card-body">
-          <h5>
+          <h5 className="card-title">
             {name} <small>Written by</small> {book_author}{" "}
             <span className="float-right">{book_score.slice(0, 3)} / 5</span>
           </h5>
+          <p>
+            <i style={{ textDecoration: "underline #fff" }}>Reviewed By: </i>
+            <strong> {review_author}</strong>
+          </p>
           <div
             dangerouslySetInnerHTML={{ __html: mini_review_text }}
             className="card-text d-inline"
@@ -46,6 +51,10 @@ export default function bookItem(props) {
               <h5 className="card-title">
                 {name} by {book_author}
               </h5>
+              <p>
+                <i style={{ textDecoration: "underline #fff" }}>Reviewed By:</i>
+                <strong> {review_author}</strong>
+              </p>
               <div
                 dangerouslySetInnerHTML={{ __html: mini_review_text }}
                 className="card-text d-inline"

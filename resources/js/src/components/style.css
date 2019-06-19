@@ -12,6 +12,7 @@
   padding: 10px;
 }
 
-.filter-input {
+.filter-input,
+.filter-select {
   border-radius: 0.25rem;
 }
