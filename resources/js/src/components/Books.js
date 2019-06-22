@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BookItem from "./bookItem";
 import PropTypes from "prop-types";
 import "./style.css";
+import { filterText } from "../customFunctions";
 
 class Books extends Component {
   state = {
@@ -52,7 +53,9 @@ class Books extends Component {
       }
       books = books.filter(book => {
         return (
-          book[filterBy].toLowerCase().indexOf(this.state.filterTerm) !== -1
+          filterText(book[filterBy]).indexOf(
+            filterText(this.state.filterTerm)
+          ) !== -1
         );
       });
     }

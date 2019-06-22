@@ -30,6 +30,7 @@ import About from "./components/About";
 import PageNotFound from "./components/layout/PageNotFound";
 import Spinner from "./components/layout/Spinner";
 import AdminPanel from "./components/AdminPanel";
+import Search from "./components/Search";
 
 class App extends Component {
   componentDidMount = () => {
@@ -102,6 +103,10 @@ class App extends Component {
                       render={props => <Books {...props} books={books} />}
                     />
                     <Route path="/about" component={About} />
+                    <Route
+                      path="/search/:q"
+                      render={props => <Search {...props} books={books} />}
+                    />
 
                     <Route component={PageNotFound} />
                   </Switch>
@@ -137,7 +142,10 @@ class App extends Component {
                     />
 
                     <Route path="/about" component={About} />
-
+                    <Route
+                      path="/search/:q"
+                      render={props => <Search {...props} books={books} />}
+                    />
                     <Route component={PageNotFound} />
                   </Switch>
                 )}

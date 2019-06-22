@@ -13,6 +13,26 @@
 }
 
 .filter-input,
-.filter-select {
+.filter-select,
+.search-input {
   border-radius: 0.25rem;
+}
+.search-input {
+  padding: 0 0.32rem;
+}
+.fa-search {
+  padding: 0.15rem;
+  border-radius: 50%;
+  position: relative;
+  left: -1.5rem;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.fa-search:hover {
+  cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
 }
