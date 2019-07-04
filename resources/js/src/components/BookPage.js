@@ -89,10 +89,11 @@ class BookPage extends Component {
 
             <hr />
 
-            <div className="card">
+            <div className="card p-2">
               <h2 className="card-header">
                 <strong>{name}</strong>
                 <span className="ml-3">
+                  <br className="d-md-none" />
                   <small>By </small>
                   <i className="text-primary">{book_author} </i>
                 </span>
@@ -147,8 +148,9 @@ class BookPage extends Component {
                   <i className={"fa fa-heart fa-2x " + likedClass} />
                 </button>
               </h2>
+
               <div className="row">
-                <div className="col-md-4 ml-3 mt-2">
+                <div className="col-md-3">
                   <img
                     src={`/storage/featured_images/${featured_image}`}
                     alt={name}

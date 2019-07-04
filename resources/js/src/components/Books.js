@@ -110,8 +110,8 @@ class Books extends Component {
           </div>
         </div>
         <div
-          className={`row col-md-12 ${
-            this.state.selectedView == "grid" ? "ml-5" : null
+          className={`row col-md-12 mx-auto ${
+            this.state.selectedView == "grid" ? "ml-md-5" : null
           }`}
         >
           {books.map(book => (

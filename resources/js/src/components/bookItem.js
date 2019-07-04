@@ -37,7 +37,7 @@ export default function bookItem(props) {
     );
   } else if (props.viewType == "grid") {
     return (
-      <div className="card mb-4 card-dark bg-dark text-white mx-3 pl-3 py-2 col-md-5">
+      <div className="card mb-md-4 card-dark bg-dark text-white mx-md-3 pl-3 py-2 col-md-5 mt-3 mt-md-0">
         <div className="row no-gutters">
           <div className="col-md-4">
             <img
