@@ -82135,7 +82135,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-9"
+          className: "col-lg-9"
         }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, user.role == "Admin" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           path: "/admin-panel",
           render: function render(props) {
@@ -82236,7 +82236,7 @@ function (_Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
           component: _components_layout_PageNotFound__WEBPACK_IMPORTED_MODULE_15__["default"]
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "col-md-3 d-none d-md-block"
+          className: "col-lg-3 d-none d-lg-block"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_layout_Sidebar__WEBPACK_IMPORTED_MODULE_6__["default"], {
           books: books
         })))));
@@ -83376,7 +83376,7 @@ function (_Component) {
           scope: "col"
         }, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
           scope: "col",
-          className: "d-none d-md-inline"
+          className: "d-none d-lg-table-cell"
         }, "Email"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
           scope: "col"
         }, "Role"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.users.map(function (user) {
@@ -83386,7 +83386,7 @@ function (_Component) {
             }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", {
               scope: "row"
             }, user.id), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, user.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-              className: "d-none d-md-inline"
+              className: "d-none d-lg-table-cell"
             }, user.email), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
               onChange: function onChange(e) {
                 return _this2.onChangeHandler(e, user);
@@ -83626,9 +83626,11 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", {
             className: "fa fa-arrow-circle-left"
           }), " Return to Home"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "card p-2"
+            className: "card"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "card-body"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-            className: "card-header"
+            className: "bg-light py-2"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, name), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             className: "ml-3"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", {
@@ -83673,14 +83675,14 @@ function (_Component) {
           }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "row"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "col-md-3"
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+            className: "col-lg-3"
+          }, " ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
             src: "/storage/featured_images/".concat(featured_image),
             alt: name,
-            className: "card-img-top"
-          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-            className: "card-body"
-          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", {
+            className: "img-fluid"
+          })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+            className: "col-lg-9 mt-2"
+          }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h5", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("i", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", {
             className: "text-danger"
           }, "Reviewed by: ")), review_author, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             className: "ml-3"
@@ -83688,12 +83690,12 @@ function (_Component) {
             className: "text-dark"
           }, "Reviewer Rating: "), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
             className: "badge badge-danger"
-          }, book_score % 1 == 0 ? book_score.slice(0, 1) : book_score.slice(0, 3), " ", "/ 5")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }, book_score % 1 == 0 ? book_score.slice(0, 1) : book_score.slice(0, 3), " ", "/ 5"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             dangerouslySetInnerHTML: {
               __html: review_text
             },
             className: "lead card-text"
-          }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          }))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             className: "list-group"
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
             className: "list-group-item list-group-item-action list-group-item-secondary"
@@ -85023,7 +85025,7 @@ __webpack_require__.r(__webpack_exports__);
 function Sidebar(props) {
   var books = props.books;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "sticky-top card card-body vh-100 card-dark text-white bg-dark"
+    className: "sticky-top card card-body vh-100 card-dark text-white bg-dark "
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "list-group"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {

@@ -89,96 +89,100 @@ class BookPage extends Component {
 
             <hr />
 
-            <div className="card p-2">
-              <h2 className="card-header">
-                <strong>{name}</strong>
-                <span className="ml-3">
-                  <br className="d-md-none" />
-                  <small>By </small>
-                  <i className="text-primary">{book_author} </i>
-                </span>
-                {this.props.isLoggedIn &&
-                (this.props.user.role == "Admin" ||
-                  (this.props.user.role == "Editor" &&
-                    this.props.user.id == user_id)) ? (
-                  <div className="dropdown d-inline">
-                    <Link
-                      to=""
-                      className="fa fa-pencil text-primary"
-                      style={{ fontSize: "2rem" }}
-                      aria-hidden="true"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    />
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <Link
-                        to={`/book/${currentBookId}/edit`}
-                        className=" dropdown-item"
-                      >
-                        <i
-                          className="fa fa-pencil  text-primary"
-                          aria-hidden="true"
-                        />{" "}
-                        Edit Review
-                      </Link>
-                      <Link
-                        to="/"
-                        className=" dropdown-item"
-                        onClick={this.showModalHandler}
-                      >
-                        <i
-                          className="fa fa-trash text-danger"
-                          aria-hidden="true"
-                        />{" "}
-                        Delete Book
-                      </Link>
-                    </div>
-                  </div>
-                ) : null}
-                <button
-                  className="btn float-right"
-                  onClick={this.likeHandler}
-                  title="Add To Favourites"
-                >
-                  <i className={"fa fa-heart fa-2x " + likedClass} />
-                </button>
-              </h2>
-
-              <div className="row">
-                <div className="col-md-3">
-                  <img
-                    src={`/storage/featured_images/${featured_image}`}
-                    alt={name}
-                    className="card-img-top"
-                  />
-                </div>
-              </div>
-
+            <div className="card">
               <div className="card-body">
-                <i>
-                  <strong className="text-danger">Reviewed by: </strong>
-                </i>
-                {review_author}
-                <br />
-                <span className="ml-3">
-                  <i className="text-dark">Reviewer Rating: </i>
-                  <span className="badge badge-danger">
-                    {book_score % 1 == 0
-                      ? book_score.slice(0, 1)
-                      : book_score.slice(0, 3)}{" "}
-                    / 5
+                <h2 className="bg-light py-2">
+                  <strong>{name}</strong>
+                  <span className="ml-3">
+                    <br className="d-md-none" />
+                    <small>By </small>
+                    <i className="text-primary">{book_author} </i>
                   </span>
-                </span>
-                <hr />
-                <div
-                  dangerouslySetInnerHTML={{ __html: review_text }}
-                  className="lead card-text"
-                />
+                  {this.props.isLoggedIn &&
+                  (this.props.user.role == "Admin" ||
+                    (this.props.user.role == "Editor" &&
+                      this.props.user.id == user_id)) ? (
+                    <div className="dropdown d-inline">
+                      <Link
+                        to=""
+                        className="fa fa-pencil text-primary"
+                        style={{ fontSize: "2rem" }}
+                        aria-hidden="true"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      />
+                      <div
+                        className="dropdown-menu"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <Link
+                          to={`/book/${currentBookId}/edit`}
+                          className=" dropdown-item"
+                        >
+                          <i
+                            className="fa fa-pencil  text-primary"
+                            aria-hidden="true"
+                          />{" "}
+                          Edit Review
+                        </Link>
+                        <Link
+                          to="/"
+                          className=" dropdown-item"
+                          onClick={this.showModalHandler}
+                        >
+                          <i
+                            className="fa fa-trash text-danger"
+                            aria-hidden="true"
+                          />{" "}
+                          Delete Book
+                        </Link>
+                      </div>
+                    </div>
+                  ) : null}
+                  <button
+                    className="btn float-right"
+                    onClick={this.likeHandler}
+                    title="Add To Favourites"
+                  >
+                    <i className={"fa fa-heart fa-2x " + likedClass} />
+                  </button>
+                </h2>
+
+                <div className="row">
+                  <div className="col-lg-3">
+                    {" "}
+                    <img
+                      src={`/storage/featured_images/${featured_image}`}
+                      alt={name}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="col-lg-9 mt-2">
+                    <h5>
+                      <i>
+                        <strong className="text-danger">Reviewed by: </strong>
+                      </i>
+                      {review_author}
+                      <br />
+                      <span className="ml-3">
+                        <i className="text-dark">Reviewer Rating: </i>
+                        <span className="badge badge-danger">
+                          {book_score % 1 == 0
+                            ? book_score.slice(0, 1)
+                            : book_score.slice(0, 3)}{" "}
+                          / 5
+                        </span>
+                      </span>
+                    </h5>
+                    <hr />
+                    <div
+                      dangerouslySetInnerHTML={{ __html: review_text }}
+                      className="lead card-text"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <hr />

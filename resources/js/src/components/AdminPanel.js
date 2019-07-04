@@ -41,7 +41,7 @@ class AdminPanel extends Component {
                   <tr>
                     <th scope="col">id</th>
                     <th scope="col">Name</th>
-                    <th scope="col" className="d-none d-md-inline">
+                    <th scope="col" className="d-none d-lg-table-cell">
                       Email
                     </th>
                     <th scope="col">Role</th>
@@ -54,7 +54,9 @@ class AdminPanel extends Component {
                         <tr key={user.id}>
                           <th scope="row">{user.id}</th>
                           <td>{user.name}</td>
-                          <td className="d-none d-md-inline">{user.email}</td>
+                          <td className="d-none d-lg-table-cell">
+                            {user.email}
+                          </td>
 
                           <td>
                             <select

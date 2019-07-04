@@ -49,7 +49,7 @@ class App extends Component {
           />
           <div className="container-fluid pt-3">
             <div className="row">
-              <div className="col-md-9">
+              <div className="col-lg-9">
                 {isLoggedIn ? (
                   <Switch>
                     {user.role == "Admin" ? (
@@ -150,7 +150,7 @@ class App extends Component {
                   </Switch>
                 )}
               </div>
-              <div className="col-md-3 d-none d-md-block">
+              <div className="col-lg-3 d-none d-lg-block">
                 <Sidebar books={books} />
               </div>
             </div>

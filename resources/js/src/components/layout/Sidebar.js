@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 function Sidebar(props) {
   const { books } = props;
   return (
-    <div className="sticky-top card card-body vh-100 card-dark text-white bg-dark">
+    <div className="sticky-top card card-body vh-100 card-dark text-white bg-dark ">
       <div className="list-group">
         <li className="list-group-item list-group-item-action list-group-item-secondary">
           Recent Book Reviews
