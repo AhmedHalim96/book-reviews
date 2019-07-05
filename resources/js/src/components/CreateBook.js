@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createBook } from "../actions/singleBookActions";
-
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import CKEditor from "ckeditor4-react";
 
 class CreateBook extends Component {
   state = {
@@ -35,6 +33,14 @@ class CreateBook extends Component {
     }
   };
 
+  editorChangeHandler = e => {
+    this.setState({
+      newBook: {
+        ...this.state.newBook,
+        review_text: e.editor.getData()
+      }
+    });
+  };
   handleSubmit = event => {
     event.preventDefault();
     const fileSize = this.state.newBook.featured_image.size;
@@ -89,17 +95,11 @@ class CreateBook extends Component {
           <div className="form-group">
             <label>Book Review*</label>
 
-            <textarea
-              className="form-control"
-              rows="10"
-              name="review_text"
-              onChange={this.handleChange}
-              required
-            />
+            <CKEditor data="" onChange={this.editorChangeHandler} />
           </div>
+
           <div className="form-group">
             <label htmlFor="image">Featured Image</label>
-            {/* <input type="hidden" name="MAX_FILE_SIZE" value="2097152" /> */}
             <input
               type="file"
               className="form-control-file"

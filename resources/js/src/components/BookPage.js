@@ -105,7 +105,7 @@ class BookPage extends Component {
                     <div className="dropdown d-inline">
                       <Link
                         to=""
-                        className="fa fa-pencil text-primary"
+                        className="fa fa-pen text-primary"
                         style={{ fontSize: "2rem" }}
                         aria-hidden="true"
                         id="dropdownMenuButton"
@@ -122,7 +122,7 @@ class BookPage extends Component {
                           className=" dropdown-item"
                         >
                           <i
-                            className="fa fa-pencil  text-primary"
+                            className="fa fa-pen  text-primary"
                             aria-hidden="true"
                           />{" "}
                           Edit Review
@@ -179,7 +179,7 @@ class BookPage extends Component {
                     <hr />
                     <div
                       dangerouslySetInnerHTML={{ __html: review_text }}
-                      className="lead card-text"
+                      className="card-text review__style"
                     />
                   </div>
                 </div>

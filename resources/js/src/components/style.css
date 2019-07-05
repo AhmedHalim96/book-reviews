@@ -29,10 +29,38 @@
   justify-content: center;
   align-items: center; */
 }
-.fa-search:hover {
+.fa-search:hover,
+.fa-pen {
   cursor: pointer;
 }
 
 .underline {
   text-decoration: underline;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid rgb(127, 120, 190);
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: rgb(127, 120, 190);
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+.review__style p {
+  margin-bottom: inherit;
+}
+
+.review__style img {
+  width: 30% !important;
+  height: 30% !important;
 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import { connect } from "react-redux";
 import { getBook, updateBook } from "../actions/singleBookActions";
 import Spinner from "./layout/Spinner";
+import CKEditor from "ckeditor4-react";
 
 class EditBook extends Component {
   state = {
@@ -40,6 +40,14 @@ class EditBook extends Component {
         }
       });
     }
+  };
+  editorChangeHandler = e => {
+    this.setState({
+      currentBook: {
+        ...this.state.currentBook,
+        review_text: e.editor.getData()
+      }
+    });
   };
 
   handleSubmit = async event => {
@@ -101,13 +109,9 @@ class EditBook extends Component {
             </div>
             <div className="form-group">
               <label>Book Review*</label>
-              <textarea
-                className="form-control"
-                rows="10"
-                name="review_text"
-                defaultValue={review_text}
-                onChange={this.handleChange}
-                required
+              <CKEditor
+                data={review_text}
+                onChange={this.editorChangeHandler}
               />
             </div>
             <div className="form-group">
