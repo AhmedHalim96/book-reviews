@@ -2,6 +2,9 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
+
+// Redux
 import {
   appReady,
   resetUser,
@@ -41,121 +44,128 @@ class App extends Component {
     if (this.props.isReady) {
       const { isLoggedIn, user, books } = this.props;
       return (
-        <div className="bg-secondary">
-          <Navbar
-            user={user}
-            isLoggedIn={isLoggedIn}
-            logout={this.props.logoutUser}
-          />
-          <div className="container-fluid pt-3">
-            <div className="row">
-              <div className="col-lg-9">
-                {isLoggedIn ? (
-                  <Switch>
-                    {user.role == "Admin" ? (
+        <Fragment>
+          <Helmet>
+            <title>Book Reviews</title>
+          </Helmet>
+          <div className="bg-secondary">
+            <Navbar
+              user={user}
+              isLoggedIn={isLoggedIn}
+              logout={this.props.logoutUser}
+            />
+            <div className="container-fluid pt-3">
+              <div className="row">
+                <div className="col-lg-9">
+                  {isLoggedIn ? (
+                    <Switch>
+                      {user.role == "Admin" ? (
+                        <Route
+                          path="/admin-panel"
+                          render={props => (
+                            <AdminPanel {...props} user={user} />
+                          )}
+                        />
+                      ) : null}
                       <Route
-                        path="/admin-panel"
-                        render={props => <AdminPanel {...props} user={user} />}
-                      />
-                    ) : null}
-                    <Route
-                      path="/dashboard"
-                      render={props => (
-                        <Dashboard {...props} userId={user.id} />
-                      )}
-                    />
-
-                    {user.role == "Admin" || user.role == "Editor" ? (
-                      <Route
-                        path="/book/:id/edit"
+                        path="/dashboard"
                         render={props => (
-                          <EditBook
+                          <Dashboard {...props} userId={user.id} />
+                        )}
+                      />
+
+                      {user.role == "Admin" || user.role == "Editor" ? (
+                        <Route
+                          path="/book/:id/edit"
+                          render={props => (
+                            <EditBook
+                              {...props}
+                              userId={user.id}
+                              userRole={user.role}
+                            />
+                          )}
+                        />
+                      ) : null}
+                      {user.role == "Admin" || user.role == "Editor" ? (
+                        <Route
+                          path="/book/create"
+                          render={props => (
+                            <CreateBook {...props} userId={user.id} />
+                          )}
+                        />
+                      ) : null}
+                      <Route
+                        path="/book/:id"
+                        render={props => (
+                          <BookPage
                             {...props}
-                            userId={user.id}
-                            userRole={user.role}
+                            isLoggedIn={isLoggedIn}
+                            user={user}
+                            books={books}
                           />
                         )}
                       />
-                    ) : null}
-                    {user.role == "Admin" || user.role == "Editor" ? (
+
                       <Route
-                        path="/book/create"
+                        exact
+                        path="/"
+                        render={props => <Books {...props} books={books} />}
+                      />
+                      <Route path="/about" component={About} />
+                      <Route
+                        path="/search/:q/:p?"
+                        render={props => <Search {...props} books={books} />}
+                      />
+
+                      <Route component={PageNotFound} />
+                    </Switch>
+                  ) : (
+                    <Switch>
+                      <Route
+                        path="/login"
                         render={props => (
-                          <CreateBook {...props} userId={user.id} />
+                          <Login {...props} login={this.props.loginUser} />
                         )}
                       />
-                    ) : null}
-                    <Route
-                      path="/book/:id"
-                      render={props => (
-                        <BookPage
-                          {...props}
-                          isLoggedIn={isLoggedIn}
-                          user={user}
-                          books={books}
-                        />
-                      )}
-                    />
+                      <Route
+                        path="/register"
+                        render={props => (
+                          <Register
+                            {...props}
+                            register={this.props.registerUser}
+                          />
+                        )}
+                      />
 
-                    <Route
-                      exact
-                      path="/"
-                      render={props => <Books {...props} books={books} />}
-                    />
-                    <Route path="/about" component={About} />
-                    <Route
-                      path="/search/:q/:p?"
-                      render={props => <Search {...props} books={books} />}
-                    />
+                      <Route
+                        path="/book/:id"
+                        render={props => (
+                          <BookPage {...props} isLoggedIn={isLoggedIn} />
+                        )}
+                      />
 
-                    <Route component={PageNotFound} />
-                  </Switch>
-                ) : (
-                  <Switch>
-                    <Route
-                      path="/login"
-                      render={props => (
-                        <Login {...props} login={this.props.loginUser} />
-                      )}
-                    />
-                    <Route
-                      path="/register"
-                      render={props => (
-                        <Register
-                          {...props}
-                          register={this.props.registerUser}
-                        />
-                      )}
-                    />
+                      <Route
+                        exact
+                        path="/"
+                        render={props => <Books {...props} books={books} />}
+                      />
 
-                    <Route
-                      path="/book/:id"
-                      render={props => (
-                        <BookPage {...props} isLoggedIn={isLoggedIn} />
-                      )}
-                    />
-
-                    <Route
-                      exact
-                      path="/"
-                      render={props => <Books {...props} books={books} />}
-                    />
-
-                    <Route path="/about" component={About} />
-                    <Route
-                      path="/search/:q/:p?"
-                      render={props => <Search {...props} books={books} />}
-                    />
-                    <Route component={PageNotFound} />
-                  </Switch>
-                )}
-              </div>
-              <div className="col-lg-3 d-none d-lg-block">
-                <Sidebar books={books} />
+                      <Route path="/about" component={About} />
+                      <Route
+                        path="/search/:q/:p?"
+                        render={props => <Search {...props} books={books} />}
+                      />
+                      <Route component={PageNotFound} />
+                    </Switch>
+                  )}
+                </div>
+                <div className="col-lg-3 d-none d-lg-block">
+                  <Sidebar books={books} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Fragment>
       );
     }
     return <Spinner />;

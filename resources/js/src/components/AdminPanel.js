@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
 import { getUsers, assignUserRole } from "../actions/adminPanelActions";
 import Spinner from "./layout/Spinner";
 import Modal from "./layout/Modal/Modal";
@@ -32,64 +33,69 @@ class AdminPanel extends Component {
   render() {
     if (this.props.isLoaded) {
       return (
-        <div className="card card-body">
-          <h1 className="text-primary text-center w-100 mb-3">Admin Panel</h1>
-          <div className="row">
-            <div className="col-md-10 mx-auto">
-              <table className="table border border-light">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col" className="d-none d-lg-table-cell">
-                      Email
-                    </th>
-                    <th scope="col">Role</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.props.users.map(user => {
-                    if (user.id != this.props.user.id) {
-                      return (
-                        <tr key={user.id}>
-                          <th scope="row">{user.id}</th>
-                          <td>{user.name}</td>
-                          <td className="d-none d-lg-table-cell">
-                            {user.email}
-                          </td>
+        <React.Fragment>
+          <Helmet>
+            <title>Admin Panel - Book Reviews</title>
+          </Helmet>
+          <div className="card card-body">
+            <h1 className="text-primary text-center w-100 mb-3">Admin Panel</h1>
+            <div className="row">
+              <div className="col-md-10 mx-auto">
+                <table className="table border border-light">
+                  <thead className="thead-dark">
+                    <tr>
+                      <th scope="col">id</th>
+                      <th scope="col">Name</th>
+                      <th scope="col" className="d-none d-lg-table-cell">
+                        Email
+                      </th>
+                      <th scope="col">Role</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.props.users.map(user => {
+                      if (user.id != this.props.user.id) {
+                        return (
+                          <tr key={user.id}>
+                            <th scope="row">{user.id}</th>
+                            <td>{user.name}</td>
+                            <td className="d-none d-lg-table-cell">
+                              {user.email}
+                            </td>
 
-                          <td>
-                            <select
-                              onChange={e => this.onChangeHandler(e, user)}
-                              defaultValue={user.role}
-                            >
-                              <option>Admin</option>
-                              <option>Editor</option>
-                              <option>Subscriber</option>
-                            </select>
-                          </td>
-                        </tr>
-                      );
-                    }
-                  })}
-                </tbody>
-              </table>
+                            <td>
+                              <select
+                                onChange={e => this.onChangeHandler(e, user)}
+                                defaultValue={user.role}
+                              >
+                                <option>Admin</option>
+                                <option>Editor</option>
+                                <option>Subscriber</option>
+                              </select>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-          <Modal
-            show={this.state.showModal}
-            close={() => this.setState({ showModal: false })}
-          >
-            <p className="lead">{this.state.modalMessage}</p>
-            <button
-              className="btn btn-dark mx-auto"
-              onClick={() => this.setState({ showModal: false })}
+            <Modal
+              show={this.state.showModal}
+              close={() => this.setState({ showModal: false })}
             >
-              OK
-            </button>
-          </Modal>
-        </div>
+              <p className="lead">{this.state.modalMessage}</p>
+              <button
+                className="btn btn-dark mx-auto"
+                onClick={() => this.setState({ showModal: false })}
+              >
+                OK
+              </button>
+            </Modal>
+          </div>
+        </React.Fragment>
       );
     }
     return <Spinner />;

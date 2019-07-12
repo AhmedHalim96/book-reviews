@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import { Helmet } from "react-helmet";
+
 import BookItem from "../bookItem";
 import { filterText } from "../../customFunctions";
 import Spinner from "../layout/Spinner";
@@ -95,29 +97,38 @@ export default class Search extends Component {
         );
       }
       return (
-        <div className="row">
-          <h1 className="text-white underline col-12">
-            Search Results for "{q}"
-          </h1>
-          {books.length !== 0 ? (
-            <Fragment>
-              {books
-                .slice(pageStart, pageStart + postsPerPage)
-                .map((book, id) => {
-                  return <BookItem book={book} key={book.id} viewType="list" />;
-                })}
-              <SearchPagination
-                q={q}
-                pagecount={pageCount}
-                currentpage={currentPage}
-              />
-            </Fragment>
-          ) : (
-            <div className="card card-body col-lg-10 mx-auto py-5">
-              <p className="lead card-text mx-auto">Sorry, No Search Results</p>
-            </div>
-          )}
-        </div>
+        <Fragment>
+          <Helmet>
+            <title>Search Results for "{q}" - Book Reviews</title>
+          </Helmet>{" "}
+          <div className="row">
+            <h1 className="text-white underline col-12">
+              Search Results for "{q}"
+            </h1>
+            {books.length !== 0 ? (
+              <Fragment>
+                {books
+                  .slice(pageStart, pageStart + postsPerPage)
+                  .map((book, id) => {
+                    return (
+                      <BookItem book={book} key={book.id} viewType="list" />
+                    );
+                  })}
+                <SearchPagination
+                  q={q}
+                  pagecount={pageCount}
+                  currentpage={currentPage}
+                />
+              </Fragment>
+            ) : (
+              <div className="card card-body col-lg-10 mx-auto py-5">
+                <p className="lead card-text mx-auto">
+                  Sorry, No Search Results
+                </p>
+              </div>
+            )}
+          </div>
+        </Fragment>
       );
     }
     return <Spinner />;

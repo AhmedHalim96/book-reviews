@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { createBook } from "../actions/singleBookActions";
 import CKEditor from "ckeditor4-react";
@@ -56,64 +57,69 @@ class CreateBook extends Component {
   };
   render() {
     return (
-      <div className="card card-body card-dark bg-dark text-white">
-        <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-          <div className="form-group">
-            <label>Book Title*</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Book Author*</label>
-            <input
-              type="text"
-              className="form-control"
-              name="book_author"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Book Rating*</label>
-            <input
-              type="number"
-              step="0.1"
-              min="0"
-              max="5"
-              className="form-control"
-              name="book_score"
-              onChange={this.handleChange}
-              required
-              placeholder="Rating out of 5"
-            />
-          </div>
-          <div className="form-group">
-            <label>Book Review*</label>
+      <React.Fragment>
+        <Helmet>
+          <title>Create a Review - Book Reviews</title>
+        </Helmet>
+        <div className="card card-body card-dark bg-dark text-white">
+          <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+            <div className="form-group">
+              <label>Book Title*</label>
+              <input
+                type="text"
+                className="form-control"
+                name="name"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Book Author*</label>
+              <input
+                type="text"
+                className="form-control"
+                name="book_author"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Book Rating*</label>
+              <input
+                type="number"
+                step="0.1"
+                min="0"
+                max="5"
+                className="form-control"
+                name="book_score"
+                onChange={this.handleChange}
+                required
+                placeholder="Rating out of 5"
+              />
+            </div>
+            <div className="form-group">
+              <label>Book Review*</label>
 
-            <CKEditor data="" onChange={this.editorChangeHandler} />
-          </div>
+              <CKEditor data="" onChange={this.editorChangeHandler} />
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="image">Featured Image</label>
-            <input
-              type="file"
-              className="form-control-file"
-              name="featured_image"
-              id="image"
-              onChange={this.handleChange}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-dark btn-block">
-            Submit Review
-          </button>
-        </form>
-      </div>
+            <div className="form-group">
+              <label htmlFor="image">Featured Image</label>
+              <input
+                type="file"
+                className="form-control-file"
+                name="featured_image"
+                id="image"
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-dark btn-block">
+              Submit Review
+            </button>
+          </form>
+        </div>
+      </React.Fragment>
     );
   }
 }

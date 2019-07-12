@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
+import { Helmet } from "react-helmet";
 import {
   getBook,
   clearBook,
@@ -83,6 +84,9 @@ class BookPage extends Component {
 
         return (
           <Fragment>
+            <Helmet>
+              <title>{name} Review - Book Reviews</title>
+            </Helmet>
             <Link to="/">
               <i className="fa fa-arrow-circle-left" /> Return to Home
             </Link>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getFavouriteList } from "../actions/userActions";
@@ -19,18 +20,23 @@ class Dashboard extends Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <div className="card card-body">
-          <h1>Favourite Books</h1>
-          <ul className="list-group">
-            {this.props.favouriteBooks.map(book => {
-              return (
-                <li className="list-group-item" key={book.id}>
-                  <Link to={`book/${book.id}`}>{book.name}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        <React.Fragment>
+          <Helmet>
+            <title>Dashboard - Book Reviews</title>
+          </Helmet>
+          <div className="card card-body">
+            <h1>Favourite Books</h1>
+            <ul className="list-group">
+              {this.props.favouriteBooks.map(book => {
+                return (
+                  <li className="list-group-item" key={book.id}>
+                    <Link to={`book/${book.id}`}>{book.name}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </React.Fragment>
       );
     }
     return <Spinner />;
