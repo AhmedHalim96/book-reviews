@@ -91,7 +91,7 @@ class BookPage extends Component {
 
             <div className="card">
               <div className="card-body">
-                <h2 className="bg-light py-2">
+                <h3 className="bg-light py-2">
                   <strong>{name}</strong>
                   <span className="ml-3">
                     <br className="d-md-none" />
@@ -148,7 +148,7 @@ class BookPage extends Component {
                   >
                     <i className={"fa fa-heart fa-2x " + likedClass} />
                   </button>
-                </h2>
+                </h3>
 
                 <div className="row">
                   <div className="col-lg-3">

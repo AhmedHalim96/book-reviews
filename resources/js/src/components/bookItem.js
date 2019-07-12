@@ -12,7 +12,7 @@ export default function bookItem(props) {
     featured_image,
     review_author
   } = props.book;
-  const mini_review_text = review_text.slice(0, 40) + '...."';
+  const mini_review_text = review_text.slice(0, 100) + '...."';
   if (props.viewType == "list") {
     return (
       <div className="card col-md-10 mx-auto card-dark bg-dark text-white pt-3 mb-2">

@@ -8,14 +8,14 @@ class Navbar extends Component {
 
   onSearchTermChange = e => this.setState({ searchTerm: e.target.value });
   submitSearchHandler = () => {
-    this.props.history.push(`/search/${this.state.searchTerm}`);
+    this.props.history.push(`/search/${this.state.searchTerm}/1`);
   };
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-3">
         <div className="container-fluid">
           <NavLink className="navbar-brand" to="/">
-            Book Reviews
+            <i className="fas fa-book" /> Book Reviews
           </NavLink>
           <button
             className="navbar-toggler"
@@ -104,7 +104,7 @@ class Navbar extends Component {
                       Login
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item disabled">
                     <NavLink className="nav-link" to="/register">
                       Register
                     </NavLink>

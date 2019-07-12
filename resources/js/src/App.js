@@ -30,7 +30,7 @@ import About from "./components/About";
 import PageNotFound from "./components/layout/PageNotFound";
 import Spinner from "./components/layout/Spinner";
 import AdminPanel from "./components/AdminPanel";
-import Search from "./components/Search";
+import Search from "./components/search/Search";
 
 class App extends Component {
   componentDidMount = () => {
@@ -104,7 +104,7 @@ class App extends Component {
                     />
                     <Route path="/about" component={About} />
                     <Route
-                      path="/search/:q"
+                      path="/search/:q/:p?"
                       render={props => <Search {...props} books={books} />}
                     />
 
@@ -143,7 +143,7 @@ class App extends Component {
 
                     <Route path="/about" component={About} />
                     <Route
-                      path="/search/:q"
+                      path="/search/:q/:p?"
                       render={props => <Search {...props} books={books} />}
                     />
                     <Route component={PageNotFound} />
@@ -158,11 +158,7 @@ class App extends Component {
         </div>
       );
     }
-    return (
-      <div className="my-auto">
-        <Spinner color={"#343a40"} />
-      </div>
-    );
+    return <Spinner />;
   }
 }
 

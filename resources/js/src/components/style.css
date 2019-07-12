@@ -64,3 +64,15 @@ blockquote p {
   width: 30% !important;
   height: 30% !important;
 }
+
+/* 
+  __Pagination
+*/
+
+.page-item.active .page-link {
+  background: #1d2124 !important;
+}
+.page-item.disabled .page-link {
+  color: #fff !important;
+  background: #6c757d !important;
+}
