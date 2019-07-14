@@ -8,7 +8,8 @@ import CKEditor from "ckeditor4-react";
 
 class EditBook extends Component {
   state = {
-    currentBook: null
+    currentBook: null,
+    animation: "slide-left"
   };
 
   componentDidMount() {
@@ -55,7 +56,12 @@ class EditBook extends Component {
   handleSubmit = async event => {
     event.preventDefault();
     await this.props.updateBook(this.state.currentBook, this.props.userId);
-    this.props.history.push("/book/" + this.state.currentBook.id);
+    this.setState({
+      animation: "slide-right"
+    });
+    setTimeout(() => {
+      this.props.history.push("/book/" + this.state.currentBook.id);
+    }, 300);
   };
   render() {
     if (
@@ -70,9 +76,9 @@ class EditBook extends Component {
         featured_image
       } = this.props.book;
       return (
-        <React.Fragment>
+        <div className={this.state.animation}>
           <Helmet>
-            <title>Editing {name} - Book Reviews</title>
+            <title>Editing {name} Review - Book Reviews</title>
           </Helmet>
           <div className="card card-body card-dark bg-dark text-white">
             <form onSubmit={this.handleSubmit} encType="multipart/form-data">
@@ -86,6 +92,7 @@ class EditBook extends Component {
                   onChange={this.handleChange}
                   required
                 />
+                re
               </div>
               <div className="form-group">
                 <label>Book Author*</label>
@@ -142,7 +149,7 @@ class EditBook extends Component {
               </button>
             </form>
           </div>
-        </React.Fragment>
+        </div>
       );
     }
     return <Spinner />;

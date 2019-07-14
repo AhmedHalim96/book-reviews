@@ -17,7 +17,8 @@ import Modal from "./layout/Modal/Modal";
 
 class BookPage extends Component {
   state = {
-    showModal: false
+    showModal: false,
+    animation: "Slide-left"
   };
   componentDidMount() {
     this.intialize(this.props);
@@ -55,17 +56,31 @@ class BookPage extends Component {
   };
   deleteHandler = e => {
     e.preventDefault();
-    this.props.deleteBook(
-      this.props.match.params.id,
-      this.props.user.id,
-      this.props.history
-    );
+    this.props.deleteBook(this.props.match.params.id, this.props.user.id);
+    this.setState({
+      animation: "slide-right"
+    });
+
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 300);
   };
 
   closeModalHandler = () => this.setState({ showModal: false });
   showModalHandler = e => {
     e.preventDefault();
     this.setState({ showModal: true });
+  };
+
+  backHandler = e => {
+    e.preventDefault();
+    this.setState({
+      animation: "slide-right"
+    });
+
+    setTimeout(() => {
+      this.props.history.push("/");
+    }, 300);
   };
   render() {
     if (this.props.isLoaded) {
@@ -83,11 +98,11 @@ class BookPage extends Component {
         const likedClass = this.props.liked ? "text-danger" : "text-secondary";
 
         return (
-          <Fragment>
+          <div className={this.state.animation}>
             <Helmet>
               <title>{name} Review - Book Reviews</title>
             </Helmet>
-            <Link to="/">
+            <Link to="/" onClick={this.backHandler}>
               <i className="fa fa-arrow-circle-left" /> Return to Home
             </Link>
 
@@ -222,7 +237,7 @@ class BookPage extends Component {
                 No
               </button>
             </Modal>
-          </Fragment>
+          </div>
         );
       }
       return <Redirect to="/" />;

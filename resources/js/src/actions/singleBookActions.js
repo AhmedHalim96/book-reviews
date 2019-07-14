@@ -52,8 +52,10 @@ export const createBook = (newBook, userId, history) => async dispatch => {
       dispatch({
         type: actionTypes.CREATE_BOOK
       });
-      history.push("/book/" + res.data.id);
       dispatch(getBooks());
+      setTimeout(() => {
+        history.push("/book/" + res.data.id);
+      }, 300);
     })
     .catch(err => console.log(err));
 };
@@ -86,7 +88,7 @@ export const updateBook = (updatedBook, userId) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const deleteBook = (id, userId, history) => async dispatch => {
+export const deleteBook = (id, userId) => async dispatch => {
   await axios
     .post(`/books/${id}`, {
       _method: "DELETE",
@@ -97,7 +99,6 @@ export const deleteBook = (id, userId, history) => async dispatch => {
         type: actionTypes.DELETE_BOOK
       });
       dispatch(getBooks());
-      history.push("/");
     })
     .catch(err => console.log(err));
 };

@@ -54,7 +54,7 @@ class App extends Component {
               isLoggedIn={isLoggedIn}
               logout={this.props.logoutUser}
             />
-            <div className="container-fluid pt-3">
+            <div className="container-fluid pt-3 slide-left">
               <div className="row">
                 <div className="col-lg-9">
                   {isLoggedIn ? (

@@ -33,7 +33,7 @@ class AdminPanel extends Component {
   render() {
     if (this.props.isLoaded) {
       return (
-        <React.Fragment>
+        <div className="slide-down">
           <Helmet>
             <title>Admin Panel - Book Reviews</title>
           </Helmet>
@@ -95,7 +95,7 @@ class AdminPanel extends Component {
               </button>
             </Modal>
           </div>
-        </React.Fragment>
+        </div>
       );
     }
     return <Spinner />;

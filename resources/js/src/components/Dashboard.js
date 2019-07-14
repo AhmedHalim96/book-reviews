@@ -20,7 +20,7 @@ class Dashboard extends Component {
   render() {
     if (this.state.isLoaded) {
       return (
-        <React.Fragment>
+        <div className="slide-down">
           <Helmet>
             <title>Dashboard - Book Reviews</title>
           </Helmet>
@@ -36,7 +36,7 @@ class Dashboard extends Component {
               })}
             </ul>
           </div>
-        </React.Fragment>
+        </div>
       );
     }
     return <Spinner />;

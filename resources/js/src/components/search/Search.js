@@ -97,7 +97,7 @@ export default class Search extends Component {
         );
       }
       return (
-        <Fragment>
+        <div className="slide-down">
           <Helmet>
             <title>Search Results for "{q}" - Book Reviews</title>
           </Helmet>{" "}
@@ -128,7 +128,7 @@ export default class Search extends Component {
               </div>
             )}
           </div>
-        </Fragment>
+        </div>
       );
     }
     return <Spinner />;

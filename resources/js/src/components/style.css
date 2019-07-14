@@ -76,3 +76,54 @@ blockquote p {
   color: #fff !important;
   background: #6c757d !important;
 }
+
+/* 
+  * Animation Stuff
+*/
+
+.slide-left {
+  position: relative;
+  left: 5000px;
+  animation-name: slide-left;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+@keyframes slide-left {
+  0% {
+    left: 2000px;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.slide-right {
+  position: relative;
+  right: 0;
+  animation-name: slide-right;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+@keyframes slide-right {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -2000px;
+  }
+}
+.slide-down {
+  position: relative;
+  top: 0;
+  animation-name: slide-down;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+@keyframes slide-down {
+  0% {
+    top: -2000px;
+  }
+  100% {
+    top: 0;
+  }
+}

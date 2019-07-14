@@ -13,7 +13,8 @@ class CreateBook extends Component {
       book_score: 0,
       featured_image: null,
       userId: null
-    }
+    },
+    animation: "slide-left"
   };
 
   handleChange = event => {
@@ -51,13 +52,16 @@ class CreateBook extends Component {
         this.props.userId,
         this.props.history
       );
+      this.setState({
+        animation: "slide-right"
+      });
     } else {
       alert("File Too Big");
     }
   };
   render() {
     return (
-      <React.Fragment>
+      <div className={this.state.animation}>
         <Helmet>
           <title>Create a Review - Book Reviews</title>
         </Helmet>
@@ -119,7 +123,7 @@ class CreateBook extends Component {
             </button>
           </form>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
