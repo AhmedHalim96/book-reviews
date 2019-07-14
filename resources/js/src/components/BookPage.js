@@ -18,7 +18,7 @@ import Modal from "./layout/Modal/Modal";
 class BookPage extends Component {
   state = {
     showModal: false,
-    animation: "Slide-left"
+    animation: "slide-left"
   };
   componentDidMount() {
     this.intialize(this.props);
@@ -115,7 +115,9 @@ class BookPage extends Component {
                   <span className="ml-3">
                     <br className="d-md-none" />
                     <small>By </small>
-                    <i className="text-primary">{book_author} </i>
+                    <Link to={`/author/${book_author}`}>
+                      <i>{book_author} </i>
+                    </Link>
                   </span>
                   {this.props.isLoggedIn &&
                   (this.props.user.role == "Admin" ||

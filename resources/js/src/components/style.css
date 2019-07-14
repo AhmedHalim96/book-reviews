@@ -57,7 +57,7 @@ blockquote p {
   display: inline;
 }
 .review__style p {
-  margin-bottom: inherit;
+  margin-bottom: 0.5rem;
 }
 
 .review__style img {
