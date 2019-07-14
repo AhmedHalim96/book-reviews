@@ -185,7 +185,9 @@ class BookPage extends Component {
                       <i>
                         <strong className="text-danger">Reviewed by: </strong>
                       </i>
-                      {review_author}
+                      <Link to={`/reviewer/${review_author}`}>
+                        <i>{review_author} </i>
+                      </Link>
                       <br />
                       <span className="ml-3">
                         <i className="text-dark">Reviewer Rating: </i>

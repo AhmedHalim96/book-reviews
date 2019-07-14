@@ -18,12 +18,17 @@ export default function bookItem(props) {
       <div className="card col-md-10 mx-auto card-dark bg-dark text-white pt-3 mb-2">
         <div className="card-body">
           <h5 className="card-title">
-            {name} <small>Written by</small> {book_author}{" "}
+            {name} <small>Written by</small>{" "}
+            <Link to={`/author/${book_author}`}>
+              <i>{book_author} </i>
+            </Link>{" "}
             <span className="float-right">{book_score.slice(0, 3)} / 5</span>
           </h5>
           <p>
-            <i style={{ textDecoration: "underline #fff" }}>Reviewed By: </i>
-            <strong> {review_author}</strong>
+            <i style={{ textDecoration: "underline #fff" }}>Reviewed By: </i>{" "}
+            <Link to={`/reviewer/${review_author}`}>
+              <i>{review_author} </i>
+            </Link>
           </p>
           <div
             dangerouslySetInnerHTML={{ __html: mini_review_text }}
@@ -49,11 +54,16 @@ export default function bookItem(props) {
           <div className="col-md-8">
             <div className="card-body">
               <h5 className="card-title">
-                {name} by {book_author}
+                {name} by{" "}
+                <Link to={`/author/${book_author}`}>
+                  <i>{book_author} </i>
+                </Link>
               </h5>
               <p>
-                <i style={{ textDecoration: "underline #fff" }}>Reviewed By:</i>
-                <strong> {review_author}</strong>
+                <i style={{ textDecoration: "underline #fff" }}>Reviewed By:</i>{" "}
+                <Link to={`/reviewer/${review_author}`}>
+                  <i>{review_author} </i>
+                </Link>
               </p>
               <div
                 dangerouslySetInnerHTML={{ __html: mini_review_text }}

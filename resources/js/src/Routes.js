@@ -16,6 +16,7 @@ import PageNotFound from "./components/layout/PageNotFound";
 import AdminPanel from "./components/AdminPanel";
 import Search from "./components/search/Search";
 import Author from "./components/Author";
+import Reviewer from "./components/Reviewer";
 
 export default function Routes({
   books,
@@ -66,6 +67,10 @@ export default function Routes({
       <Route
         path="/author/:author"
         render={props => <Author {...props} books={books} />}
+      />
+      <Route
+        path="/reviewer/:reviewer"
+        render={props => <Reviewer {...props} books={books} />}
       />
       <Route
         path="/book/:id"
