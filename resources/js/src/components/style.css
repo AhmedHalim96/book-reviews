@@ -127,3 +127,9 @@ blockquote p {
     top: 0;
   }
 }
+
+.heart {
+  transition: ease-in-out;
+  transition-duration: 500ms;
+  transition-property: all;
+}

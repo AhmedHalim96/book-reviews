@@ -59,7 +59,11 @@ class App extends Component {
         </Fragment>
       );
     }
-    return <Spinner />;
+    return (
+      <div className="bg-secondary">
+        <Spinner />
+      </div>
+    );
   }
 }
 

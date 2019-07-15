@@ -3,7 +3,7 @@ import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 
 // BOOK COMPONENTS
 import Books from "./components/Books";
-import BookPage from "./components/BookPage";
+import BookPage from "./components/bookPage/BookPage";
 import CreateBook from "./components/CreateBook";
 import EditBook from "./components/EditBook";
 
