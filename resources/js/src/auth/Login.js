@@ -8,7 +8,7 @@ const Login = props => {
     props.login(_email.value, _password.value, _rememberMe, props.history);
   };
   return (
-    <div id="main">
+    <div className="slide-left">
       <div className="card bg-dark text-white">
         <h3 className="card-header">Login Form</h3>
         <div className="card-body">
