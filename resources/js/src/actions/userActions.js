@@ -154,10 +154,9 @@ export const registerUser = (name, email, password, history) => dispatch => {
 
   axios
     .post("/api/user/register", formData)
-    .then(response => {
-      return response;
-    })
+
     .then(json => {
+      // return console.log(json.data);
       if (json.data.success) {
         alert(`Registration Successful!`);
 
@@ -185,7 +184,7 @@ export const registerUser = (name, email, password, history) => dispatch => {
         });
         history.push("/");
       } else {
-        alert(`Registration Failed!`);
+        alert(`Registration Failed!, ${json.data.data}`);
         $("#email-login-btn")
           .removeAttr("disabled")
           .html("Register");
