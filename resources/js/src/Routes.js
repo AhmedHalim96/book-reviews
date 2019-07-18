@@ -18,13 +18,7 @@ import Search from "./components/search/Search";
 import Author from "./components/Author";
 import Reviewer from "./components/Reviewer";
 
-export default function Routes({
-  books,
-  user,
-  isLoggedIn,
-  loginUser,
-  registerUser
-}) {
+export default function Routes({ books, user, isLoggedIn, loginUser }) {
   return (
     <Switch>
       {isLoggedIn && user.role == "Admin" ? (
@@ -58,12 +52,7 @@ export default function Routes({
           render={props => <Login {...props} login={loginUser} />}
         />
       )}
-      {isLoggedIn ? null : (
-        <Route
-          path="/register"
-          render={props => <Register {...props} register={registerUser} />}
-        />
-      )}
+      {isLoggedIn ? null : <Route path="/register" component={Register} />}
       <Route
         path="/author/:author"
         render={props => <Author {...props} books={books} />}

@@ -1,61 +1,7 @@
 import * as actionTypes from "./types";
 import $ from "jquery";
-import ExpiredStorage from "expired-storage";
 import axios from "axios";
-import SimpleCrypto from "simple-crypto-js";
-
-const expiredStorage = new ExpiredStorage();
-const simpleCrypto = new SimpleCrypto(
-  "c9a1375fc3e8f227b3efda9947502153b73d37696bd1a90ed1c2cd79caaeb14b"
-);
-
-export const getFavouriteList = id => async dispatch => {
-  const res = await axios
-    .post(`/books/favourites`, {
-      user_id: id
-    })
-    .then(res => {
-      dispatch({
-        type: actionTypes.GET_FAVOURITE_LIST,
-        payload: res.data
-      });
-      dispatch(appReady());
-    })
-    .catch(err => console.log(err));
-};
-
-export const addToFavourite = (book, user) => async dispatch => {
-  const res = await axios
-    .post(`/books/favourites/add`, {
-      user_id: user,
-      book_id: book
-    })
-    .then(res => {
-      // dispatch(isLiked(book, user));
-      dispatch(getFavouriteList(user));
-
-      dispatch({
-        type: actionTypes.ADD_TO_FAVOURITES
-      });
-    })
-    .catch(err => console.log(err));
-};
-
-export const removeFromFavourite = (book, user) => async dispatch => {
-  const res = await axios
-    .post(`/books/favourites/remove`, {
-      user_id: user,
-      book_id: book,
-      _method: "DELETE"
-    })
-    .then(res => {
-      dispatch({
-        type: actionTypes.REMOVE_FROM_FAVOURITES
-      });
-      dispatch(getFavouriteList(user));
-    })
-    .catch(err => console.log(err));
-};
+import { simpleCrypto, expiredStorage } from "../utilities";
 
 export const getUser = () => dispatch => {
   expiredStorage.clearExpired();
@@ -140,63 +86,22 @@ export const loginUser = (email, password, rememberMe, history) => dispatch => {
         .html("Login");
     });
 };
-export const registerUser = (name, email, password, history) => dispatch => {
-  $("#email-login-btn")
-    .attr("disabled", "disabled")
-    .html(
-      '<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i><span class="sr-only">Loading...</span>'
-    );
 
-  var formData = new FormData();
-  formData.append("password", password);
-  formData.append("email", email);
-  formData.append("name", name);
+export const setUser = user => dispatch => {
+  let appState = {
+    isLoggedIn: true,
+    user: user
+  };
 
-  axios
-    .post("/api/user/register", formData)
+  // Encrypt appState for localStorage
+  const encryptedAppState = simpleCrypto.encrypt(appState);
 
-    .then(json => {
-      // return console.log(json.data);
-      if (json.data.success) {
-        alert(`Registration Successful!`);
-
-        let userData = {
-          name: json.data.data.name,
-          id: json.data.data.id,
-          email: json.data.data.email,
-          auth_token: json.data.data.auth_token,
-          timestamp: new Date().toString()
-        };
-        let appState = {
-          isLoggedIn: true,
-          user: userData
-        };
-
-        // Encrypt appState for localStorage
-        const encryptedAppState = simpleCrypto.encrypt(appState);
-
-        // save app state with user date in local storage
-        expiredStorage.setItem("appState", encryptedAppState, 3600);
-
-        dispatch({
-          type: actionTypes.REGISTER_USER,
-          payload: appState.user
-        });
-        history.push("/");
-      } else {
-        alert(`Registration Failed!, ${json.data.data}`);
-        $("#email-login-btn")
-          .removeAttr("disabled")
-          .html("Register");
-      }
-    })
-    .catch(error => {
-      alert("An Error Occured!" + error);
-      console.log(`${formData} ${error}`);
-      $("#email-login-btn")
-        .removeAttr("disabled")
-        .html("Register");
-    });
+  // save app state with user date in local storage
+  expiredStorage.setItem("appState", encryptedAppState, 3600);
+  dispatch({
+    type: actionTypes.SET_USER,
+    payload: user
+  });
 };
 
 export const logoutUser = () => dispatch => {
@@ -218,8 +123,60 @@ export const resetUser = () => dispatch => {
     type: actionTypes.RESET_USER
   });
 };
+
 export const appReady = () => dispatch => {
   dispatch({
     type: actionTypes.APP_READY
   });
+};
+
+// Get Favourites
+export const getFavouriteList = id => async dispatch => {
+  const res = await axios
+    .post(`/books/favourites`, {
+      user_id: id
+    })
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_FAVOURITE_LIST,
+        payload: res.data
+      });
+      dispatch(appReady());
+    })
+    .catch(err => console.log(err));
+};
+
+// Add To Favourites
+export const addToFavourite = (book, user) => async dispatch => {
+  const res = await axios
+    .post(`/books/favourites/add`, {
+      user_id: user,
+      book_id: book
+    })
+    .then(res => {
+      // dispatch(isLiked(book, user));
+      dispatch(getFavouriteList(user));
+
+      dispatch({
+        type: actionTypes.ADD_TO_FAVOURITES
+      });
+    })
+    .catch(err => console.log(err));
+};
+
+// Remove from Favourites
+export const removeFromFavourite = (book, user) => async dispatch => {
+  const res = await axios
+    .post(`/books/favourites/remove`, {
+      user_id: user,
+      book_id: book,
+      _method: "DELETE"
+    })
+    .then(res => {
+      dispatch({
+        type: actionTypes.REMOVE_FROM_FAVOURITES
+      });
+      dispatch(getFavouriteList(user));
+    })
+    .catch(err => console.log(err));
 };

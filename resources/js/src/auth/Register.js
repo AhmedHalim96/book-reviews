@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { validateEmail } from "../customFunctions";
+import { validateEmail } from "../utilities";
+import { setUser } from "../actions/userActions";
+import { connect } from "react-redux";
+import Modal from "../components/layout/Modal/Modal";
+import axios from "axios";
 
-export default class Register extends Component {
+class Register extends Component {
   state = {
+    userData: {},
     error: { target: null, errorMessage: "" },
-    submittable: false
+    showModal: false,
+    modalMessage: "",
+    sendingRequest: false,
+    registered: false,
+    pageAnimation: "slide-left"
   };
 
   // Refs
@@ -29,7 +38,63 @@ export default class Register extends Component {
     }
   };
 
-  handleRegister = e => {
+  closeModalHandler = () => {
+    this.setState({ showModal: false });
+    if (this.state.registered) {
+      this.setState({
+        pageAnimation: "slide-right"
+      });
+      setTimeout(() => {
+        this.props.setUser(this.state.userData);
+      }, 300);
+    } else {
+      this.setState({ sendingRequest: false });
+    }
+  };
+
+  registerUser = () => {
+    this.setState({ sendingRequest: true });
+    var formData = new FormData();
+    formData.append("password", this._password.value);
+    formData.append("email", this._email.value);
+    formData.append("name", this._name.value);
+
+    axios
+      .post("/api/user/register", formData)
+
+      .then(res => {
+        if (res.data.success) {
+          let userData = {
+            name: res.data.data.name,
+            id: res.data.data.id,
+            email: res.data.data.email,
+            auth_token: res.data.data.auth_token,
+            timestamp: new Date().toString()
+          };
+
+          this.setState({
+            showModal: true,
+            modalMessage: "Congratulation You're now a User",
+            registered: true,
+            userData: userData
+          });
+        } else {
+          this.setState({
+            showModal: true,
+            modalMessage: `Registration Failed!, ${res.data.msg}`
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          showModal: true,
+          modalMessage: `Registration Failed!, ${res.data.msg}`
+        });
+        console.log(`${formData} ${error}`);
+      });
+  };
+
+  validateForm = e => {
     e.preventDefault();
     if (this._password.value !== this._confirmPassword.value) {
       this.setState({
@@ -40,18 +105,13 @@ export default class Register extends Component {
         error: { target: "email", errorMessage: "Please Enter a Valid Email" }
       });
     } else {
-      this.props.register(
-        this._name.value,
-        this._email.value,
-        this._password.value,
-        this.props.history
-      );
+      this.registerUser();
     }
   };
   render() {
-    const { error, submittable } = this.state;
+    const { error, pageAnimation, sendingRequest } = this.state;
     return (
-      <div className="slide-left">
+      <div className={pageAnimation}>
         <div className="card  bg-dark text-white">
           <h3 className="card-header">Register Form</h3>
           <div className="card-body">
@@ -60,7 +120,7 @@ export default class Register extends Component {
                 <form
                   id="login-form"
                   action=""
-                  onSubmit={this.handleRegister}
+                  onSubmit={this.validateForm}
                   method="post"
                 >
                   <div className="form-group">
@@ -122,16 +182,35 @@ export default class Register extends Component {
                   <button
                     type="submit"
                     className="btn btn-lg btn-success"
-                    disabled={!submittable}
                     id="email-login-btn"
+                    disabled={sendingRequest}
                   >
-                    Register
+                    {sendingRequest ? (
+                      <span>
+                        <i className="fa fa-spinner fa-spin fa-1x fa-fw" />
+                        <span className="sr-only">Loading...</span>
+                      </span>
+                    ) : (
+                      "Register"
+                    )}
                   </button>
                   <p className="lead float-right">
                     Already Registered?
                     <Link to="/login"> Login</Link>
                   </p>
                 </form>
+                <Modal
+                  show={this.state.showModal}
+                  close={this.closeModalHandler}
+                >
+                  <p className="lead text-dark">{this.state.modalMessage}</p>
+                  <button
+                    className="btn btn-dark mx-auto"
+                    onClick={this.closeModalHandler}
+                  >
+                    OK
+                  </button>
+                </Modal>
               </div>
             </div>
           </div>
@@ -140,3 +219,8 @@ export default class Register extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { setUser }
+)(Register);

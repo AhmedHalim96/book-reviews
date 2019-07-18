@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Helmet } from "react-helmet";
 
 import BookItem from "../bookItem";
-import { filterText } from "../../customFunctions";
+import { filterText } from "../../utilities";
 import Spinner from "../layout/Spinner";
 import SearchPagination from "./searchPagination";
 

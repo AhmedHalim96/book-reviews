@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BookItem from "./bookItem";
 import PropTypes from "prop-types";
 import "./style.css";
-import { filterText } from "../customFunctions";
+import { filterText } from "../utilities";
 
 class Books extends Component {
   state = {

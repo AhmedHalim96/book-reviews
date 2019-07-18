@@ -21,13 +21,13 @@ export default function(state = initialState, action) {
         user: action.payload,
         isLoggedIn: true
       };
-    case actionTypes.LOGIN_USER:
+    case actionTypes.SET_USER:
       return {
         ...state,
         user: action.payload,
         isLoggedIn: true
       };
-    case actionTypes.REGISTER_USER:
+    case actionTypes.LOGIN_USER:
       return {
         ...state,
         user: action.payload,

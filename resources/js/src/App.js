@@ -9,7 +9,6 @@ import {
   resetUser,
   getUser,
   loginUser,
-  registerUser,
   logoutUser
 } from "./actions/userActions";
 import { getBooks } from "./actions/booksActions";
@@ -27,7 +26,7 @@ class App extends Component {
 
   render() {
     if (this.props.isReady) {
-      const { isLoggedIn, user, books, registerUser, loginUser } = this.props;
+      const { isLoggedIn, user, books, loginUser } = this.props;
       return (
         <Fragment>
           <Helmet>
@@ -46,7 +45,6 @@ class App extends Component {
                     books={books}
                     user={user}
                     isLoggedIn={isLoggedIn}
-                    registerUser={registerUser}
                     loginUser={loginUser}
                   />
                 </div>
@@ -82,7 +80,6 @@ export default connect(
     getUser,
     loginUser,
     logoutUser,
-    registerUser,
     getBooks
   }
 )(App);
