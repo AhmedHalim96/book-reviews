@@ -1,74 +1,169 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setUser } from "../actions/userActions";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Modal from "../components/layout/Modal/Modal";
 
-const Login = props => {
-  let _email, _password, _rememberMe;
-  const handleLogin = e => {
-    e.preventDefault();
-    props.login(_email.value, _password.value, _rememberMe, props.history);
+class Login extends Component {
+  state = {
+    userData: {},
+    rememberMe: false,
+    error: { target: null, errorMessage: "" },
+    showModal: false,
+    modalMessage: "",
+    sendingRequest: false,
+    loggedIn: false,
+    pageAnimation: "slide-left"
   };
-  return (
-    <div className="slide-left">
-      <div className="card bg-dark text-white">
-        <h3 className="card-header">Login Form</h3>
-        <div className="card-body">
-          <div className="row">
-            <div className="col-md-8 mx-auto">
-              <form
-                id="login-form"
-                action=""
-                onSubmit={handleLogin}
-                method="post"
-              >
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    ref={input => (_email = input)}
-                    id="email-input"
-                    name="email"
-                    type="email"
-                    className="form-control"
-                    placeholder="email"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    ref={input => (_password = input)}
-                    id="password-input"
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="password"
-                  />
-                </div>
-                <div className="form-check mb-2">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    ref={input => (_rememberMe = input)}
-                  />
-                  <label className="form-check-label">Remember Me</label>
-                </div>
+  _email;
+  _password;
+  _rememberMe;
 
-                <button
-                  type="submit"
-                  className="btn btn-lg btn-success"
-                  id="email-login-btn"
+  closeModalHandler = () => {
+    this.setState({ showModal: false });
+    if (this.state.loggedIn) {
+      this.setState({
+        pageAnimation: "slide-right"
+      });
+      setTimeout(() => {
+        this.props.setUser(this.state.userData);
+      }, 300);
+    } else {
+      this.setState({ sendingRequest: false });
+    }
+  };
+
+  loginUser = e => {
+    e.preventDefault();
+    this.setState({ sendingRequest: true });
+    var formData = new FormData();
+    formData.append("email", this._email.value);
+    formData.append("password", this._password.value);
+    formData.append("rememberMe", this._rememberMe.checked);
+    axios
+      .post("/api/user/login", formData)
+      .then(res => {
+        if (res.data.success) {
+          let userData = {
+            name: res.data.data.name,
+            id: res.data.data.id,
+            email: res.data.data.email,
+            token: res.data.data.token,
+            timestamp: new Date().toString(),
+            role: res.data.data.role
+          };
+          this.setState({
+            showModal: true,
+            modalMessage: "Login Success!",
+            loggedIn: true,
+            userData: userData,
+            rememberMe: this._rememberMe.checked
+          });
+        } else {
+          this.setState({
+            showModal: true,
+            modalMessage: `Log in Failed!`
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          showModal: true,
+          modalMessage: `Registration Failed!, ${error}`
+        });
+        console.log(`${formData} ${error}`);
+      });
+  };
+
+  render() {
+    const { error, pageAnimation, sendingRequest } = this.state;
+    return (
+      <div className={pageAnimation}>
+        <div className="card bg-dark text-white">
+          <h3 className="card-header">Login Form</h3>
+          <div className="card-body">
+            <div className="row">
+              <div className="col-md-8 mx-auto">
+                <form
+                  id="login-form"
+                  action=""
+                  onSubmit={this.loginUser}
+                  method="post"
                 >
-                  Login
-                </button>
-                <p className="lead float-right">
-                  New Member?
-                  <Link to="/register"> Register</Link>
-                </p>
-              </form>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      ref={input => (this._email = input)}
+                      id="email-input"
+                      name="email"
+                      type="email"
+                      className="form-control"
+                      placeholder="email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                      ref={input => (this._password = input)}
+                      id="password-input"
+                      name="password"
+                      type="password"
+                      className="form-control"
+                      placeholder="password"
+                    />
+                  </div>
+                  <div className="form-check mb-2">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      ref={input => (this._rememberMe = input)}
+                    />
+                    <label className="form-check-label">Remember Me</label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-lg btn-success"
+                    id="email-login-btn"
+                    disabled={sendingRequest}
+                  >
+                    {sendingRequest ? (
+                      <span>
+                        <i className="fa fa-spinner fa-spin fa-1x fa-fw" />
+                        <span className="sr-only">Loading...</span>
+                      </span>
+                    ) : (
+                      "Login"
+                    )}
+                  </button>
+                  <p className="lead float-right">
+                    New Member?
+                    <Link to="/register"> Register</Link>
+                  </p>
+                </form>
+                <Modal
+                  show={this.state.showModal}
+                  close={this.closeModalHandler}
+                >
+                  <p className="lead text-dark">{this.state.modalMessage}</p>
+                  <button
+                    className="btn btn-dark mx-auto"
+                    onClick={this.closeModalHandler}
+                  >
+                    OK
+                  </button>
+                </Modal>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default withRouter(Login);
+export default connect(
+  null,
+  { setUser }
+)(Login);

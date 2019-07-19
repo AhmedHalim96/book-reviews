@@ -9,7 +9,6 @@ export const DELETE_BOOK = "DELETE_BOOK";
 
 export const GET_USER = "GET_USER";
 export const SET_USER = "SET_USER";
-export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const GET_FAVOURITE_LIST = "GET_FAVOURITE_LIST";
 export const ADD_TO_FAVOURITES = "ADD_TO_FAVOURITES";

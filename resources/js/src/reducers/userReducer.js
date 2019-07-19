@@ -27,12 +27,7 @@ export default function(state = initialState, action) {
         user: action.payload,
         isLoggedIn: true
       };
-    case actionTypes.LOGIN_USER:
-      return {
-        ...state,
-        user: action.payload,
-        isLoggedIn: true
-      };
+
     case actionTypes.LOGOUT_USER:
       return {
         ...state,

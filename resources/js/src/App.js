@@ -8,7 +8,6 @@ import {
   appReady,
   resetUser,
   getUser,
-  loginUser,
   logoutUser
 } from "./actions/userActions";
 import { getBooks } from "./actions/booksActions";
@@ -26,7 +25,7 @@ class App extends Component {
 
   render() {
     if (this.props.isReady) {
-      const { isLoggedIn, user, books, loginUser } = this.props;
+      const { isLoggedIn, user, books } = this.props;
       return (
         <Fragment>
           <Helmet>
@@ -41,12 +40,7 @@ class App extends Component {
             <div className="container-fluid pt-3 slide-left">
               <div className="row">
                 <div className="col-lg-9">
-                  <Routes
-                    books={books}
-                    user={user}
-                    isLoggedIn={isLoggedIn}
-                    loginUser={loginUser}
-                  />
+                  <Routes books={books} user={user} isLoggedIn={isLoggedIn} />
                 </div>
                 <div className="col-lg-3 d-none d-lg-block">
                   <Sidebar books={books} />
@@ -78,7 +72,6 @@ export default connect(
     appReady,
     resetUser,
     getUser,
-    loginUser,
     logoutUser,
     getBooks
   }

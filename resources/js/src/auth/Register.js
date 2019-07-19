@@ -88,7 +88,7 @@ class Register extends Component {
       .catch(error => {
         this.setState({
           showModal: true,
-          modalMessage: `Registration Failed!, ${res.data.msg}`
+          modalMessage: `Registration Failed!, ${error}`
         });
         console.log(`${formData} ${error}`);
       });
