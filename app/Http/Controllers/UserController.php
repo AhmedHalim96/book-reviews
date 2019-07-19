@@ -30,6 +30,7 @@ class UserController extends Controller {
     }
     return $token;
   }
+
   public function login(Request $request) {
     $user = \App\User::where('email', $request->email)->get()->first();
     if ($user && \Hash::check($request->password, $user->password)) // The passwords match...
@@ -39,7 +40,7 @@ class UserController extends Controller {
       $user->save();
       $response = ['success' => true, 'data' => ['id' => $user->id, 'token' => $user->auth_token, 'name' => $user->name, 'email' => $user->email, "role" => $user->roles->first()->name]];
     } else {
-      $response = ['success' => false, 'data' => 'Record doesnt exists'];
+      $response = ['success' => false, 'msg' => 'Wrong Email or Password'];
     }
 
     return response()->json($response, 201);

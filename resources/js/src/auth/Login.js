@@ -63,14 +63,14 @@ class Login extends Component {
         } else {
           this.setState({
             showModal: true,
-            modalMessage: `Log in Failed!`
+            modalMessage: `Login Failed! ${res.data.msg}`
           });
         }
       })
       .catch(error => {
         this.setState({
           showModal: true,
-          modalMessage: `Registration Failed!, ${error}`
+          modalMessage: `Login Failed!, ${error}`
         });
         console.log(`${formData} ${error}`);
       });

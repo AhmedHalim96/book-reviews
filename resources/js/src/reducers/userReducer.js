@@ -2,20 +2,15 @@ import * as actionTypes from "../actions/types";
 const initialState = {
   user: {},
   isLoggedIn: false,
-  favouriteBooks: [],
-  isReady: false
+  favouriteBooks: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case actionTypes.GET_FAVOURITE_LIST:
       return { ...state, favouriteBooks: action.payload, isReady: true };
-    case actionTypes.APP_READY:
-      return {
-        ...state,
-        isReady: true
-      };
-    case actionTypes.GET_USER:
+
+    case actionTypes.GET_USER_INFO_FROM_LOCAL_STORAGE:
       return {
         ...state,
         user: action.payload,
@@ -28,12 +23,6 @@ export default function(state = initialState, action) {
         isLoggedIn: true
       };
 
-    case actionTypes.LOGOUT_USER:
-      return {
-        ...state,
-        user: action.payload,
-        isLoggedIn: false
-      };
     case actionTypes.RESET_USER:
       return {
         ...state,

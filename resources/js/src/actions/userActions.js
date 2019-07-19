@@ -2,7 +2,7 @@ import * as actionTypes from "./types";
 import axios from "axios";
 import { simpleCrypto, expiredStorage } from "../utilities";
 
-export const getUser = () => dispatch => {
+export const getUserInfoFromLocalStorage = () => dispatch => {
   expiredStorage.clearExpired();
   let AppState = null;
   if (localStorage["appState"]) {
@@ -10,7 +10,7 @@ export const getUser = () => dispatch => {
       AppState = simpleCrypto.decrypt(localStorage["appState"], true);
       if (AppState.isLoggedIn) {
         dispatch({
-          type: actionTypes.GET_USER,
+          type: actionTypes.GET_USER_INFO_FROM_LOCAL_STORAGE,
           payload: AppState.user
         });
       }
@@ -18,8 +18,6 @@ export const getUser = () => dispatch => {
       dispatch(logoutUser());
     }
   }
-
-  dispatch(appReady());
 };
 
 export const setUser = (user, rememberMe = false) => dispatch => {
@@ -63,12 +61,6 @@ export const resetUser = () => dispatch => {
   });
 };
 
-export const appReady = () => dispatch => {
-  dispatch({
-    type: actionTypes.APP_READY
-  });
-};
-
 // Get Favourites
 export const getFavouriteList = id => async dispatch => {
   const res = await axios
@@ -80,7 +72,6 @@ export const getFavouriteList = id => async dispatch => {
         type: actionTypes.GET_FAVOURITE_LIST,
         payload: res.data
       });
-      dispatch(appReady());
     })
     .catch(err => console.log(err));
 };

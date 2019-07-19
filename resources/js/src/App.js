@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import {
   appReady,
   resetUser,
-  getUser,
+  getUserInfoFromLocalStorage,
   logoutUser
 } from "./actions/userActions";
 import { getBooks } from "./actions/booksActions";
@@ -19,12 +19,16 @@ import Spinner from "./components/layout/Spinner";
 import Routes from "./Routes";
 
 class App extends Component {
+  state = {
+    appReady: false
+  };
   componentDidMount = () => {
-    this.props.getBooks().then(() => this.props.getUser());
+    this.props.getUserInfoFromLocalStorage();
+    this.props.getBooks().then(() => this.setState({ appReady: true }));
   };
 
   render() {
-    if (this.props.isReady) {
+    if (this.state.appReady) {
       const { isLoggedIn, user, books } = this.props;
       return (
         <Fragment>
@@ -60,7 +64,6 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  isReady: state.user.isReady,
   user: state.user.user,
   isLoggedIn: state.user.isLoggedIn,
   books: state.books.books
@@ -71,7 +74,7 @@ export default connect(
   {
     appReady,
     resetUser,
-    getUser,
+    getUserInfoFromLocalStorage,
     logoutUser,
     getBooks
   }
