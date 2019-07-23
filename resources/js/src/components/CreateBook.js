@@ -14,16 +14,18 @@ class CreateBook extends Component {
       featured_image: null,
       userId: null
     },
-    animation: "slide-left"
+    animation: "slide-left",
+    imgPrev: null
   };
 
   handleChange = event => {
     if (event.target.files) {
-      return this.setState({
+      this.setState({
         newBook: {
           ...this.state.newBook,
           [event.target.name]: event.target.files[0]
-        }
+        },
+        imgPrev: URL.createObjectURL(event.target.files[0])
       });
     } else {
       this.setState({
@@ -68,7 +70,7 @@ class CreateBook extends Component {
         <div className="card card-body card-dark bg-dark text-white">
           <form onSubmit={this.handleSubmit} encType="multipart/form-data">
             <div className="form-group">
-              <label>Book Title*</label>
+              <label>Book Title*:</label>
               <input
                 type="text"
                 className="form-control"
@@ -78,7 +80,7 @@ class CreateBook extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Book Author*</label>
+              <label>Book Author*:</label>
               <input
                 type="text"
                 className="form-control"
@@ -88,7 +90,7 @@ class CreateBook extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Book Rating*</label>
+              <label>Book Rating*:</label>
               <input
                 type="number"
                 step="0.1"
@@ -102,13 +104,23 @@ class CreateBook extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Book Review*</label>
+              <label>Book Review*:</label>
 
               <CKEditor data="" onChange={this.editorChangeHandler} />
             </div>
 
             <div className="form-group">
-              <label htmlFor="image">Featured Image</label>
+              <label htmlFor="img-prev d-block">Image Preview:</label>
+              <br />
+              <img
+                src={this.state.imgPrev}
+                className={`img-thumbnail img-fluid w-25 h-25 ${
+                  this.state.imgPrev ? "" : "d-none"
+                }`}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="image">Featured Image:</label>
               <input
                 type="file"
                 className="form-control-file"
@@ -118,8 +130,11 @@ class CreateBook extends Component {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-dark btn-block">
-              Submit Review
+            <button
+              type="submit"
+              className="btn btn-success w-25 mx-auto btn-block py-3 "
+            >
+              <strong>Submit Review</strong>
             </button>
           </form>
         </div>

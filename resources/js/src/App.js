@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 
 // Redux
 import {
-  appReady,
   resetUser,
   getUserInfoFromLocalStorage,
   logoutUser
@@ -29,18 +28,14 @@ class App extends Component {
 
   render() {
     if (this.state.appReady) {
-      const { isLoggedIn, user, books } = this.props;
+      const { isLoggedIn, user, books, logoutUser } = this.props;
       return (
         <Fragment>
           <Helmet>
             <title>Book Reviews</title>
           </Helmet>
           <div className="bg-secondary">
-            <Navbar
-              user={user}
-              isLoggedIn={isLoggedIn}
-              logout={this.props.logoutUser}
-            />
+            <Navbar user={user} isLoggedIn={isLoggedIn} logout={logoutUser} />
             <div className="container-fluid pt-3 slide-left">
               <div className="row">
                 <div className="col-lg-9">
@@ -72,7 +67,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    appReady,
     resetUser,
     getUserInfoFromLocalStorage,
     logoutUser,

@@ -21,16 +21,15 @@ import Reviewer from "./components/Reviewer";
 export default function Routes({ books, user, isLoggedIn }) {
   return (
     <Switch>
+      {/* Admin Only */}
       {isLoggedIn && user.role == "Admin" ? (
         <Route
           path="/admin-panel"
           render={props => <AdminPanel {...props} user={user} />}
         />
       ) : null}
-      <Route
-        path="/dashboard"
-        render={props => <Dashboard {...props} userId={user.id} />}
-      />
+
+      {/* Admin and Editor */}
       {isLoggedIn && (user.role == "Admin" || user.role == "Editor") ? (
         <Route
           path="/book/:id/edit"
@@ -45,8 +44,20 @@ export default function Routes({ books, user, isLoggedIn }) {
           render={props => <CreateBook {...props} userId={user.id} />}
         />
       ) : null}
-      \{isLoggedIn ? null : <Route path="/login" component={Login} />}
+
+      {/* Any Logged in User */}
+      {isLoggedIn ? (
+        <Route
+          path="/dashboard"
+          render={props => <Dashboard {...props} userId={user.id} />}
+        />
+      ) : null}
+
+      {/* Not logged in */}
+      {isLoggedIn ? null : <Route path="/login" component={Login} />}
       {isLoggedIn ? null : <Route path="/register" component={Register} />}
+
+      {/* Everyone */}
       <Route
         path="/author/:author"
         render={props => <Author {...props} books={books} />}

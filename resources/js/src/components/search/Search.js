@@ -97,7 +97,7 @@ export default class Search extends Component {
         );
       }
       return (
-        <div className="slide-down">
+        <div className="slide-down" onLoad={window.scroll(0, 0)}>
           <Helmet>
             <title>Search Results for "{q}" - Book Reviews</title>
           </Helmet>{" "}

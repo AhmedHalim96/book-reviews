@@ -32,7 +32,7 @@ export default function bookItem(props) {
           </p>
           <div
             dangerouslySetInnerHTML={{ __html: mini_review_text }}
-            className="card-text d-inline"
+            className="card-text d-inline mini_review_text"
           />
           <Link to={`/book/${id}`} className="float-right">
             Read Review
@@ -67,7 +67,7 @@ export default function bookItem(props) {
               </p>
               <div
                 dangerouslySetInnerHTML={{ __html: mini_review_text }}
-                className="card-text d-inline"
+                className="card-text d-inline mini_review_text"
               />
               <Link to={`/book/${id}`} className="float-right">
                 Read More

@@ -9,6 +9,7 @@ import CKEditor from "ckeditor4-react";
 class EditBook extends Component {
   state = {
     currentBook: null,
+    imgPrev: null,
     animation: "slide-left"
   };
 
@@ -33,7 +34,8 @@ class EditBook extends Component {
         currentBook: {
           ...this.state.currentBook,
           [event.target.name]: event.target.files[0]
-        }
+        },
+        imgPrev: URL.createObjectURL(event.target.files[0])
       });
     } else {
       this.setState({
@@ -83,7 +85,7 @@ class EditBook extends Component {
           <div className="card card-body card-dark bg-dark text-white">
             <form onSubmit={this.handleSubmit} encType="multipart/form-data">
               <div className="form-group">
-                <label>Book Title*</label>
+                <label>Book Title*:</label>
                 <input
                   type="text"
                   className="form-control"
@@ -95,7 +97,7 @@ class EditBook extends Component {
                 re
               </div>
               <div className="form-group">
-                <label>Book Author*</label>
+                <label>Book Author*:</label>
                 <input
                   type="text"
                   className="form-control"
@@ -106,7 +108,7 @@ class EditBook extends Component {
                 />
               </div>
               <div className="form-group">
-                <label>Book Rating*</label>
+                <label>Book Rating*:</label>
                 <input
                   type="number"
                   step="0.1"
@@ -121,21 +123,27 @@ class EditBook extends Component {
                 />
               </div>
               <div className="form-group">
-                <label>Book Review*</label>
+                <label>Book Review*:</label>
                 <CKEditor
                   data={review_text}
                   onChange={this.editorChangeHandler}
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="img-prev d-block">Image Preview:</label>
+                <br />
                 <img
-                  src={`/storage/featured_images/${featured_image}`}
-                  className="img-thumbnail img-fluid w-50 h-50 "
+                  src={
+                    this.state.imgPrev
+                      ? this.state.imgPrev
+                      : `/storage/featured_images/${featured_image}`
+                  }
+                  className="img-thumbnail img-fluid w-25 h-25 "
                 />
               </div>
 
               <div className="form-group">
-                <label htmlFor="image">Change Featured Image</label>
+                <label htmlFor="image">Change Featured Image:</label>
                 <input
                   type="file"
                   className="form-control-file"

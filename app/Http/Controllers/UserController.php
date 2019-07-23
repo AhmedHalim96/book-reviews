@@ -18,6 +18,7 @@ class UserController extends Controller {
         $token = JWTAuth::attempt(['email' => $email, 'password' => $password]);
 
       } else {
+        JWTFactory::setTTL(120);
         $token = JWTAuth::attempt(['email' => $email, 'password' => $password]);
 
       }

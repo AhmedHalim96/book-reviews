@@ -6,7 +6,7 @@ export default function Reviewer(props) {
   const bookReviewer = props.match.params.reviewer;
   let books = props.books.filter(book => book.review_author === bookReviewer);
   return (
-    <div className="slide-down">
+    <div className="slide-down" onLoad={window.scroll(0, 0)}>
       <Helmet>
         <title>Books By {bookReviewer} - Book Reviews</title>
       </Helmet>

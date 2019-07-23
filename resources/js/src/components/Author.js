@@ -7,7 +7,7 @@ export default function Author(props) {
   let books = props.books.filter(book => book.book_author === bookAuthor);
   console.log(books);
   return (
-    <div className="slide-down">
+    <div className="slide-down" onLoad={window.scroll(0, 0)}>
       <Helmet>
         <title>Books By {bookAuthor} - Book Reviews</title>
       </Helmet>

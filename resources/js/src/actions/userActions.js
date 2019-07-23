@@ -33,7 +33,7 @@ export const setUser = (user, rememberMe = false) => dispatch => {
   expiredStorage.setItem(
     "appState",
     encryptedAppState,
-    rememberMe ? 604800 : 3600
+    rememberMe ? 604800 : 7200
   );
   dispatch({
     type: actionTypes.SET_USER,

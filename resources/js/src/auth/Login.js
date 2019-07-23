@@ -27,7 +27,7 @@ class Login extends Component {
         pageAnimation: "slide-right"
       });
       setTimeout(() => {
-        this.props.setUser(this.state.userData);
+        this.props.setUser(this.state.userData, this.state.rememberMe);
       }, 300);
     } else {
       this.setState({ sendingRequest: false });
