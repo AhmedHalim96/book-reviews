@@ -80,7 +80,7 @@ class EditBook extends Component {
       return (
         <div className={this.state.animation}>
           <Helmet>
-            <title>Editing {name} Review - Book Reviews</title>
+            <title>{`Editing ${name} Review - Book Reviews`}</title>
           </Helmet>
           <div className="card card-body card-dark bg-dark text-white">
             <form onSubmit={this.handleSubmit} encType="multipart/form-data">
