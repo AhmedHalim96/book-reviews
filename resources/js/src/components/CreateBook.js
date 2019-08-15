@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { createBook } from "../actions/singleBookActions";
 import CKEditor from "ckeditor4-react";
+import Loading from "./layout/Loading";
 
 class CreateBook extends Component {
   state = {
@@ -15,6 +16,7 @@ class CreateBook extends Component {
       userId: null
     },
     animation: "slide-left",
+    loading: false,
     imgPrev: null
   };
 
@@ -45,6 +47,7 @@ class CreateBook extends Component {
       }
     });
   };
+
   handleSubmit = event => {
     event.preventDefault();
     const fileSize = this.state.newBook.featured_image.size;
@@ -55,18 +58,21 @@ class CreateBook extends Component {
         this.props.history
       );
       this.setState({
-        animation: "slide-right"
+        loading: true
       });
     } else {
       alert("File Too Big");
     }
   };
   render() {
+    const { animation, loading, imgPrev } = this.state;
     return (
-      <div className={this.state.animation}>
+      <div className={animation + loading ? " overflow-hidden" : null}>
         <Helmet>
           <title>Create a Review - Book Reviews</title>
         </Helmet>
+        {loading ? <Loading /> : null}
+
         <div className="card card-body card-dark bg-dark text-white">
           <form onSubmit={this.handleSubmit} encType="multipart/form-data">
             <div className="form-group">
@@ -113,7 +119,7 @@ class CreateBook extends Component {
               <label htmlFor="img-prev d-block">Image Preview:</label>
               <br />
               <img
-                src={this.state.imgPrev}
+                src={imgPrev}
                 className={`img-thumbnail img-fluid w-25 h-25 ${
                   this.state.imgPrev ? "" : "d-none"
                 }`}

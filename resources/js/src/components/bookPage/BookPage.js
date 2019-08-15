@@ -42,7 +42,7 @@ class BookPage extends Component {
     props.getBook(bookId);
   };
 
-  // Handlres
+  // Handlers
   favouriteHandler = async e => {
     if (this.props.isLoggedIn) {
       const bookId = parseInt(this.props.match.params.id);
@@ -60,14 +60,14 @@ class BookPage extends Component {
   };
   deleteHandler = e => {
     e.preventDefault();
-    this.props.deleteBook(this.props.match.params.id, this.props.user.id);
+    this.props.deleteBook(
+      this.props.match.params.id,
+      this.props.user.id,
+      this.props.history
+    );
     this.setState({
       animation: "slide-right"
     });
-
-    setTimeout(() => {
-      this.props.history.push("/");
-    }, 300);
   };
 
   closeModalHandler = () => this.setState({ showModal: false });

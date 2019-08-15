@@ -35,16 +35,19 @@ class BookController extends Controller {
     $img = $request->file('featured_image');
     $filename = time() . $img->getClientOriginalName();
     $filename = str_replace(' ', '-', $filename);
-    $path = $img->storeAs('public/featured_images', $filename);
-    $book = new Book;
-    $book->name = $request->name;
-    $book->book_author = $request->book_author;
-    $book->book_score = $request->book_score;
-    $book->review_text = $request->review_text;
-    $book->featured_image = $filename;
-    $book->user_id = $request->user_id;
-    $book->save();
-    return $book;
+    if ($img->storeAs('public/featured_images', $filename)) {
+      $book = new Book;
+      $book->name = $request->name;
+      $book->book_author = $request->book_author;
+      $book->book_score = $request->book_score;
+      $book->review_text = $request->review_text;
+      $book->featured_image = $filename;
+      $book->user_id = $request->user_id;
+      $book->save();
+      return $book;
+    } else {
+      return ['status' => 500, "msg" => "Internal Server Error"];
+    }
 
   }
 
@@ -105,8 +108,10 @@ class BookController extends Controller {
     $book = Book::find($id);
     // return unlink(storage_path("public/featured_images/".$book->featured_image));
     Storage::delete("public/featured_images/" . $book->featured_image);
-    $book->delete();
-    return $book;
+    if ($book->delete()) {
+      return $book;
+    }
+
   }
 
 }

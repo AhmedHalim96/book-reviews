@@ -4,7 +4,7 @@ import { getBooks } from "./booksActions";
 import { Redirect } from "react-router-dom";
 
 export const getBook = id => async dispatch => {
-  const res = await axios
+  await axios
     .get(`/books/${id}`)
     .then(res => {
       dispatch({
@@ -17,6 +17,7 @@ export const getBook = id => async dispatch => {
       return <Redirect to="/" />;
     });
 };
+
 export const isLiked = (book, user) => async dispatch => {
   await axios
     .post(`/books/${book}`, {
@@ -30,6 +31,7 @@ export const isLiked = (book, user) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
+
 export const createBook = (newBook, userId, history) => async dispatch => {
   const {
     name,
@@ -59,6 +61,7 @@ export const createBook = (newBook, userId, history) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
+
 export const updateBook = (updatedBook, userId) => async dispatch => {
   const {
     id,
@@ -88,20 +91,25 @@ export const updateBook = (updatedBook, userId) => async dispatch => {
     })
     .catch(err => console.log(err));
 };
-export const deleteBook = (id, userId) => async dispatch => {
+
+export const deleteBook = (bookId, userId, history) => async dispatch => {
   await axios
-    .post(`/books/${id}`, {
+    .post(`/books/${bookId}`, {
       _method: "DELETE",
       user_id: userId
     })
     .then(res => {
-      dispatch({
-        type: actionTypes.DELETE_BOOK
-      });
+      // dispatch({
+      //   type: actionTypes.DELETE_BOOK
+      // });
       dispatch(getBooks());
+      setTimeout(() => {
+        history.push("/");
+      }, 300);
     })
     .catch(err => console.log(err));
 };
+
 export const clearBook = () => dispatch => {
   dispatch({
     type: actionTypes.CLEAR_BOOK
